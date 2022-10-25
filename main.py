@@ -7,7 +7,9 @@ from museval import evaluate
 
 from datetime import datetime
 
-def run_eval(dataset="TIMIT",
+
+def run_eval(
+    dataset="TIMIT",
     room_dim=(3, 3),
     snr=None,
     rt60=0.150,
@@ -19,18 +21,17 @@ def run_eval(dataset="TIMIT",
     angle_step=30,
     min_error=-90,
     max_error=90,
-    error_step=15,):
+    error_step=10,
+):
 
     kwargs = locals()
 
-    timit_dm = StereoDatamodule(
-        **kwargs
-    )
+    timit_dm = StereoDatamodule(**kwargs)
 
     timit_dl = timit_dm.train_dataloader()
 
     results = []
-    
+
     is_incomplete = False
 
     try:
@@ -41,7 +42,9 @@ def run_eval(dataset="TIMIT",
             n_sampl = item["xtrue"].shape[-1]
 
             sdr, isr, sir, sar = evaluate(
-                item["xtrue"].transpose((0, 2, 1)),  # src, chan, sampl --> src, sampl, chan
+                item["xtrue"].transpose(
+                    (0, 2, 1)
+                ),  # src, chan, sampl --> src, sampl, chan
                 item["xest"].transpose((0, 2, 1)),
                 win=n_sampl,
                 hop=n_sampl,
@@ -73,18 +76,21 @@ def run_eval(dataset="TIMIT",
     except KeyboardInterrupt:
         is_incomplete = True
     finally:
-        
+
         folder = f"./results/{datetime.now().strftime('%Y%m%d%H%M%S')}"
-        
+
         os.makedirs(folder)
-        
+
         import json
-        with open(os.path.join(folder, 'args.json'), 'w') as f:
+
+        with open(os.path.join(folder, "args.json"), "w") as f:
             json.dump(dict(kwargs), f, indent=4)
-        
+
         df = pd.DataFrame(results)
         df.to_csv(f"{folder}/results-{'incomplete' if is_incomplete else 'ok'}.csv")
-        
+
+
 if __name__ == "__main__":
     import fire
+
     fire.Fire()

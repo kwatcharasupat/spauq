@@ -53,7 +53,7 @@ class StereoDatamodule(pl.LightningDataModule):
         )
 
         self.train_dataset = DatasetConstructor(mode="train", room=self.room, min_angle=min_angle, max_angle=max_angle, angle_step=angle_step, min_error=min_error, max_error=max_error, error_step=error_step)
-        self.val_dataset = DatasetConstructor(mode="val", room=self.room)
+        self.val_dataset = DatasetConstructor(mode="val", room=self.room, min_angle=min_angle, max_angle=max_angle, angle_step=angle_step, min_error=min_error, max_error=max_error, error_step=error_step)
 
     def train_dataloader(self):
         return data.DataLoader(

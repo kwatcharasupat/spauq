@@ -47,7 +47,7 @@ class TIMITDataset(data.Dataset):
             min_error, max_error, (max_error - min_error) // error_step + 1
         )
         
-        print(self.angles, self.errors)
+        print(mode, self.angles, self.errors)
 
         self.n_angles = len(self.angles)
         self.n_errors = len(self.errors)
