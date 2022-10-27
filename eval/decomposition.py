@@ -34,7 +34,7 @@ def project_spatial(est, ref):
     # (n_freq, 1, n_chan) @ (n_freq, n_chan, 1)
     #   --> (n_freq, 1, 1)
     #   --sum--> (1, 1)
-    prod_est_ref = np.sum(s_est[:, None, :] @ s_ref[:, :, None], axis=0, keepdims=False)
+    prod_est_ref = np.sum(np.conj(s_est[:, None, :]) @ s_ref[:, :, None], axis=0, keepdims=False)
 
     # cheat using broadcasting
     # (n_freq, 1, n_chan) + (n_freq, n_chan, 1)
@@ -42,7 +42,7 @@ def project_spatial(est, ref):
     #   --reshape--> (n_freq, n_chan*n_chan)
     #   --sum--> (1, n_chan*n_chan)
     kron_ref_ref = np.sum(
-        np.reshape(s_ref[:, None, :] + s_ref[:, :, None], (n_freq, n_chan * n_chan)),
+        np.reshape(s_ref[:, :, None] +  np.conj(s_ref[:, None, :]), (n_freq, n_chan * n_chan)),
         axis=0,
         keepdims=True,
     )
