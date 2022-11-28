@@ -23,6 +23,8 @@ class TIMITDataset(data.Dataset):
         min_error=-90,
         max_error=90,
         error_step=10,
+        signal_filter_kwargs=None,
+        estim_filter_kwargs=None,
         root="/home/kwatchar3/data/timit/timit",
     ) -> None:
         super().__init__()
@@ -54,7 +56,11 @@ class TIMITDataset(data.Dataset):
 
         self.length = self.n_files * self.n_angles * self.n_errors
 
-        self.cache = defaultdict(lambda: defaultdict(lambda: None))
+        self.signal_cache = defaultdict(lambda: defaultdict(lambda: None))
+        self.estim_cache = defaultdict(lambda: defaultdict(lambda: None))
+        
+        self.signal_filter_kwargs = signal_filter_kwargs
+        self.estim_filter_kwargs = estim_filter_kwargs
         
     def __len__(self):
         return self.length
@@ -66,7 +72,9 @@ class TIMITDataset(data.Dataset):
 
         path = self.files[file_idx]
         data, fs = sf.read(path)
-
+        
+        data = 1.0 * data/np.ptp(data)
+        
         angle_idx = angerr_idx // self.n_errors
         error_idx = angerr_idx % self.n_errors
 
@@ -75,17 +83,17 @@ class TIMITDataset(data.Dataset):
         
         # print(angle_idx, error_idx)
         
-        signal = self.cache[file_idx][angle]
+        signal = self.signal_cache[file_idx][angle]
         
         if signal is None:
-            signal = self.room.generate_one(data, angle)
-            self.cache[file_idx][angle] = signal
+            signal = self.room.generate_one(data, angle, self.signal_filter_kwargs)
+            self.signal_cache[file_idx][angle] = signal
             
-        estim = self.cache[file_idx][angle + error]
+        estim = self.estim_cache[file_idx][angle + error]
         
         if estim is None:
-            estim = self.room.generate_one(data, angle + error)
-            self.cache[file_idx][angle + error] = estim
+            estim = self.room.generate_one(data, angle + error, self.estim_filter_kwargs)
+            self.estim_cache[file_idx][angle + error] = estim
             
             
         return {

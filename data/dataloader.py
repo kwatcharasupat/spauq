@@ -4,7 +4,7 @@ import pytorch_lightning as pl
 
 from torch.utils import data
 from data.musdb import MusDB18HQDataset
-from data.room import StereoMicInRoom
+from data.room import StereoMicInRoom, StereoPanLaw
 
 from data.timit import TIMITDataset
 
@@ -29,9 +29,11 @@ class StereoDatamodule(pl.LightningDataModule):
         min_error=-90,
         max_error=90,
         error_step=15,
+        signal_filter_kwargs=None,
+        estim_filter_kwargs=None,
+        **kwargs
     ) -> None:
         super().__init__()
-
 
         if dataset == "TIMIT":
             DatasetConstructor = TIMITDataset
@@ -42,30 +44,48 @@ class StereoDatamodule(pl.LightningDataModule):
         else:
             raise NameError
 
-        self.room = StereoMicInRoom(
-            dimensions=room_dim,
-            rt60=rt60,
-            fs=self.fs,
-            mic_spacing=mic_spacing,
-            directivity=pra.directivities.DirectivityPattern.__dict__[directivity],
-            src_dist=src_dist,
-            snr=snr,
-        )
+        self.room = StereoPanLaw()
 
-        self.train_dataset = DatasetConstructor(mode="train", room=self.room, min_angle=min_angle, max_angle=max_angle, angle_step=angle_step, min_error=min_error, max_error=max_error, error_step=error_step)
-        self.val_dataset = DatasetConstructor(mode="val", room=self.room, min_angle=min_angle, max_angle=max_angle, angle_step=angle_step, min_error=min_error, max_error=max_error, error_step=error_step)
+        # self.room = StereoMicInRoom(
+        #     dimensions=room_dim,
+        #     rt60=rt60,
+        #     fs=self.fs,
+        #     mic_spacing=mic_spacing,
+        #     directivity=pra.directivities.DirectivityPattern.__dict__[directivity],
+        #     src_dist=src_dist,
+        #     snr=snr,
+        # )
+
+        self.train_dataset = DatasetConstructor(
+            mode="train",
+            room=self.room,
+            min_angle=min_angle,
+            max_angle=max_angle,
+            angle_step=angle_step,
+            min_error=min_error,
+            max_error=max_error,
+            error_step=error_step,
+            signal_filter_kwargs=signal_filter_kwargs,
+            estim_filter_kwargs=estim_filter_kwargs
+        )
+        self.val_dataset = DatasetConstructor(
+            mode="val",
+            room=self.room,
+            min_angle=min_angle,
+            max_angle=max_angle,
+            angle_step=angle_step,
+            min_error=min_error,
+            max_error=max_error,
+            error_step=error_step,
+            signal_filter_kwargs=signal_filter_kwargs,
+            estim_filter_kwargs=estim_filter_kwargs
+        )
 
     def train_dataloader(self):
-        return data.DataLoader(
-            dataset=self.train_dataset,
-            batch_size=1
-        )
+        return data.DataLoader(dataset=self.train_dataset, batch_size=1)
 
     def val_dataloader(self):
-        return data.DataLoader(
-            dataset=self.val_dataset,
-            batch_size=1
-        )
+        return data.DataLoader(dataset=self.val_dataset, batch_size=1)
 
 
 if __name__ == "__main__":
@@ -79,9 +99,8 @@ if __name__ == "__main__":
         mic_spacing=0.60,
         directivity="CARDIOID",
     )
-    
+
     timit_dl = timit_dm.train_dataloader()
-    
-    
+
     for item in timit_dl:
         print(item)

@@ -1,9 +1,119 @@
+from abc import ABC
+import functools
 import numpy as np
 
 import pyroomacoustics as pra
+from scipy.signal import *
 
 
-class StereoMicInRoom:
+def stftfilt(signal, Wn, btype, fs, **kwargs):
+    
+    winmult = np.power(2.0, np.ceil(fs/16000)).astype(int)
+    nperseg=4096*winmult
+    noverlap=nperseg//2
+    
+    n_sampl = signal.shape[0]
+    farr, tarr, X = stft(signal, fs=fs, window='hann', nperseg=nperseg, noverlap=noverlap)
+    
+    
+    
+    if btype == 'lowpass':
+        mask = farr < Wn[0]
+    elif btype == 'highpass':
+        mask = farr > Wn[0]
+    elif btype == 'bandstop':
+        mask = (farr < Wn[0]) | (farr > Wn[1])
+        # print(farr)
+        # print(mask)
+    elif btype == 'bandpass':
+        mask = (farr > Wn[0]) & (farr < Wn[1])
+        # print(mask)[]
+        
+    Xfilt = X * mask[:, None]
+    
+    _, sigfilt = istft(Xfilt, fs=fs, window='hann', nperseg=nperseg, noverlap=noverlap)
+    
+    # print(signal.shape, X.shape, Xfilt.shape, sigfilt.shape)
+    sigfilt = sigfilt[:n_sampl]
+    
+    
+    return sigfilt
+
+def delay(signal, ldelay, rdelay, **kwargs):
+    
+    n_sampl = signal.shape[-1]
+    L = signal[0, :]
+    R = signal[1, :]
+    
+    L = np.concatenate([np.zeros((ldelay,)), L])[:n_sampl]
+    R = stftfilt(np.concatenate([np.zeros((rdelay,)), R])[:n_sampl], [7000], 'lowpass', 16000)
+    
+    signal = np.stack([L, R], axis=0)
+    
+
+    return signal
+
+class Spatializer(ABC):
+    def generate_one(self, signal, angle):
+        raise NotImplementedError
+
+class StereoPanLaw(Spatializer):
+    def __init__(self, mode='ConstantPower') -> None:
+        super().__init__()
+        
+        assert mode in ['ConstantGain', 'ConstantPower']
+        
+        self.mode = mode
+        
+        self.filter = None
+        
+    def get_stereo_multipliers(self, angle):
+        
+        if self.mode == 'ConstantPower':
+            # angle = 0 is center i.e. p = 0
+            # angle = -45 is -0.5
+            # angle = -90 is -1 
+            p = angle/90
+            pan = 45 * (p + 1)
+            L = np.cos(np.deg2rad(pan))
+            R = np.sin(np.deg2rad(pan))
+        elif self.mode == 'ConstantGain':
+            pan = 0.5 * ((angle/90 + 1) % 2.0) + 0.5
+            L = pan
+            R = 1.0 - pan
+        else:
+            raise NotImplementedError
+        
+        return np.array([L, R])
+    
+        
+    def generate_one(self, signal, angle, filter_kwargs=None):
+        
+        multipliers = self.get_stereo_multipliers(angle)
+        
+        if filter_kwargs is not None:
+            if type(filter_kwargs) is dict:
+                if filter_kwargs['ftype'] == 'ideal':
+                    signal = stftfilt(signal, **filter_kwargs)
+            else:
+                signal = sosfilt(filter_kwargs, signal)
+            
+            # print(signal.shape)
+            
+            if np.any(np.isnan(signal)):
+                raise ValueError
+        # print(angle, multipliers)
+        
+        signal = multipliers[:, None] * signal[None, :]
+        
+        if filter_kwargs is not None:
+            if type(filter_kwargs) is dict:
+                if filter_kwargs['ftype'] == 'delay':
+                    signal = delay(signal, **filter_kwargs)
+        
+        return signal
+
+class StereoMicInRoom(Spatializer):
     def __init__(
         self, dimensions, rt60, fs, mic_spacing, directivity, src_dist, snr
     ) -> None:
