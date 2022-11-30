@@ -116,7 +116,7 @@ def run_eval(
         n_samples = (
             64 * timit_dm.train_dataset.n_angles * timit_dm.train_dataset.n_errors
         )
-        cs = 256
+        cs = 128
 
         for i in tqdm(range(int(np.ceil(n_samples / cs)))):
             results += process_map(
@@ -160,10 +160,16 @@ def run_multiple(
     signal_filter_kwargs_list=None,
     estim_filter_kwargs_list=[None]
     + [
-        ideal_filt_dict([f/np.power(2, 1/6), f * np.power(2, 1/6)], "bandstop") for f in [
-            125, 250, 500, 1000, 2000, 4000
+        right_delay_dict(d) for d in [
+            1, 2, 4, 8, 16, 32, 64, 128, 256, 512
         ]
-    ]  # [125, 250, 500, 1000, 2000, 3000, 4000, 5000, 6000, 7000]],
+    ]
+    # estim_filter_kwargs_list=[None]
+    # + [
+    #     ideal_filt_dict([f/np.power(2, 1/6), f * np.power(2, 1/6)], "bandstop") for f in [
+    #         125, 250, 500, 1000, 2000, 4000
+    #     ]
+    # ]  # [125, 250, 500, 1000, 2000, 3000, 4000, 5000, 6000, 7000]],
     # estim_filter_kwargs_list=[None] + [ideal_filt_dict([f], 'low') for f in [125, 250, 500, 1000, 2000, 4000, 6000, 7000]],
 ):
 
