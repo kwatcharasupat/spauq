@@ -1,33 +1,28 @@
-from collections import defaultdict
-from typing import Optional
-import pytorch_lightning as pl
-from torch.utils import data
+
 import os
 import glob
 
-import soundfile as sf
+from data.dataset import Dataset
 
-import numpy as np
-
-from data.room import StereoMicInRoom
+from data.room import Spatializer
 
 
-class TIMITDataset(data.Dataset):
+class TIMITDataset(Dataset):
     def __init__(
         self,
         mode,
-        room: StereoMicInRoom,
-        min_angle=-90,
-        max_angle=90,
-        angle_step=10,
+        fs: int,
+        room: Spatializer,
+        min_pan=-90,
+        max_pan=90,
+        pan_step=10,
         min_error=-90,
         max_error=90,
         error_step=10,
-        signal_filter_kwargs=None,
-        estim_filter_kwargs=None,
+        signal_filter_kwargs=[],
+        estim_filter_kwargs=[],
         root="/home/kwatchar3/data/timit/timit",
     ) -> None:
-        super().__init__()
 
         subfolder = {"train": "train", "val": "test"}[mode]
 
@@ -39,68 +34,17 @@ class TIMITDataset(data.Dataset):
 
         assert len(self.files) == self.n_files
 
-        self.room = room
-
-        self.angles = np.linspace(
-            min_angle, max_angle, (max_angle - min_angle) // angle_step + 1
+        super().__init__(
+            fs=fs,
+            room=room,
+            min_pan=min_pan,
+            max_pan=max_pan,
+            pan_step=pan_step,
+            min_error=min_error,
+            max_error=max_error,
+            error_step=error_step,
+            signal_filter_kwargs=signal_filter_kwargs,
+            estim_filter_kwargs=estim_filter_kwargs,
         )
 
-        self.errors = np.linspace(
-            min_error, max_error, (max_error - min_error) // error_step + 1
-        )
-        
-        print(mode, self.angles, self.errors)
-
-        self.n_angles = len(self.angles)
-        self.n_errors = len(self.errors)
-
-        self.length = self.n_files * self.n_angles * self.n_errors
-
-        self.signal_cache = defaultdict(lambda: defaultdict(lambda: None))
-        self.estim_cache = defaultdict(lambda: defaultdict(lambda: None))
-        
-        self.signal_filter_kwargs = signal_filter_kwargs
-        self.estim_filter_kwargs = estim_filter_kwargs
-        
-    def __len__(self):
-        return self.length
-
-    def __getitem__(self, index):
-
-        file_idx = index // (self.n_angles * self.n_errors)
-        angerr_idx = index % (self.n_angles * self.n_errors)
-
-        path = self.files[file_idx]
-        data, fs = sf.read(path)
-        
-        data = 1.0 * data/np.ptp(data)
-        
-        angle_idx = angerr_idx // self.n_errors
-        error_idx = angerr_idx % self.n_errors
-
-        angle = self.angles[angle_idx]
-        error = self.errors[error_idx]
-        
-        # print(angle_idx, error_idx)
-        
-        signal = self.signal_cache[file_idx][angle]
-        
-        if signal is None:
-            signal = self.room.generate_one(data, angle, self.signal_filter_kwargs)
-            self.signal_cache[file_idx][angle] = signal
-            
-        estim = self.estim_cache[file_idx][angle + error]
-        
-        if estim is None:
-            estim = self.room.generate_one(data, angle + error, self.estim_filter_kwargs)
-            self.estim_cache[file_idx][angle + error] = estim
-            
-            
-        return {
-            'xtrue': signal,
-            'xest': estim,
-            'true_angle': angle,
-            'est_angle': angle+error,
-            'est_deviation': error,
-            'file': path
-        }
+        print(mode, self.pans, self.errors)

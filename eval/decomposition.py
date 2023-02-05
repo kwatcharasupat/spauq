@@ -4,6 +4,8 @@ import scipy as sp
 from scipy import fft
 
 from scipy import optimize
+from scipy import signal as ss
+from scipy import ndimage as ndi
 
 
 def transform(est, ref, drop_conj_sym=False):
@@ -38,7 +40,7 @@ def transform(est, ref, drop_conj_sym=False):
 
 def project_spatial_const_phase(est, ref):
 
-    s_est, s_ref, n_sampl = _transform(est, ref)
+    s_est, s_ref, n_sampl, _, _ = transform(est, ref)
     n_freq, n_chan = s_est.shape
 
     # vec(J.T) = (
@@ -160,11 +162,10 @@ def compute_numerical_proj_matrix(
 
         DxSHq = DxSH * qhase
 
-        dA = 2 * np.real(np.mean(DxSHq, axis=0))
-        
+        dA = 2 * np.mean(np.real(DxSHq), axis=0)
 
-        dT = 2 * np.real(
-            np.mean(2 * np.pi * 1j * farr[:, None, None] * A * DxSHq, axis=0)
+        dT = 2 * np.mean(
+            np.real(2 * np.pi * 1j * farr[:, None, None] * A * DxSHq), axis=0
         )
 
         err = np.mean(np.square(np.abs(diff)))
@@ -187,7 +188,7 @@ def compute_numerical_proj_matrix(
         )
 
     cost = AT.fun
-    
+
     # if cost > 1e-5:
     #     print("non zero cost:", cost)
 
@@ -202,7 +203,7 @@ def compute_numerical_proj_matrix(
 
     proj = mag[None, ...] * phase
 
-    # print("A", A, "\nT", T)
+    print("\nT", T[1][1])
 
     return proj, mag, T, cost
 
@@ -290,6 +291,112 @@ def compute_numerical_proj_matrix_iterative(s_est, s_ref, farr, max_iter=10):
     return proj, mag, T0, np.mean(np.square(np.abs(s_proj - s_est)))
 
 
+def compute_corr_proj_matrix(s_est, s_ref, use_aligned_refref=True, lambd=1e-3):
+    n_chan, n_sampl = s_est.shape
+    # print("n_chan", n_chan, "n_sampl", n_sampl)
+
+    lags = ss.correlation_lags(n_sampl, n_sampl, mode="full")
+
+    optim_lags = np.zeros((n_chan, n_chan))
+
+    # print("aligning signals")
+    for c in range(n_chan):
+        for d in range(n_chan):
+            # print("aligning channels:", c, d)
+            optim_lags[c, d] = lags[
+                np.argmax(ss.correlate(s_est[c, :], s_ref[d, :], method="fft"))
+            ]
+
+    # print("optim lags", optim_lags)
+
+    optim_lags = np.round(optim_lags).astype(int)
+    corr_refref = np.zeros((n_chan, n_chan))
+    corr_estref = np.zeros((n_chan, n_chan))
+
+    s_ref_aligned = np.zeros((n_chan, n_chan, n_sampl))
+
+    # print("computing correlations")
+    for c in range(n_chan):
+        for d in range(n_chan):
+            s_est_aligned = s_est[c, :]
+            s_ref_aligned[c, d, :] = np.roll(s_ref[d, :], optim_lags[c, d])
+            if optim_lags[c, d] > 0:
+                s_ref_aligned[c, d, : optim_lags[c, d]] = 0
+                s_est_aligned[: optim_lags[c, d]] = 0
+            elif optim_lags[c, d] < 0:
+                s_ref_aligned[c, d, optim_lags[c, d] :] = 0
+                s_est_aligned[optim_lags[c, d] :] = 0
+
+            if use_aligned_refref:
+                corr_refref[c, d] = np.mean(
+                    s_ref_aligned[c, d, :] * s_ref_aligned[c, d, :]
+                )
+            else:
+                corr_refref[c, d] = np.mean(s_ref[d, :] * s_ref[d, :])
+                
+            corr_estref[c, d] = np.mean(s_est_aligned * s_ref_aligned[c, d, :])
+
+    # A * R = Rhat
+    # R^T * A^T = Rhat^T
+    # R * R^T * A^T = R * Rhat^T
+    # A^T = (R * R^T + lambda * I)^-1 * R * Rhat^T
+
+    try:
+        A = np.linalg.lstsq(corr_refref.T, corr_estref.T, rcond=-1)[0].T
+    except np.linalg.LinAlgError:
+        A = np.linalg.pinv(
+            corr_refref @ corr_refref.T + lambd * np.eye(n_chan)
+        ) @ corr_refref @ corr_estref.T
+
+
+    s_proj = np.zeros((n_chan, n_sampl))
+
+    for c in range(n_chan):
+        s_proj[c] = np.squeeze(A[[c], :] @ s_ref_aligned[c, :, :])
+
+    # print("sproj", s_proj.shape)
+
+    return s_proj
+
+
+def adjust_est_global_mag(s_est, s_ref):
+
+    # n_chan, n_sampl = s_est.shape
+
+    est_rms = np.linalg.norm(s_est)
+    ref_rms = np.linalg.norm(s_ref)
+    est_adjusted = s_est * ref_rms / est_rms
+
+    ref_adjusted = s_ref
+
+    return est_adjusted, ref_adjusted
+
+def adjust_est_global_phase(s_est, s_ref):
+
+    n_chan, n_sampl = s_est.shape
+
+    corrs = np.zeros((n_chan, 2 * n_sampl - 1))
+    corr_lags = ss.correlation_lags(n_sampl, n_sampl, mode="full")
+
+    for c in range(n_chan):
+        corrs[c] = ss.correlate(s_est[c, :], s_ref[c, :], mode="full", method="fft")
+
+    corrs = np.linalg.norm(corrs, axis=0)
+    max_corr_idx = np.argmax(corrs)
+    max_corr_lag = corr_lags[max_corr_idx]
+
+    if max_corr_lag > 0:
+        s_est = s_est[:, max_corr_lag:]
+        s_ref = s_ref[:, :-max_corr_lag]
+    elif max_corr_lag < 0:
+        s_est = s_est[:, :max_corr_lag]
+        s_ref = s_ref[:, -max_corr_lag:]
+    else:
+        pass
+
+    return s_est, s_ref
+
+
 def project_spatial_magphase(
     est,
     ref,
@@ -300,7 +407,23 @@ def project_spatial_magphase(
     use_phase=True,
     iterative=True,
     use_exact_grad=False,
+    use_time_domain_corr=True,
+    use_aligned_refref=False,
+    forgive_global_mag=True,
+    forgive_global_shift=True,
 ):
+    if forgive_global_shift:
+        est, ref = adjust_est_global_phase(est, ref)
+    if forgive_global_mag:
+        est, ref = adjust_est_global_mag(est, ref)
+
+    if use_time_domain_corr:
+        # print("Using time domain correlation")
+        ref_trans = compute_corr_proj_matrix(
+            est, ref, use_aligned_refref=use_aligned_refref
+        )
+        cost = np.mean(np.square(est - ref_trans))
+        return ref, est, ref_trans, cost
 
     if use_bsseval_proj:
         raise NotImplementedError
@@ -369,43 +492,43 @@ def root_mean_square(x):
 
 
 def distortion_ratio(
-    est, ref, use_numerical=True, use_phase=True, iterative=False, use_exact_grad=False
+    est,
+    ref,
+    use_numerical=True,
+    use_phase=True,
+    iterative=False,
+    use_exact_grad=False,
+    forgive_global_mag=True,
+    forgive_global_shift=True,
 ):
 
-    # ref = root_mean_square(est)/root_mean_square(ref) * ref
-    # print(ref)
-
-    ref_trans, cost = project_spatial_magphase(
+    ref, est, ref_trans, cost = project_spatial_magphase(
         est,
         ref,
+        use_time_domain_corr=True,
         use_numerical=use_numerical,
         use_phase=use_phase,
         iterative=iterative,
         use_exact_grad=use_exact_grad,
+        forgive_global_mag=forgive_global_mag,
+        forgive_global_shift=forgive_global_shift,
     )
 
-    n_sampl = min(ref.shape[-1], est.shape[-1])
+    # n_sampl = min(ref.shape[-1], est.shape[-1])
 
-    est = est[..., :n_sampl]
-    ref = ref[..., :n_sampl]
-    ref_trans = ref_trans[..., :n_sampl]
+    # est = est[..., :n_sampl]
+    # ref = ref[..., :n_sampl]
+    # ref_trans = ref_trans[..., :n_sampl]
 
     e_spat = ref_trans - ref
-    e_filt = est - ref_trans  # est - (ref + e_spat)
+    e_filt = est - ref_trans
 
     ref_pow = np.mean(np.square(ref))
-    est_pow = np.mean(np.square(est))
 
     ref_trans_pow = np.mean(np.square(ref_trans))
 
     spat_pow = np.mean(np.square(e_spat))
     filt_pow = np.mean(np.square(e_filt))
-
-    # print("SIGNAL POWERS")
-    # print("REF", ref_pow)
-    # print("EST", est_pow)
-    # print("PROJ", ref_trans_pow)
-    # print(filt_pow, ref_trans_pow, spat_pow)
 
     spat_ratio = ref_pow / spat_pow
     filt_ratio = ref_trans_pow / filt_pow

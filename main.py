@@ -36,7 +36,7 @@ def run_one(item):
         "sfr/num": sfr_num,
         # "sfr/cal": np.round(sfr_cal, 3),
         "cost": cost,
-        **{k: item[k] for k in ["true_angle", "est_angle", "est_deviation", "file"]},
+        **{k: item[k] for k in ["true_pan", "est_pan", "est_deviation", "file"]},
     }
 
     del item
@@ -65,18 +65,14 @@ ideal_filt_dict = lambda f, bt: dict(
 
 right_delay_dict = lambda rd: dict(ldelay=0, rdelay=rd, ftype="delay")
 
+leftright_delay_dict = lambda rd: dict(ldelay=rd, rdelay=rd, ftype="delay")
+
 
 def run_eval(
-    dataset="TIMIT",
-    room_dim=(3, 3),
-    snr=None,
-    rt60=0.150,
-    src_dist=1.0,
-    mic_spacing=0.60,
-    directivity="CARDIOID",
-    min_angle=0,
-    max_angle=0,
-    angle_step=45,
+    dataset,
+    min_pan=0,
+    max_pan=0,
+    pan_step=45,
     min_error=-45,
     max_error=45,
     error_step=15,
@@ -84,26 +80,31 @@ def run_eval(
     estim_filter_kwargs=right_delay_dict(1024),  # filter_dict,
     use_phase=True,
     use_exact_grad=False,
+    n_files=128,
     subfolder=None,
+    multiprocessing=True,
+    **dskwargs,
 ):
+
+    print(dskwargs)
 
     kwargs = locals()
 
-    if signal_filter_kwargs is not None:
-        if signal_filter_kwargs["ftype"] in ["ideal", "delay"]:
-            signal_filter = signal_filter_kwargs
-        else:
-            signal_filter = iirfilter(**signal_filter_kwargs)
-        kwargs["signal_filter_kwargs"] = signal_filter
+    # if signal_filter_kwargs is not None:
+    #     if signal_filter_kwargs["ftype"] in ["ideal"]:
+    #         signal_filter = signal_filter_kwargs
+    #     else:
+    #         signal_filter = iirfilter(**signal_filter_kwargs)
+    #     kwargs["signal_filter_kwargs"] = signal_filter
 
-    if estim_filter_kwargs is not None:
-        if estim_filter_kwargs["ftype"] in ["ideal", "delay"]:
-            estim_filter = estim_filter_kwargs
-        else:
-            estim_filter = iirfilter(**estim_filter_kwargs)
-        kwargs["estim_filter_kwargs"] = estim_filter
+    # if estim_filter_kwargs is not None:
+    #     if estim_filter_kwargs["ftype"] in ["ideal"]:
+    #         estim_filter = estim_filter_kwargs
+    #     else:
+    #         estim_filter = iirfilter(**estim_filter_kwargs)
+    #     kwargs["estim_filter_kwargs"] = estim_filter
 
-    timit_dm = StereoDatamodule(**kwargs)
+    timit_dm = StereoDatamodule(**kwargs, **dskwargs)
 
     # timit_dl = timit_dm.train_dataloader()
 
@@ -114,20 +115,24 @@ def run_eval(
     try:
         # if True:
         n_samples = (
-            64 * timit_dm.train_dataset.n_angles * timit_dm.train_dataset.n_errors
+            n_files * timit_dm.train_dataset.n_pans * timit_dm.train_dataset.n_errors
         )
-        cs = 128
+        cs = 1024
+        if multiprocessing:
+            for i in tqdm(range(int(np.ceil(n_samples / cs)))):
 
-        for i in tqdm(range(int(np.ceil(n_samples / cs)))):
-            results += process_map(
-                run_one,
-                [
-                    timit_dm.train_dataset[j]
-                    for j in range(i * cs, min(n_samples, (i + 1) * cs))
-                ],
-                chunksize=4,
-                max_workers=16,
-            )
+                results += process_map(
+                    run_one,
+                    [
+                        timit_dm.train_dataset[j]
+                        for j in range(i * cs, min(n_samples, (i + 1) * cs))
+                    ],
+                    chunksize=4,
+                    max_workers=16,
+                )
+        else:
+            for i in tqdm(range(n_samples)):
+                results.append(run_one(timit_dm.train_dataset[i]))
 
     except KeyboardInterrupt:
         is_incomplete = True
@@ -157,27 +162,125 @@ def run_eval(
 
 def run_multiple(
     subfolder,
+    dataset="TIMIT",
+    multiprocessing=True,
     signal_filter_kwargs_list=None,
-    estim_filter_kwargs_list=[None]
-    + [
-        right_delay_dict(d) for d in [
-            1, 2, 4, 8, 16, 32, 64, 128, 256, 512
-        ]
-    ]
-    # estim_filter_kwargs_list=[None]
-    # + [
-    #     ideal_filt_dict([f/np.power(2, 1/6), f * np.power(2, 1/6)], "bandstop") for f in [
-    #         125, 250, 500, 1000, 2000, 4000
-    #     ]
-    # ]  # [125, 250, 500, 1000, 2000, 3000, 4000, 5000, 6000, 7000]],
-    # estim_filter_kwargs_list=[None] + [ideal_filt_dict([f], 'low') for f in [125, 250, 500, 1000, 2000, 4000, 6000, 7000]],
+    estim_filter_kwargs_list=[[]],
+    **kwargs,
 ):
 
     if signal_filter_kwargs_list is None:
-        signal_filter_kwargs_list = [None for _ in range(len(estim_filter_kwargs_list))]
+        signal_filter_kwargs_list = [[] for _ in range(len(estim_filter_kwargs_list))]
 
     for sfk, efk in tqdm(zip(signal_filter_kwargs_list, estim_filter_kwargs_list)):
-        run_eval(signal_filter_kwargs=sfk, estim_filter_kwargs=efk, subfolder=subfolder)
+        print(efk)
+        run_eval(
+            dataset=dataset,
+            signal_filter_kwargs=sfk,
+            estim_filter_kwargs=efk,
+            subfolder=subfolder,
+            multiprocessing=multiprocessing,
+            **kwargs,
+        )
+
+
+def run_pow2_delays(
+    subfolder,
+    dataset,
+    multiprocessing=True,
+    max_delay=4096,
+    sampling_rate=None,
+    **kwargs,
+):  
+
+    if sampling_rate is None:
+        if dataset == "TIMIT":
+            sampling_rate = 16000
+        elif dataset == "MUSDB18-HQ":
+            sampling_rate = 44100
+        else:
+            raise ValueError(f"Unknown dataset {dataset}")
+
+    estim_filter_kwargs_list = [[]]
+
+    p2 = int(np.log2(max_delay))
+
+    for ldp in range(-1, p2+1):
+        ld = np.power(2.0, ldp)/sampling_rate if ldp >= 0 else 0
+        for rdp in range(-1, p2+1):
+            rd = np.power(2.0, rdp)/sampling_rate if rdp >= 0 else 0
+
+            estim_filter_kwargs_list.append(
+                [
+                    {
+                    "backend": "custom",
+                    "name": "delay",
+                    "kwargs": {
+                        "positions": [ld, rd],
+                    }
+                }
+                ]
+            )
+    
+    pprint(estim_filter_kwargs_list)
+
+    run_multiple(
+        subfolder=subfolder,
+        dataset=dataset,
+        multiprocessing=multiprocessing,
+        estim_filter_kwargs_list=estim_filter_kwargs_list,
+        signal_filter_kwargs_list=None,
+        **kwargs,
+    )
+
+
+
+def run_lin_delays(
+    subfolder,
+    dataset,
+    multiprocessing=True,
+    max_delay=64,
+    sampling_rate=None,
+    **kwargs,
+):  
+
+    if sampling_rate is None:
+        if dataset == "TIMIT":
+            sampling_rate = 16000
+        elif dataset == "MUSDB18-HQ":
+            sampling_rate = 44100
+        else:
+            raise ValueError(f"Unknown dataset {dataset}")
+
+    estim_filter_kwargs_list = [[]]
+
+    for ldp in range(4, max_delay, 4):
+        ld = ldp/sampling_rate
+        for rdp in range(0, max_delay):
+            rd = rdp/sampling_rate
+            estim_filter_kwargs_list.append(
+                [
+                    {
+                    "backend": "custom",
+                    "name": "delay",
+                    "kwargs": {
+                        "positions": [ld, rd],
+                    }
+                }
+                ]
+            )
+    
+    pprint(estim_filter_kwargs_list)
+
+    run_multiple(
+        subfolder=subfolder,
+        dataset=dataset,
+        multiprocessing=multiprocessing,
+        estim_filter_kwargs_list=estim_filter_kwargs_list,
+        signal_filter_kwargs_list=None,
+        **kwargs,
+    )
+
 
 
 if __name__ == "__main__":

@@ -4,7 +4,7 @@ import pytorch_lightning as pl
 
 from torch.utils import data
 from data.musdb import MusDB18HQDataset
-from data.room import StereoMicInRoom, StereoPanLaw
+from data.room import MonoToStereoPanLaw, StereoToStereoPanLawWithMix
 
 from data.timit import TIMITDataset
 
@@ -13,72 +13,60 @@ import pyroomacoustics as pra
 DATASETS = ["TIMIT", "MUSDB18-HQ"]
 
 
-class StereoDatamodule(pl.LightningDataModule):
+class StereoDatamodule:
     def __init__(
         self,
         dataset,
-        room_dim,
-        snr,
-        rt60,
-        src_dist=1.0,
-        mic_spacing=0.60,
-        directivity="CARDIOID",
-        min_angle=-90,
-        max_angle=90,
-        angle_step=30,
+        min_pan=-90,
+        max_pan=90,
+        pan_step=30,
         min_error=-90,
         max_error=90,
         error_step=15,
-        signal_filter_kwargs=None,
-        estim_filter_kwargs=None,
+        signal_filter_kwargs=[],
+        estim_filter_kwargs=[],
         **kwargs
     ) -> None:
         super().__init__()
 
         if dataset == "TIMIT":
             DatasetConstructor = TIMITDataset
+            self.room = MonoToStereoPanLaw()
             self.fs = 16000
         elif dataset == "MUSDB18-HQ":
             DatasetConstructor = MusDB18HQDataset
+            self.room = StereoToStereoPanLawWithMix()
             self.fs = 44100
         else:
             raise NameError
 
-        self.room = StereoPanLaw()
-
-        # self.room = StereoMicInRoom(
-        #     dimensions=room_dim,
-        #     rt60=rt60,
-        #     fs=self.fs,
-        #     mic_spacing=mic_spacing,
-        #     directivity=pra.directivities.DirectivityPattern.__dict__[directivity],
-        #     src_dist=src_dist,
-        #     snr=snr,
-        # )
-
         self.train_dataset = DatasetConstructor(
             mode="train",
+            fs=self.fs,
             room=self.room,
-            min_angle=min_angle,
-            max_angle=max_angle,
-            angle_step=angle_step,
+            min_pan=min_pan,
+            max_pan=max_pan,
+            pan_step=pan_step,
             min_error=min_error,
             max_error=max_error,
             error_step=error_step,
             signal_filter_kwargs=signal_filter_kwargs,
-            estim_filter_kwargs=estim_filter_kwargs
+            estim_filter_kwargs=estim_filter_kwargs,
+            **kwargs
         )
         self.val_dataset = DatasetConstructor(
             mode="val",
+            fs=self.fs,
             room=self.room,
-            min_angle=min_angle,
-            max_angle=max_angle,
-            angle_step=angle_step,
+            min_pan=min_pan,
+            max_pan=max_pan,
+            pan_step=pan_step,
             min_error=min_error,
             max_error=max_error,
             error_step=error_step,
             signal_filter_kwargs=signal_filter_kwargs,
-            estim_filter_kwargs=estim_filter_kwargs
+            estim_filter_kwargs=estim_filter_kwargs,
+            **kwargs
         )
 
     def train_dataloader(self):

@@ -73,8 +73,8 @@ class StereoPanLaw(Spatializer):
             # angle = 0 is center i.e. p = 0
             # angle = -45 is -0.5
             # angle = -90 is -1 
-            p = angle/90
-            pan = 45 * (p + 1)
+            p = angle/90 # [-90, 90] -> [-1, 1]
+            pan = 45 * (p + 1) # [-1, 1] -> [0, 90]
             L = np.cos(np.deg2rad(pan))
             R = np.sin(np.deg2rad(pan))
         elif self.mode == 'ConstantGain':
@@ -85,31 +85,35 @@ class StereoPanLaw(Spatializer):
             raise NotImplementedError
         
         return np.array([L, R])
-    
+
+    def get_stereo_rotater(self, angle):
+        multipliers = self.get_stereo_multipliers(angle)
         
-    def generate_one(self, signal, angle, filter_kwargs=None):
+        rotater = np.array([[multipliers[0], -multipliers[1]], [multipliers[1], multipliers[0]]])
+        
+        return rotater
+    
+    def generate_one(self, signal, angle):
+        raise NotImplementedError
+        
+class MonoToStereoPanLaw(StereoPanLaw):
+    def generate_one(self, signal, angle):
         
         multipliers = self.get_stereo_multipliers(angle)
         
-        if filter_kwargs is not None:
-            if type(filter_kwargs) is dict:
-                if filter_kwargs['ftype'] == 'ideal':
-                    signal = stftfilt(signal, **filter_kwargs)
-            else:
-                signal = sosfilt(filter_kwargs, signal)
-            
-            # print(signal.shape)
-            
-            if np.any(np.isnan(signal)):
-                raise ValueError
-        # print(angle, multipliers)
+        signal = multipliers[:, None] * signal
         
-        signal = multipliers[:, None] * signal[None, :]
+        return signal
+
+class StereoToStereoPanLawNoMix(MonoToStereoPanLaw):
+    pass
+
+class StereoToStereoPanLawWithMix(StereoPanLaw):
+    def generate_one(self, signal, angle):
         
-        if filter_kwargs is not None:
-            if type(filter_kwargs) is dict:
-                if filter_kwargs['ftype'] == 'delay':
-                    signal = delay(signal, **filter_kwargs)
+        rotater = self.get_stereo_rotater(angle)
+        
+        signal = rotater @ signal
         
         return signal
 
