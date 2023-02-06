@@ -17,6 +17,7 @@ class Dataset:
         min_error=-90,
         max_error=90,
         error_step=10,
+        limit = None,
         signal_filter_kwargs=[],
         estim_filter_kwargs=[],
         **kwargs,
@@ -42,9 +43,20 @@ class Dataset:
         self.signal_transform = Transform(signal_filter_kwargs, self.fs)
         self.estim_transform = Transform(estim_filter_kwargs, self.fs)
 
+        self.limit = limit
+
     
     def __len__(self):
         return self.length
+
+    def get_signal(self, path):
+        data, fs = sf.read(path, always_2d=True)
+        data = data.T # chan by time
+
+        if self.limit is not None:
+            data = data[:, : self.limit]
+
+        return data
 
     def __getitem__(self, index):
 
@@ -52,8 +64,7 @@ class Dataset:
         angerr_idx = index % (self.n_pans * self.n_errors)
 
         path = self.files[file_idx]
-        data, fs = sf.read(path, always_2d=True)
-        data = data.T # chan by time
+        data = self.get_signal(path)
 
         data = 1.0 * data / np.ptp(data)
 

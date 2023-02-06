@@ -104,9 +104,11 @@ def run_eval(
     #         estim_filter = iirfilter(**estim_filter_kwargs)
     #     kwargs["estim_filter_kwargs"] = estim_filter
 
-    timit_dm = StereoDatamodule(**kwargs, **dskwargs)
+    dm = StereoDatamodule(**kwargs, **dskwargs)
 
     # timit_dl = timit_dm.train_dataloader()
+
+    n_files = min(n_files, dm.train_dataset.n_files)
 
     results = []
 
@@ -115,16 +117,16 @@ def run_eval(
     try:
         # if True:
         n_samples = (
-            n_files * timit_dm.train_dataset.n_pans * timit_dm.train_dataset.n_errors
+            n_files * dm.train_dataset.n_pans * dm.train_dataset.n_errors
         )
-        cs = 1024
+        cs = 32
         if multiprocessing:
             for i in tqdm(range(int(np.ceil(n_samples / cs)))):
 
                 results += process_map(
                     run_one,
                     [
-                        timit_dm.train_dataset[j]
+                        dm.train_dataset[j]
                         for j in range(i * cs, min(n_samples, (i + 1) * cs))
                     ],
                     chunksize=4,
@@ -132,7 +134,7 @@ def run_eval(
                 )
         else:
             for i in tqdm(range(n_samples)):
-                results.append(run_one(timit_dm.train_dataset[i]))
+                results.append(run_one(dm.train_dataset[i]))
 
     except KeyboardInterrupt:
         is_incomplete = True

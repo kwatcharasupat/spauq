@@ -28,6 +28,7 @@ class MusDB18Dataset(Dataset):
         signal_filter_kwargs=[],
         estim_filter_kwargs=[],
         root="/home/kwatchar3/data/musdb18hq",
+        limit=None,
     ) -> None:
 
         assert instrument in ["vocals", "drums", "bass", "other", "mixture"]
@@ -59,6 +60,7 @@ class MusDB18Dataset(Dataset):
             error_step=error_step,
             signal_filter_kwargs=signal_filter_kwargs,
             estim_filter_kwargs=estim_filter_kwargs,
+            limit=limit,
         )
 
         print(mode, self.pans, self.errors)
@@ -87,6 +89,7 @@ class MusDB18HQDataset(MusDB18Dataset):
             instrument=instrument,
             fs=44100,
             room=room,
+            limit=44100 * 60,
             min_pan=min_pan,
             max_pan=max_pan,
             pan_step=pan_step,
