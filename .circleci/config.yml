@@ -29,7 +29,7 @@ jobs:
           name: Run tests
           command: |
             . venv<< parameters.python-ver >>/bin/activate
-            pytest -n 2 tests/ --cov=latte --cov-report=xml
+            pytest -n 2 tests/ --cov=spauq --cov-report=xml
       - save_cache:
           key: deps<< parameters.python-ver >>-{{ .Branch }}-{{ checksum "setup.cfg" }}
           paths:
