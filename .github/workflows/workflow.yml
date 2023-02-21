@@ -11,9 +11,9 @@ jobs:
       OS: ${{ matrix.os }}
       PYTHON: ${{ matrix.py }}
     steps:
-    - uses: actions/checkout@dev
+    - uses: actions/checkout@master
     - name: Setup Python
-      uses: actions/setup-python@dev
+      uses: actions/setup-python@master
       with:
         python-version: ${{ matrix.py }}
     - name: Generate coverage report
