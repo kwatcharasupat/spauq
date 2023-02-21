@@ -1,0 +1,18 @@
+{
+    "dataset": "TIMIT",
+    "room_dim": [
+        3,
+        3
+    ],
+    "snr": null,
+    "rt60": 0.15,
+    "src_dist": 1.0,
+    "mic_spacing": 0.6,
+    "directivity": "CARDIOID",
+    "min_angle": -45,
+    "max_angle": 45,
+    "angle_step": 45,
+    "min_error": -45,
+    "max_error": 45,
+    "error_step": 15
+}
