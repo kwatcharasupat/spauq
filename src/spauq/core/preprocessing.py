@@ -116,7 +116,7 @@ def _compute_optimal_shift(
                         method="auto",
                     )
 
-    xcvals = np.mean(xcvals, axis=(-2, -1))  # use mean for stability
+    xcvals = np.mean(np.abs(xcvals), axis=(-2, -1))  # use mean for stability
     best_lag = xclags[np.argmax(xcvals, axis=-1)]
 
     return best_lag

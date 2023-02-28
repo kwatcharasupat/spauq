@@ -347,6 +347,7 @@ def compute_corr_proj_matrix(s_est, s_ref, use_aligned_refref=True, lambd=1e-3):
         A = np.linalg.pinv(
             corr_refref @ corr_refref.T + lambd * np.eye(n_chan)
         ) @ corr_refref @ corr_estref.T
+        A = A.T
 
 
     s_proj = np.zeros((n_chan, n_sampl))
