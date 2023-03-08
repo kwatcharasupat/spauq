@@ -90,7 +90,11 @@ def _compute_optimal_shift(
     _, n_sampl_e = estimate.shape[-2:]
 
     xclags = sps.correlation_lags(n_sampl_r, n_sampl_e, mode="full")
-    n_lags = int(max_shift_samples) * 2 + 1 if np.isfinite(max_shift_samples) else len(xclags)
+    n_lags = (
+        int(max_shift_samples) * 2 + 1
+        if np.isfinite(max_shift_samples)
+        else len(xclags)
+    )
 
     if reference.ndim == 2:
         xcvals = np.zeros((n_chan, n_chan, n_lags))
@@ -99,7 +103,7 @@ def _compute_optimal_shift(
                 if use_diag_only and i != j:
                     continue
                 xcf = sps.correlate(
-                    reference[i], estimate[j], mode="full", method="auto"
+                    reference[i], estimate[j], mode="full", method="fft"
                 )
 
                 if np.isfinite(max_shift_samples):
@@ -178,12 +182,14 @@ def _apply_global_shift_forgive(
     align_mode: Optional[_AlignType] = None,
     use_diag_only: bool = True,
     max_shift_samples: Optional[int] = None,
+    verbose: bool = False,
 ) -> Tuple[np.ndarray, np.ndarray]:
 
     if align_mode is None:
-        warnings.warn(
-            f"No align_mode specified, defaulting to `{_AlignDefault}`", UserWarning
-        )
+        if verbose:
+            warnings.warn(
+                f"No align_mode specified, defaulting to `{_AlignDefault}`", UserWarning
+            )
         align_mode = _AlignDefault
 
     assert align_mode in typing.get_args(_AlignType), "Invalid align_mode"
@@ -209,11 +215,13 @@ def _apply_global_scale_forgive(
     estimate: np.ndarray,
     *,
     scale_mode: Optional[_ScaleType] = None,
+    verbose: bool = False,
 ) -> Tuple[np.ndarray, np.ndarray]:
     if scale_mode is None:
-        warnings.warn(
-            f"No align_mode specified, defaulting to `{_ScaleDefault}`", UserWarning
-        )
+        if verbose:
+            warnings.warn(
+                f"No align_mode specified, defaulting to `{_ScaleDefault}`", UserWarning
+            )
         scale_mode = _ScaleDefault
 
     assert scale_mode in typing.get_args(_ScaleType), "Invalid scale_mode"
@@ -249,12 +257,15 @@ def _apply_global_forgive(
     align_use_diag_only: bool = True,
     max_shift_samples: Optional[int] = None,
     scale_mode: Optional[_ScaleType] = None,
+    verbose: bool = False,
 ) -> Tuple[np.ndarray, np.ndarray]:
 
     if forgive_mode is None:
-        warnings.warn(
-            f"No forgive_mode specified, defaulting to `{_ForgiveDefault}`", UserWarning
-        )
+        if verbose:
+            warnings.warn(
+                f"No forgive_mode specified, defaulting to `{_ForgiveDefault}`",
+                UserWarning,
+            )
         forgive_mode = _ForgiveDefault
 
     assert forgive_mode in typing.get_args(_ForgiveType), "Invalid forgive_mode"
@@ -270,11 +281,12 @@ def _apply_global_forgive(
             align_mode=align_mode,
             use_diag_only=align_use_diag_only,
             max_shift_samples=max_shift_samples,
+            verbose=verbose,
         )
 
     if forgive_mode in ["scale", "both"]:
         reference, estimate = _apply_global_scale_forgive(
-            reference, estimate, scale_mode=scale_mode
+            reference, estimate, scale_mode=scale_mode, verbose=verbose
         )
 
     return reference, estimate

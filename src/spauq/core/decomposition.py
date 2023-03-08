@@ -4,6 +4,8 @@ import numpy.typing as npt
 from typing import Optional, Tuple
 from scipy import signal as sps
 
+# from numba import jit
+
 from .preprocessing import (
     _ForgiveType,
     _AlignType,
@@ -14,8 +16,8 @@ from .preprocessing import (
 
 __all__ = ["compute_projection"]
 
-_DefaultWindowLengthSeconds = 30  # follows bsseval
-_DefaultHopLengthSeconds = 15  # follows bsseval
+_DefaultWindowLengthSeconds = 30
+_DefaultHopLengthSeconds = 15
 _DefaultMaximumGlobalShiftSeconds = np.inf
 _DefaultMaximumSegmentShiftSeconds = 1.0
 
@@ -51,7 +53,7 @@ def _project_shift(
 
     for i in range(n_chan):
         for j in range(n_chan):
-            corr = sps.correlate(reference[i], estimate[j], mode="full")
+            corr = sps.correlate(reference[i], estimate[j], mode="full", method="fft")
             if np.isfinite(max_shift_samples):
                 corr = corr[max_shift_filter]
             optim_lags[i, j] = lags[np.argmax(np.abs(corr))]
@@ -59,42 +61,77 @@ def _project_shift(
     min_lags = np.min(optim_lags)
     max_lags = np.max(optim_lags)
 
-    # if estimate is behind, lag is negative --> reference is ahead
-    # usable region of estimate: abs(lags) to end
-
-    # if estimate is ahead, lag is positive --> reference is behind
-    # usable region of estimate: 0 to end - abs(lags)
-
     shifted_ref = np.zeros((n_chan, n_chan, n_sampl), dtype=reference.dtype)
-    masked_ref = np.zeros((n_chan, n_chan, n_sampl), dtype=reference.dtype)
+    masked_ref = np.tile(reference, (n_chan, 1, 1))
+    # np.zeros((n_chan, n_chan, n_sampl), dtype=reference.dtype)
 
     for i in range(n_chan):
         for j in range(n_chan):
             shifted_ref[i, j] = np.roll(reference[i], -optim_lags[i, j])
-            masked_ref[i, j] = reference[i]
+
+    # if min_lags < 0 and max_lags < 0: then abs(min_lags) > abs(max_lags), only deal with min_lags
+    # if min_lags > 0 and max_lags > 0: then abs(max_lags) > abs(min_lags), only deal with max_lags
+    # if min_lags < 0 and max_lags > 0: then max_lags > min_lags, deal with both
+    # if min_lags > 0 and max_lags < 0: cannot happen
+
+    # if estimate is behind, lag is negative --> reference is ahead and gets pulled backward
+    # usable region of estimate: -lags to end
+    # unusable region of estimate: 0 to -lags
+
+    # if estimate is ahead, lag is positive --> reference is behind and gets pulled forward
+    # usable region of estimate: 0 to -lags
+    # unusable region of estimate: -lags to end
 
     mask = np.ones((n_sampl,), dtype=bool)
-
     if min_lags < 0:
-        mask[min_lags:] = False
-        if max_lags < 0:
-            pass
-        elif max_lags > 0:
-            mask[:max_lags] = False
-    elif min_lags > 0:
-        mask[:min_lags] = False
-        if max_lags < 0:
-            pass
-        elif max_lags > 0:
-            mask[:max_lags] = False
-
-    # print("n_sampl", n_sampl, "min_lags", min_lags, "max_lags", max_lags)
+        mask[:-min_lags] = False
+        if max_lags > 0:
+            mask[-max_lags:] = False
+    elif min_lags > 0 and max_lags > 0:
+        mask[-max_lags:] = False
 
     shifted_ref = shifted_ref[:, :, mask]
     estimate = estimate[:, mask]
     masked_ref = masked_ref[:, :, mask]
 
     return masked_ref, shifted_ref, estimate, optim_lags
+
+
+def _compute_corrs(
+    shifted_reference: np.ndarray,
+    shifted_estimate: np.ndarray,
+):
+    n_chan, _, _ = shifted_reference.shape
+    # chan of reference, chan of estimate, sample
+
+    shifted_reference_t = np.ascontiguousarray(shifted_reference.transpose((1, 0, 2)))
+    xcf = np.sum(shifted_reference_t * shifted_estimate[:, None, :], axis=-1)
+
+    # xcf = np.zeros((n_chan, n_chan), dtype=shifted_reference.dtype)
+    acf = np.zeros((n_chan, n_chan), dtype=shifted_reference.dtype)
+    for cest in range(n_chan):
+        acf[cest, :] = np.sum(
+            shifted_reference_t[cest, :, :] * shifted_reference[cest, cest, :],
+            axis=-1,
+        )
+        # xcf[cest, :] = np.sum(
+        #     shifted_reference_t[cest, :, :] * shifted_estimate[cest, :], axis=-1
+        # )
+
+    return acf, xcf
+
+
+def _compute_projections(
+    shifted_reference: np.ndarray,
+    scale: np.ndarray,
+):
+    _, n_chan, n_sampl = shifted_reference.shape
+    ref_proj = np.zeros((n_chan, n_sampl), dtype=shifted_reference.dtype)
+
+    for cest in range(n_chan):
+        ref_proj[cest, :] = scale[cest, :, :] @ shifted_reference[cest, :, :]
+
+    return ref_proj
 
 
 def _project_scale(
@@ -104,22 +141,9 @@ def _project_scale(
 ):
     assert shifted_reference.ndim == 3
 
-    n_chan, n_chan, n_sampl = shifted_reference.shape
-    # chan of reference, chan of estimate, sample
+    n_chan, n_chan, _ = shifted_reference.shape
 
-    xcf = np.zeros((n_chan, n_chan), dtype=shifted_reference.dtype)
-    acf = np.zeros((n_chan, n_chan), dtype=shifted_reference.dtype)
-
-    # TODO: vectorize
-    for cest in range(n_chan):
-        for cref in range(n_chan):
-            xcf[cest, cref] = np.sum(
-                shifted_reference[cref, cest, :] * shifted_estimate[cest, :], axis=-1
-            )
-            acf[cest, cref] = np.sum(
-                shifted_reference[cref, cest, :] * shifted_reference[cest, cest, :],
-                axis=-1,
-            )
+    acf, xcf = _compute_corrs(shifted_reference, shifted_estimate)
 
     # scale @ acf = xcf
     # acf.T @ scale.T = xcf.T
@@ -140,17 +164,17 @@ def _project_scale(
         )
         scale = scaleT.T
 
-    ref_proj = np.zeros_like(shifted_estimate)
-
-    for cest in range(n_chan):
-        ref_proj[cest, :] = scale[[cest], :] @ shifted_reference[:, cest, :]
+    ref_proj = _compute_projections(
+        np.ascontiguousarray(shifted_reference.transpose((1, 0, 2))),
+        np.ascontiguousarray(scale[:, None, :]),
+    )
 
     return ref_proj, scale
 
 
+# @jit(nopython=True)
 def _compute_cost(reference: np.ndarray, estimate: np.ndarray):
-
-    return np.linalg.norm(reference - estimate, ord=2)
+    return np.linalg.norm(reference - estimate)
 
 
 def _compute_framewise_projection(
@@ -187,7 +211,7 @@ def compute_projection(
     window_length: Optional[int] = None,
     hop_length: Optional[int] = None,
     tikhonov_lambda: float = 1e-6,
-    warn_short_signal: bool = True,
+    verbose: bool = True,
 ) -> Tuple[np.ndarray, np.ndarray]:
 
     reference, estimate = _validate_inputs(
@@ -208,6 +232,7 @@ def compute_projection(
         max_shift_samples=max_global_shift_seconds * fs,
         align_use_diag_only=align_use_diag_only,
         scale_mode=scale_mode,
+        verbose=verbose,
     )
 
     n_chan = reference.shape[-2]
@@ -215,12 +240,19 @@ def compute_projection(
     # compute projection
 
     if window_length is None:
-        window_length = int(_DefaultWindowLengthSeconds * fs)
-    if hop_length is None:
+        window_length = (
+            int(_DefaultWindowLengthSeconds * fs)
+            if np.isfinite(_DefaultWindowLengthSeconds)
+            else _DefaultWindowLengthSeconds
+        )
+    if hop_length is None and np.isfinite(window_length):
         hop_length = int(_DefaultHopLengthSeconds * fs)
 
     n_sampl = reference.shape[-1]
-    n_frames = int(np.ceil((n_sampl - window_length) / hop_length) + 1)
+    if np.isposinf(window_length):
+        n_frames = 1
+    else:
+        n_frames = int(np.ceil((n_sampl - window_length) / hop_length) + 1)
 
     refs = []
     refprojs = []
@@ -229,19 +261,19 @@ def compute_projection(
     shifts = np.full((n_chan, n_chan, n_frames), np.nan)
     scales = np.full((n_chan, n_chan, n_frames), np.nan)
 
-    if n_frames == 1 and warn_short_signal:
-        warnings.warn(
-            "The input signal is too short to be decomposed into frames. "
-            "The entire signal is used as a single frame."
-        )
-
-    starts = np.arange(0, n_frames) * hop_length
-    ends = starts + window_length
-
-    # print(n_frames)
+    if n_frames == 1:
+        if verbose:
+            warnings.warn(
+                "The input signal is too short to be decomposed into frames. "
+                "The entire signal is used as a single frame."
+            )
+        starts = [0]
+        ends = [n_sampl]
+    else:
+        starts = np.arange(0, n_frames) * hop_length
+        ends = starts + window_length
 
     for i in range(n_frames):
-        # print(starts[i], min(n_sampl, ends[i]), n_sampl, min(n_sampl, ends[i]) - starts[i])
         ref, refproj, estproj, cost, shift, scale = _compute_framewise_projection(
             reference=reference[..., starts[i] : ends[i]],
             estimate=estimate[..., starts[i] : ends[i]],

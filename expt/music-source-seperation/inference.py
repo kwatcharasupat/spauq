@@ -1,114 +1,50 @@
 import os
-import torchaudio as ta
-from tqdm import tqdm
-import pytorch_lightning as pl
-from torch.utils.data import DataLoader
-import torch
-
-torch.set_float32_matmul_precision("high")
+import numpy as np
+import glob
 
 
-class LightningWrapper(pl.LightningModule):
-    def __init__(self, model, output_path, chunk_size=60, overlap=0.25) -> None:
-        super().__init__()
-        self.model = model
-        self.output_path = output_path
-        self.chunk_size = chunk_size
-        self.overlap = overlap
-        self.n_src = 4
-
-    def forward(self, x):
-        return self.model(x)
-
-    def chunk_audio(self, audio, fs, length):
-        n_chunk = int(fs * self.chunk_size)
-        n_hop = int(fs * (1 - self.overlap) * self.chunk_size)
-
-        n_slices = int((length - n_chunk) / n_hop) + 1
-        padded_length = n_hop * n_slices + n_chunk
-        n_pad = padded_length - length
-
-        audio = torch.nn.functional.pad(audio, (0, n_pad))
-
-        audio = audio.unfold(-1, n_chunk, n_hop)
-        audio = torch.permute(audio, (1, 0, 2)).contiguous()
-
-        return audio, n_pad
-
-    def unchunk_audio(self, audio, fs, length, n_pad):
-        n_slices, _, n_chan, n_chunk = audio.shape
-
-        n_hop = int(fs * (1 - self.overlap) * self.chunk_size)
-        n_overlap = n_chunk - n_hop
-
-        fade = ta.transforms.Fade(
-            fade_in_len=0, fade_out_len=n_overlap, fade_shape="linear"
-        )
-
-        
-
-        output = torch.zeros((self.n_src, n_chan, length))
-
-        for i in range(n_slices):
-            if i == n_slices - 1:
-                fade.fade_out_len = 0
-
-            faded = fade(audio[i])
-
-            if i == n_slices - 1:
-                faded = faded[:, :, :-n_pad]
-            print(faded.shape)
-
-            output[:, :, i * n_hop : min(length, i * n_hop + n_chunk)] += faded
-
-            if i == 0:
-                fade.fade_in_len = n_overlap
-
-        return output
-            
-            
-
-    def predict_step(self, batch, batch_idx):
-        mix, fs, length, name = batch
-
-        mix, n_pad = self.chunk_audio(mix[0, 0], fs, length)
-
-        n_slices, n_chan, n_samples = mix.shape
-
-        output = torch.zeros((n_slices, self.n_src, n_chan, n_samples))
-
-        for i in tqdm(range(n_slices)):
-            output[i] = self.model(mix[i].unsqueeze(0))[0]
-
-        output = self.unchunk_audio(output, fs, length, n_pad)
-
-        for s, source in zip(self.model.sources, output):
-            # print(s, source.shape)
-            os.makedirs(os.path.join(self.output_path, name[0]), exist_ok=True)
-            ta.save(
-                os.path.join(self.output_path, name[0], f"{s}.wav"),
-                source.cpu().squeeze(),
-                sample_rate=fs,
-            )
+_DefaultOutputPath = "/home/kwatchar3/spauq-home/data/musdb-hq/{model}-{variant}"
 
 
-class LightningDataWrapper(pl.LightningDataModule):
-    def __init__(self, ds, num_workers=16) -> None:
-        super().__init__()
-        self.ds = ds
-        self.num_workers = num_workers
+def inference_spleeter(variant, audio_path, output_path):
+    assert variant in ["4stems"]
 
-    def predict_dataloader(self):
-        return DataLoader(
-            self.ds,
-            batch_size=1,
-            shuffle=False,
-            pin_memory=True,
-            num_workers=self.num_workers,
-        )
+    from spleeter.__main__ import separate
+    from spleeter.audio import Codec, STFTBackend
+
+    mixtures = glob.glob(os.path.join(audio_path, "musdb18hq/test", "**", "mixture.wav"), recursive=True)
+    os.makedirs(output_path, exist_ok=True)
+
+    separate(
+        deprecated_files=None,
+        files=mixtures,
+        adapter="spleeter.audio.ffmpeg.FFMPEGProcessAudioAdapter",
+        bitrate="128k",
+        codec=Codec.WAV,
+        duration=600.0,
+        offset=0,
+        output_path=output_path,
+        stft_backend=STFTBackend.AUTO,
+        filename_format="{foldername}/{instrument}.{codec}",
+        params_filename=f"spleeter:{variant}",
+        mwf=False,
+        verbose=True,
+    )
 
 
-def inference(model, audio_path, output_path):
+def inference_torch(
+    model,
+    variant,
+    audio_path,
+    output_path,
+):
+    import torch
+    import torchaudio as ta
+    import pytorch_lightning as pl
+    from utils import LightningWrapper, LightningDataWrapper
+
+    torch.set_float32_matmul_precision("high")
+
     ds = LightningDataWrapper(
         ds=ta.datasets.MUSDB_HQ(
             root=audio_path,
@@ -119,16 +55,43 @@ def inference(model, audio_path, output_path):
     )
 
     if model == "HDemucs":
-        model = ta.pipelines.HDEMUCS_HIGH_MUSDB.get_model()
-    elif model == "HDemucs+":
-        model = ta.pipelines.HDEMUCS_HIGH_MUSDB_PLUS.get_model()
+        assert variant in ["MUSDB", "MUSDB_PLUS"]
+        if variant == "MUSDB":
+            model = ta.pipelines.HDEMUCS_HIGH_MUSDB.get_model()
+            source_order = model.sources
+        elif variant == "MUSDB_PLUS":
+            model = ta.pipelines.HDEMUCS_HIGH_MUSDB_PLUS.get_model()
+            source_order = model.sources
+        else:
+            raise NameError(f"Variant {variant} not found")
+        chunk_size = 60.0
+    elif model == "OpenUnmix":
+        assert variant in ["umxhq"]
+        model = torch.hub.load("sigsep/open-unmix-pytorch", variant)
+        source_order = model.target_models.keys()
+        chunk_size = np.inf
     else:
         raise NameError(f"Model {model} not found")
 
-    model = LightningWrapper(model, output_path)
+    model = LightningWrapper(model, output_path, source_order, chunk_size=chunk_size)
 
     trainer = pl.Trainer(accelerator="gpu")
     trainer.predict(model, ds)
+
+
+def inference(
+    model,
+    variant,
+    audio_path="/home/kwatchar3/spauq-home/data/musdb-hq/raw",
+    output_path=None,
+):
+    if output_path is None:
+        output_path = _DefaultOutputPath.format(model=model, variant=variant)
+
+    if model == "Spleeter":
+        inference_spleeter(variant, audio_path, output_path)
+    else:
+        inference_torch(model, variant, audio_path, output_path)
 
 
 if __name__ == "__main__":

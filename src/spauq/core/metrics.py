@@ -13,18 +13,23 @@ _BssEvalBackendType = Literal["fast_bss_eval", "museval"]
 _BssEvalBackendDefault = "museval"
 
 
-def _snr(signal: np.ndarray, noise: np.ndarray, inf_value: float = 80.0):
+def _snr(signal: np.ndarray, noise: np.ndarray, eps: float = 1e-8):
 
-    signal_energy = np.sum(np.square(signal))
-    noise_energy = np.sum(np.square(noise))
-
-    if noise_energy == 0:
-        if signal_energy == 0:
-            snr = 1.0
-        else:
-            snr = inf_value
+    signal_energy = np.mean(np.square(signal))
+    noise_energy = np.mean(np.square(noise))
+    
+    if noise_energy == 0 and signal_energy == 0:
+        ratio = 1.0
+    elif noise_energy == 0:
+        ratio = np.inf
+    elif signal_energy == 0:
+        ratio = -np.inf
     else:
-        snr = 10 * np.log10(signal_energy / noise_energy)
+        ratio = signal_energy / noise_energy
+    
+    ratio = np.clip(ratio, a_min=eps, a_max=1.0/eps)
+    
+    snr = 10 * np.log10(ratio)
 
     return snr
 
@@ -137,6 +142,7 @@ def _spauq_eval(
     window_length: Optional[int] = None,
     hop_length: Optional[int] = None,
     tikhonov_lambda: float = 1e-6,
+    verbose: bool = True,
 ):
     refs, ref_projs, est_projs, cost, shift, scale = compute_projection(
         reference,
@@ -151,6 +157,7 @@ def _spauq_eval(
         window_length=window_length,
         hop_length=hop_length,
         tikhonov_lambda=tikhonov_lambda,
+        verbose=verbose,
     )
 
     errs_spat = [ref_proj - ref for ref_proj, ref in zip(ref_projs, refs)]
@@ -161,7 +168,7 @@ def _spauq_eval(
 
     duplex_snr = [_snr(ref, err_spat) for ref, err_spat in zip(refs, errs_spat)]
 
-    resid_snr = [_snr(ref, err_resid) for ref, err_resid in zip(refs, errs_resid)]
+    resid_snr = [_snr(ref_proj, err_resid) for ref_proj, err_resid in zip(ref_projs, errs_resid)]
 
     duplex_snr = np.stack(duplex_snr, axis=-1)
     resid_snr = np.stack(resid_snr, axis=-1)
@@ -185,7 +192,7 @@ def _spauq_eval(
     if return_framewise:
         return out
     else:
-        return {k: np.nanmean(v, axis=-1) for k, v in out.items()}
+        return {k: np.median(v, axis=-1) for k, v in out.items()}
 
 def spauq_eval(
     reference: np.ndarray,
@@ -196,6 +203,7 @@ def spauq_eval(
     return_cost: bool = False,
     return_shift: bool = False,
     return_scale: bool = False,
+    verbose: bool = True,
 ):
     return _spauq_eval(
         reference,
@@ -205,6 +213,7 @@ def spauq_eval(
         return_cost=return_cost,
         return_shift=return_shift,
         return_scale=return_scale,
+        verbose=verbose,
     )
 
 # TODO
