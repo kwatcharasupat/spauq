@@ -13,19 +13,23 @@ _BssEvalBackendType = Literal["fast_bss_eval", "museval"]
 _BssEvalBackendDefault = "museval"
 
 
-def _snr(signal: np.ndarray, noise: np.ndarray):
+def _snr(signal: np.ndarray, noise: np.ndarray, inf_value: float = 80.0):
 
-    signal_energy = np.sum(np.square(signal), axis=-1)
-    noise_energy = np.sum(np.square(noise), axis=-1)
+    signal_energy = np.sum(np.square(signal))
+    noise_energy = np.sum(np.square(noise))
 
-    snr = 10 * np.log10(signal_energy / noise_energy)
-
-    snr[noise_energy == 0] = np.inf
+    if noise_energy == 0:
+        if signal_energy == 0:
+            snr = 1.0
+        else:
+            snr = inf_value
+    else:
+        snr = 10 * np.log10(signal_energy / noise_energy)
 
     return snr
 
 
-def _source_image_to_duplex_distortion_ratio(
+def _signal_to_spatial_distortion_ratio(
     reference: np.ndarray,
     estimate: np.ndarray,
     fs: int,
@@ -52,10 +56,10 @@ def _source_image_to_duplex_distortion_ratio(
         window_length=window_length,
         hop_length=hop_length,
         tikhonov_lambda=tikhonov_lambda,
-    )["IDR"]
+    )["SSR"]
 
 
-def source_image_to_duplex_distortion_ratio(
+def signal_to_spatial_distortion_ratio(
     reference: np.ndarray,
     estimate: np.ndarray,
     fs: int,
@@ -63,7 +67,7 @@ def source_image_to_duplex_distortion_ratio(
     return_framewise: bool = False,
 ):
 
-    return _source_image_to_duplex_distortion_ratio(
+    return _signal_to_spatial_distortion_ratio(
         reference,
         estimate,
         fs,
@@ -121,9 +125,14 @@ def _spauq_eval(
     fs: int,
     *,
     return_framewise: bool = False,
+    return_cost: bool = False,
+    return_shift: bool = False,
+    return_scale: bool = False,
     forgive_mode: Optional[_ForgiveType] = None,
     align_mode: Optional[_AlignType] = None,
     align_use_diag_only: bool = True,
+    max_global_shift_seconds: Optional[float] = None,
+    max_segment_shift_seconds: Optional[float] = None,
     scale_mode: Optional[_ScaleType] = None,
     window_length: Optional[int] = None,
     hop_length: Optional[int] = None,
@@ -136,6 +145,8 @@ def _spauq_eval(
         forgive_mode=forgive_mode,
         align_mode=align_mode,
         align_use_diag_only=align_use_diag_only,
+        max_global_shift_seconds=max_global_shift_seconds,
+        max_segment_shift_seconds=max_segment_shift_seconds,
         scale_mode=scale_mode,
         window_length=window_length,
         hop_length=hop_length,
@@ -155,17 +166,26 @@ def _spauq_eval(
     duplex_snr = np.stack(duplex_snr, axis=-1)
     resid_snr = np.stack(resid_snr, axis=-1)
 
-    if return_framewise:
-        return {
-            "IDR": duplex_snr,
-            "SRR": resid_snr,
-        }
+    # print(duplex_snr.shape, resid_snr.shape)
 
-    return {
-        "IDR": np.mean(duplex_snr, axis=-1),
-        "SRR": np.mean(resid_snr, axis=-1),
+    out = {
+        "SSR": duplex_snr,
+        "SRR": resid_snr,
     }
 
+    if return_cost:
+        out["cost"] = cost
+    
+    if return_shift:
+        out["shift"] = shift
+
+    if return_scale:
+        out["scale"] = scale
+
+    if return_framewise:
+        return out
+    else:
+        return {k: np.nanmean(v, axis=-1) for k, v in out.items()}
 
 def spauq_eval(
     reference: np.ndarray,
@@ -173,12 +193,18 @@ def spauq_eval(
     fs: int,
     *,
     return_framewise: bool = False,
+    return_cost: bool = False,
+    return_shift: bool = False,
+    return_scale: bool = False,
 ):
     return _spauq_eval(
         reference,
         estimate,
         fs,
         return_framewise=return_framewise,
+        return_cost=return_cost,
+        return_shift=return_shift,
+        return_scale=return_scale,
     )
 
 # TODO

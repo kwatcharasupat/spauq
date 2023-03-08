@@ -5,15 +5,17 @@ import numpy.typing as npt
 from typing import Literal, Optional, Tuple
 from scipy import signal as sps
 
+from .utils import root_mean_square
+
 _ForgiveType = Literal["none", "scale", "shift", "both"]
-_ForgiveDefault = "scale"
+_ForgiveDefault = "none"
 
 # _AlignType = Literal["zero_pad", "overlap", "trim_estimate", "trim_reference"]
 _AlignType = Literal["overlap"]
 _AlignDefault = "overlap"
 
 _ScaleType = Literal["least_square", "equal_rms"]
-_ScaleDefault = "least_square"
+_ScaleDefault = "equal_rms"
 
 
 def _validate_input(signal: np.ndarray) -> None:
@@ -57,7 +59,9 @@ def _validate_inputs(
     assert shape_r[:-2] == shape_e[:-2], "Shape of non-time axes must be equal"
 
     if n_sampl_r != n_sampl_e:
-        raise NotImplementedError("Shifting for unequal sample lengths is not implemented yet.")
+        raise NotImplementedError(
+            "Shifting for unequal sample lengths is not implemented yet."
+        )
 
         if forgive_mode is None:
             forgive_mode = _ForgiveDefault
@@ -76,13 +80,17 @@ def _validate_inputs(
 
 
 def _compute_optimal_shift(
-    reference: np.ndarray, estimate: np.ndarray, *, use_diag_only: bool = False
+    reference: np.ndarray,
+    estimate: np.ndarray,
+    *,
+    use_diag_only: bool = True,
+    max_shift_samples: Optional[int] = None,
 ) -> Tuple[np.ndarray, np.ndarray]:
     n_chan, n_sampl_r = reference.shape[-2:]
     _, n_sampl_e = estimate.shape[-2:]
 
     xclags = sps.correlation_lags(n_sampl_r, n_sampl_e, mode="full")
-    n_lags = len(xclags)
+    n_lags = int(max_shift_samples) * 2 + 1 if np.isfinite(max_shift_samples) else len(xclags)
 
     if reference.ndim == 2:
         xcvals = np.zeros((n_chan, n_chan, n_lags))
@@ -90,34 +98,27 @@ def _compute_optimal_shift(
             for j in range(n_chan):
                 if use_diag_only and i != j:
                     continue
-                xcvals[i, j] = sps.correlate(
+                xcf = sps.correlate(
                     reference[i], estimate[j], mode="full", method="auto"
                 )
-    else:
-        warnings.warn(
-            "The input signal is not 2-dimensional. Computing cross-correlation for each batch element. This may take a while.",
-            UserWarning,
+
+                if np.isfinite(max_shift_samples):
+                    xcf = xcf[np.abs(xclags) <= max_shift_samples]
+                xcvals[i, j] = xcf
+        xcvals = np.abs(
+            np.mean(
+                xcvals,
+                axis=(
+                    -3,
+                    -2,
+                ),
+            )
         )
-
-        batch_shape = reference.shape[:-2]
-        xcvals_shape = batch_shape + (n_chan, n_chan, n_lags)
-        xcvals = np.zeros(xcvals_shape)
-        best_lag = np.full(batch_shape, np.nan)
-
-        for idx in np.ndindex(*batch_shape):
-            for i in range(n_chan):
-                for j in range(n_chan):
-                    if use_diag_only and i != j:
-                        continue
-                    xcvals[idx + (i, j)] = sps.correlate(
-                        reference[idx + (i,)],
-                        estimate[idx + (j,)],
-                        mode="full",
-                        method="auto",
-                    )
-
-    xcvals = np.mean(np.abs(xcvals), axis=(-2, -1))  # use mean for stability
-    best_lag = xclags[np.argmax(xcvals, axis=-1)]
+        # use mean for stability
+        xclags = xclags[np.abs(xclags) <= max_shift_samples]
+        best_lag = xclags[np.argmax(xcvals, axis=-1)]
+    else:
+        raise NotImplementedError
 
     return best_lag
 
@@ -138,15 +139,18 @@ def _apply_shift(
     n_chan, n_sampl_r = shape_r[-2:]
     _, n_sampl_e = estimate.shape[-2:]
 
-
     if len(shape_l) > 0:
         raise NotImplementedError("Batched shifting is not implemented yet.")
 
     if best_lag == 0:
         return reference, estimate
 
-    estimate_padded = np.concatenate(estimate, np.zeros((n_chan, abs(best_lag))))
-    estimate_rolled = np.roll(estimate_padded, best_lag, axis=-1) # (n_chan, n_sampl_e + abs(best_lag))
+    estimate_padded = np.concatenate(
+        [estimate, np.zeros((n_chan, abs(best_lag)))], axis=-1
+    )  # (n_chan, n_sampl_e + abs(best_lag
+    estimate_rolled = np.roll(
+        estimate_padded, best_lag, axis=-1
+    )  # (n_chan, n_sampl_e + abs(best_lag))
 
     if align_mode == "overlap":
         if best_lag < 0:
@@ -159,13 +163,12 @@ def _apply_shift(
             # if estimate is ahead, lag is positive
             n_overlap = n_sampl_r - best_lag
 
-            reference = reference[..., best_lag:best_lag + n_overlap]
-            estimate = estimate_rolled[..., best_lag:best_lag + n_overlap]
+            reference = reference[..., best_lag:]
+            estimate = estimate_rolled[..., best_lag:]
     else:
         raise NotImplementedError("Other alignment modes are not implemented yet.")
 
     return reference, estimate
-
 
 
 def _apply_global_shift_forgive(
@@ -174,6 +177,7 @@ def _apply_global_shift_forgive(
     *,
     align_mode: Optional[_AlignType] = None,
     use_diag_only: bool = True,
+    max_shift_samples: Optional[int] = None,
 ) -> Tuple[np.ndarray, np.ndarray]:
 
     if align_mode is None:
@@ -184,11 +188,18 @@ def _apply_global_shift_forgive(
 
     assert align_mode in typing.get_args(_AlignType), "Invalid align_mode"
 
-    best_lag = _compute_optimal_shift(reference, estimate, use_diag_only=use_diag_only)
+    best_lag = _compute_optimal_shift(
+        reference,
+        estimate,
+        use_diag_only=use_diag_only,
+        max_shift_samples=max_shift_samples,
+    )
 
     reference, estimate = _apply_shift(
         reference, estimate, best_lag, align_mode=align_mode
     )
+
+    print("best_lag", best_lag)
 
     return reference, estimate
 
@@ -209,20 +220,22 @@ def _apply_global_scale_forgive(
 
     if scale_mode == "least_square":
         # for compatibility with SI-SDR
-        ref_pow = np.mean(np.square(reference), axis=[-2, -1], keepdims=True)
-        cross_pow = np.mean(
-            np.square(reference * estimate), axis=[-2, -1], keepdims=True
+        ref_pow = np.sum(np.square(reference), axis=(-2, -1), keepdims=True)
+        cross_pow = np.sum(
+            np.square(reference * estimate), axis=(-2, -1), keepdims=True
         )
         scale = cross_pow / ref_pow
     elif scale_mode == "equal_rms":
-        ref_rms = np.sqrt(np.mean(np.square(reference), axis=[-2, -1], keepdims=True))
-        est_rms = np.sqrt(np.mean(np.square(estimate), axis=[-2, -1], keepdims=True))
+        ref_rms = root_mean_square(reference, axis=(-2, -1), keepdims=True)
+        est_rms = root_mean_square(estimate, axis=(-2, -1), keepdims=True)
         scale = est_rms / ref_rms
     else:
         # this should never be reached
         raise ValueError("Invalid scale_mode")
 
     reference = reference * scale
+
+    print("scale", scale)
 
     return reference, estimate
 
@@ -234,6 +247,7 @@ def _apply_global_forgive(
     forgive_mode: Optional[_ForgiveType] = None,
     align_mode: Optional[_AlignType] = None,
     align_use_diag_only: bool = True,
+    max_shift_samples: Optional[int] = None,
     scale_mode: Optional[_ScaleType] = None,
 ) -> Tuple[np.ndarray, np.ndarray]:
 
@@ -255,6 +269,7 @@ def _apply_global_forgive(
             estimate,
             align_mode=align_mode,
             use_diag_only=align_use_diag_only,
+            max_shift_samples=max_shift_samples,
         )
 
     if forgive_mode in ["scale", "both"]:
