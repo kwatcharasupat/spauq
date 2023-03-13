@@ -16,8 +16,8 @@ from .preprocessing import (
 
 __all__ = ["compute_projection"]
 
-_DefaultWindowLengthSeconds = 30
-_DefaultHopLengthSeconds = 15
+_DefaultWindowLengthSeconds = 2
+_DefaultHopLengthSeconds = 1.5
 _DefaultMaximumGlobalShiftSeconds = np.inf
 _DefaultMaximumSegmentShiftSeconds = 1.0
 

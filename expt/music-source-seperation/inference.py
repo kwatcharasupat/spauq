@@ -1,35 +1,54 @@
 import os
 import numpy as np
 import glob
-
+from tqdm import tqdm
 
 _DefaultOutputPath = "/home/kwatchar3/spauq-home/data/musdb-hq/{model}-{variant}"
 
+from demucs.pretrained import tasnet
 
 def inference_spleeter(variant, audio_path, output_path):
     assert variant in ["4stems"]
 
-    from spleeter.__main__ import separate
+    # from spleeter.__main__ import separate
     from spleeter.audio import Codec, STFTBackend
+    from spleeter.audio.adapter import AudioAdapter
+    from spleeter.separator import Separator
 
     mixtures = glob.glob(os.path.join(audio_path, "musdb18hq/test", "**", "mixture.wav"), recursive=True)
     os.makedirs(output_path, exist_ok=True)
 
-    separate(
-        deprecated_files=None,
-        files=mixtures,
-        adapter="spleeter.audio.ffmpeg.FFMPEGProcessAudioAdapter",
-        bitrate="128k",
-        codec=Codec.WAV,
-        duration=600.0,
-        offset=0,
-        output_path=output_path,
-        stft_backend=STFTBackend.AUTO,
-        filename_format="{foldername}/{instrument}.{codec}",
-        params_filename=f"spleeter:{variant}",
-        mwf=False,
-        verbose=True,
-    )
+    files=mixtures
+    adapter="spleeter.audio.ffmpeg.FFMPEGProcessAudioAdapter"
+    bitrate="128k"
+    codec=Codec.WAV
+    duration=600.0
+    offset=0
+    output_path=output_path
+    stft_backend=STFTBackend.AUTO
+    filename_format="{foldername}/{instrument}.{codec}"
+    params_filename=f"spleeter:{variant}"
+    mwf=False
+    verbose=True
+
+    audio_adapter = AudioAdapter.get(adapter)
+    
+    for filename in tqdm(files):
+        #FIXME: this a workaround to avoid spleeter saving files to wrong path
+        separator = Separator(
+            params_filename, MWF=mwf, stft_backend=stft_backend, multiprocess=False
+        )
+        separator.separate_to_file(
+            str(filename),
+            str(output_path),
+            audio_adapter=audio_adapter,
+            offset=offset,
+            duration=duration,
+            codec=codec,
+            bitrate=bitrate,
+            filename_format=filename_format,
+            synchronous=True,
+        )
 
 
 def inference_torch(
@@ -55,11 +74,11 @@ def inference_torch(
     )
 
     if model == "HDemucs":
-        assert variant in ["MUSDB", "MUSDB_PLUS"]
-        if variant == "MUSDB":
+        assert variant in ["musdb", "extra"]
+        if variant == "musdb":
             model = ta.pipelines.HDEMUCS_HIGH_MUSDB.get_model()
             source_order = model.sources
-        elif variant == "MUSDB_PLUS":
+        elif variant == "extra":
             model = ta.pipelines.HDEMUCS_HIGH_MUSDB_PLUS.get_model()
             source_order = model.sources
         else:
@@ -70,6 +89,11 @@ def inference_torch(
         model = torch.hub.load("sigsep/open-unmix-pytorch", variant)
         source_order = model.target_models.keys()
         chunk_size = np.inf
+    elif model == "ConvTasNet":
+        assert variant in ["musdb", "extra"]
+        model = tasnet(pretrained=True, extra=variant == "extra")
+        source_order = model.sources
+        chunk_size = 60.0
     else:
         raise NameError(f"Model {model} not found")
 

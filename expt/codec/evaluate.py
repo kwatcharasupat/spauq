@@ -14,44 +14,46 @@ from spauq.core.metrics import spauq_eval
 
 import soundfile as sf
 
-_EstimatePathFormat = "/home/kwatchar3/spauq-home/data/musdb-hq/{model_name}"
+_EstimatePathFormat = "/home/kwatchar3/spauq-home/data/musdb-hq/{codec}/{setting}/wav"
 MUSDB_FS = 44100
 
 
 def evaluate_one(inputs):
     r, e = inputs
     filename = r.split("/")[-2]
-    r = sf.read(r)[0]
-    e = sf.read(e)[0]
+    r, fs0 = sf.read(r)
+    e, fs = sf.read(e)
 
-    # print(r.shape, e.shape)
-    assert r.shape == e.shape
+    if e.shape[0] > r.shape[0]:
+        e = e[: r.shape[0]]
 
-    metrics = spauq_eval(
-        reference=r.T,
-        estimate=e.T,
-        fs=MUSDB_FS,
-        return_framewise=False,
-        return_cost=True,
-        return_shift=True,
-        return_scale=True,
-        verbose=False,
-    )
+    if r.shape == e.shape:
+        metrics = spauq_eval(
+            reference=r.T,
+            estimate=e.T,
+            fs=MUSDB_FS,
+            return_framewise=False,
+            return_cost=True,
+            return_shift=True,
+            return_scale=True,
+            verbose=False,
+        )
+        return filename, metrics
+    else:
+        print("Bad!")
+        return None
 
-    return filename, metrics
-
-
-def evaluate(
-    model_name,
+def evaluate_musdb(
+    codec, setting,
     estimate_path=None,
     reference_path="/home/kwatchar3/spauq-home/data/musdb-hq/raw/musdb18hq/test",
-    output_path="/home/kwatchar3/spauq-home/spauq/expt/music-source-seperation/results-2s",
-    sources=["vocals", "drums", "bass", "other"],
+    output_path="/home/kwatchar3/spauq-home/spauq/expt/codec/musdb/results-2s",
+    sources=["mixture"],
     fs=MUSDB_FS,
 ):
 
     if estimate_path is None:
-        estimate_path = _EstimatePathFormat.format(model_name=model_name)
+        estimate_path = _EstimatePathFormat.format(codec=codec, setting=setting)
 
     data = defaultdict(dict)
 
@@ -66,6 +68,7 @@ def evaluate(
             max_workers=4,
             total=len(ref),
         )
+        # fnmetrics = [evaluate_one(x) for x in zip(ref, est)]
 
         filenames = [fn for fn, _ in fnmetrics]
         metrics = [m for _, m in fnmetrics]
@@ -81,18 +84,19 @@ def evaluate(
     df = pd.DataFrame.from_dict(data, orient="index").sort_index()
     df["shift"] = df["shift"].apply(lambda x: x.tolist())
     df["scale"] = df["scale"].apply(lambda x: x.tolist())
-    df.to_csv(os.path.join(output_path, f"{model_name}.csv"))
+    df.to_csv(os.path.join(output_path, f"{codec}-{setting}.csv"))
     print(df[["SSR", "SRR"]].describe())
 
 
-# def evaluate_all():
-#     models = ["HDemucs-HQ", "HDemucs-HQPLUS", "OpenUnmix-umxhq", "Spleeter-4stems"]
+def evaluate_all_mp3():
+    codec = "mp3"
+    settings = glob.glob("/home/kwatchar3/spauq-home/data/musdb-hq/mp3/*", recursive=False)
 
-#     for model in models:
-#         try:
-#             evaluate(model)
-#         except Exception as e:
-#             print(e)
+    for setting in tqdm(settings):
+        try:
+            evaluate_musdb(codec, setting)
+        except Exception as e:
+            print(e)
 
 
 if __name__ == "__main__":

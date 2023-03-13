@@ -48,6 +48,8 @@ def _validate_inputs(
     shape_r = reference.shape
     shape_e = estimate.shape
 
+    # print(shape_r, shape_e)
+
     n_chan_r, n_sampl_r = shape_r[-2:]
     n_chan_e, n_sampl_e = shape_e[-2:]
 
