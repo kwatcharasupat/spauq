@@ -27,6 +27,9 @@ def evaluate_one(inputs):
     if e.shape[0] > r.shape[0]:
         e = e[: r.shape[0]]
 
+    if r.shape[0] > e.shape[0]:
+        r = r[: e.shape[0]]
+
     if r.shape == e.shape:
         metrics = spauq_eval(
             reference=r.T,
@@ -40,7 +43,7 @@ def evaluate_one(inputs):
         )
         return filename, metrics
     else:
-        print("Bad!")
+        raise ValueError("Bad!")
         return None
 
 def evaluate_musdb(
@@ -90,14 +93,53 @@ def evaluate_musdb(
 
 def evaluate_all_mp3():
     codec = "mp3"
-    settings = glob.glob("/home/kwatchar3/spauq-home/data/musdb-hq/mp3/*", recursive=False)
+    settings = sorted(glob.glob("/home/kwatchar3/spauq-home/data/musdb-hq/mp3/*", recursive=False))
 
-    for setting in tqdm(settings):
+    for setting in tqdm(settings): 
+        setting = setting.split("/")[-1]
+        print(setting)
+        csv = f"/home/kwatchar3/spauq-home/spauq/expt/codec/musdb/results-2s/{codec}-{setting}.csv"
+        print(csv)
+        if os.path.exists(csv):
+            print("Skipping", setting)
+            continue
         try:
             evaluate_musdb(codec, setting)
         except Exception as e:
             print(e)
 
+
+def evaluate_all_aac():
+    codec = "aac"
+    settings = sorted(glob.glob("/home/kwatchar3/spauq-home/data/musdb-hq/aac/*", recursive=False))
+
+    for setting in tqdm(settings): 
+        setting = setting.split("/")[-1]
+        print(setting)
+        csv = f"/home/kwatchar3/spauq-home/spauq/expt/codec/musdb/results-2s/{codec}-{setting}.csv"
+        print(csv)
+        if os.path.exists(csv):
+            print("Skipping", setting)
+            continue
+        try:
+            evaluate_musdb(codec, setting)
+        except Exception as e:
+            print(e)
+
+def evaluate_all_opus():
+    codec = "opus"
+    settings = sorted(glob.glob("/home/kwatchar3/spauq-home/data/musdb-hq/opus/*", recursive=False))
+
+    for setting in tqdm(settings):
+        setting = setting.split("/")[-1]
+
+        if os.path.exists("/home/kwatchar3/spauq-home/spauq/expt/codec/musdb/results-2s/{codec}-{setting}.csv"):
+            continue
+
+        try:
+            evaluate_musdb(codec, setting)
+        except Exception as e:
+            print(e)
 
 if __name__ == "__main__":
     import fire
