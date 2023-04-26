@@ -20,6 +20,7 @@ _DefaultWindowLengthSeconds = 2
 _DefaultHopLengthSeconds = 1.5
 _DefaultMaximumGlobalShiftSeconds = np.inf
 _DefaultMaximumSegmentShiftSeconds = 1.0
+_DefaultSilenceThreshold = 1e-8
 
 
 def _check_interchannel_leakage(
@@ -34,6 +35,7 @@ def _project_shift(
     estimate: np.ndarray,
     *,
     max_shift_samples: Optional[int] = None,
+    silence_threshold: float = _DefaultSilenceThreshold,
 ):
 
     assert reference.shape == estimate.shape
@@ -52,11 +54,24 @@ def _project_shift(
     optim_lags = np.zeros((n_chan, n_chan), dtype=int)
 
     for i in range(n_chan):
+
+        if np.std(reference[i]) < silence_threshold:
+            # print("reference is silent at channel", i, np.std(reference[i]))
+            continue
+
         for j in range(n_chan):
+
+            if np.std(estimate[j]) < silence_threshold:
+                # print("estimate is silent at channel", j, np.std(estimate[j]))
+                # print(estimate[j])
+                continue
+
             corr = sps.correlate(reference[i], estimate[j], mode="full", method="fft")
             if np.isfinite(max_shift_samples):
                 corr = corr[max_shift_filter]
             optim_lags[i, j] = lags[np.argmax(np.abs(corr))]
+
+    # print(optim_lags)
 
     min_lags = np.min(optim_lags)
     max_lags = np.max(optim_lags)
@@ -153,6 +168,10 @@ def _project_scale(
         scaleT, _, _, _ = np.linalg.lstsq(acf.T, xcf.T, rcond=None)
         scale = scaleT.T
     except np.linalg.LinAlgError:
+        warnings.warn(
+            "Singular matrix in projection, using Tikhonov regularization",
+            RuntimeWarning,
+        )
         # scale @ acf = xcf
         # acf.T @ scale.T = xcf.T
         # acf @ acf.T @ scale.T = acf @ xcf.T
@@ -184,6 +203,8 @@ def _compute_framewise_projection(
     tikhonov_lambda: float = 1e-6,
     max_shift_samples: Optional[int] = None,
 ):
+
+
     ref_shifted, ref_proj, est_proj, shift = _project_shift(
         reference, estimate, max_shift_samples=max_shift_samples
     )
@@ -218,6 +239,7 @@ def compute_projection(
         reference, estimate, forgive_mode=forgive_mode
     )
 
+
     if max_segment_shift_seconds is None:
         max_segment_shift_seconds = _DefaultMaximumSegmentShiftSeconds
 
@@ -234,6 +256,7 @@ def compute_projection(
         scale_mode=scale_mode,
         verbose=verbose,
     )
+
 
     n_chan = reference.shape[-2]
 

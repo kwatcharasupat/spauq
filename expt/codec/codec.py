@@ -8,6 +8,11 @@ _MusdbOutputPath = "/home/kwatchar3/spauq-home/data/musdb-hq"
 _MusdbInputBase = "/home/kwatchar3/spauq-home/data/musdb-hq/raw/musdb18hq/test"
 _MusdbInputGlob = "*/mixture.wav"
 
+_StarssOutputPath = "/home/kwatchar3/spauq-home/data/starss"
+_StarssInputBase = "/home/kwatchar3/data/starss22/mic_eval"
+_StarssInputGlob = "*.wav"
+
+
 def mp3(cbr, mode, *, dataset, audio_glob=None, output_path=None, q=3):
     assert mode in ["j", "s", "f"]
     encode_command = [
@@ -28,6 +33,8 @@ def mp3(cbr, mode, *, dataset, audio_glob=None, output_path=None, q=3):
     if output_path is None:
         if dataset == "musdb":
             ds_output = _MusdbOutputPath
+        elif dataset == "starss":
+            ds_output = _StarssOutputPath
         else:
             raise ValueError(f"Unknown dataset: {dataset}")
         output_path = os.path.join(ds_output, "mp3", f"{cbr}-{mode}")
@@ -39,14 +46,23 @@ def mp3(cbr, mode, *, dataset, audio_glob=None, output_path=None, q=3):
     if audio_glob is None:
         if dataset == "musdb":
             audio_glob = os.path.join(_MusdbInputBase, _MusdbInputGlob)
+        elif dataset == "starss":
+            audio_glob = os.path.join(_StarssInputBase, _StarssInputGlob)
         else:
             raise ValueError(f"Unknown dataset: {dataset}")
+        
+    if dataset == "musdb":
+        input_base = _MusdbInputBase
+    elif dataset == "starss":
+        input_base = _StarssInputBase
+    else:
+        raise ValueError(f"Unknown dataset: {dataset}")
         
     audio_files = sorted(glob.glob(audio_glob, recursive=False))
     print(f"Found {len(audio_files)} audio files")
     print(audio_files)
-    mp3_files = [f.replace(_MusdbInputBase, mp3_output_path).replace(".wav", ".mp3") for f in audio_files]
-    wav_files = [f.replace(_MusdbInputBase, wav_output_path) for f in audio_files]
+    mp3_files = [f.replace(input_base, mp3_output_path).replace(".wav", ".mp3") for f in audio_files]
+    wav_files = [f.replace(input_base, wav_output_path) for f in audio_files]
 
     for a, m, w in tqdm(zip(audio_files, mp3_files, wav_files), total=len(audio_files)):
         os.makedirs(os.path.dirname(m), exist_ok=True)
@@ -75,6 +91,7 @@ def opus(cbr, comp, *, dataset, audio_glob=None, output_path=None):
         "opusenc",
         f"--bitrate {cbr}",
         f"--hard-cbr",
+        f"--comp {comp}",
     ]
 
     if dataset == "musdb":
@@ -91,6 +108,8 @@ def opus(cbr, comp, *, dataset, audio_glob=None, output_path=None):
     if output_path is None:
         if dataset == "musdb":
             ds_output = _MusdbOutputPath
+        elif dataset == "starss":
+            ds_output = _StarssOutputPath
         else:
             raise ValueError(f"Unknown dataset: {dataset}")
         output_path = os.path.join(ds_output, "opus", f"{cbr}-{comp}")
@@ -99,17 +118,18 @@ def opus(cbr, comp, *, dataset, audio_glob=None, output_path=None):
         os.makedirs(opus_output_path, exist_ok=True)
         os.makedirs(wav_output_path, exist_ok=True)
 
-    if audio_glob is None:
-        if dataset == "musdb":
-            audio_glob = os.path.join(_MusdbInputBase, _MusdbInputGlob)
-        else:
-            raise ValueError(f"Unknown dataset: {dataset}")
+    if dataset == "musdb":
+        input_base = _MusdbInputBase
+    elif dataset == "starss":
+        input_base = _StarssInputBase
+    else:
+        raise ValueError(f"Unknown dataset: {dataset}")
         
     audio_files = sorted(glob.glob(audio_glob, recursive=False))
     print(f"Found {len(audio_files)} audio files")
     print(audio_files)
-    opus_files = [f.replace(_MusdbInputBase, opus_output_path).replace(".wav", ".opus") for f in audio_files]
-    wav_files = [f.replace(_MusdbInputBase, wav_output_path) for f in audio_files]
+    opus_files = [f.replace(input_base, opus_output_path).replace(".wav", ".opus") for f in audio_files]
+    wav_files = [f.replace(input_base, wav_output_path) for f in audio_files]
 
     for a, m, w in tqdm(zip(audio_files, opus_files, wav_files), total=len(audio_files)):
         os.makedirs(os.path.dirname(m), exist_ok=True)
@@ -152,6 +172,8 @@ def aac(abr, mode, *, dataset, audio_glob=None, output_path=None, q=100):
     if output_path is None:
         if dataset == "musdb":
             ds_output = _MusdbOutputPath
+        elif dataset == "starss":
+            ds_output = _StarssOutputPath
         else:
             raise ValueError(f"Unknown dataset: {dataset}")
         output_path = os.path.join(ds_output, "aac", f"{abr}-joint{mode}")
@@ -163,14 +185,23 @@ def aac(abr, mode, *, dataset, audio_glob=None, output_path=None, q=100):
     if audio_glob is None:
         if dataset == "musdb":
             audio_glob = os.path.join(_MusdbInputBase, _MusdbInputGlob)
+        elif dataset == "starss":
+            audio_glob = os.path.join(_StarssInputBase, _StarssInputGlob)
         else:
             raise ValueError(f"Unknown dataset: {dataset}")
+        
+    if dataset == "musdb":
+        input_base = _MusdbInputBase
+    elif dataset == "starss":
+        input_base = _StarssInputBase
+    else:
+        raise ValueError(f"Unknown dataset: {dataset}")
         
     audio_files = sorted(glob.glob(audio_glob, recursive=False))
     print(f"Found {len(audio_files)} audio files")
     print(audio_files)
-    aac_files = [f.replace(_MusdbInputBase, aac_output_path).replace(".wav", ".aac") for f in audio_files]
-    wav_files = [f.replace(_MusdbInputBase, wav_output_path) for f in audio_files]
+    aac_files = [f.replace(input_base, aac_output_path).replace(".wav", ".aac") for f in audio_files]
+    wav_files = [f.replace(input_base, wav_output_path) for f in audio_files]
 
     for a, m, w in tqdm(zip(audio_files, aac_files, wav_files), total=len(audio_files)):
         os.makedirs(os.path.dirname(m), exist_ok=True)
@@ -212,7 +243,7 @@ def aac_multiple(dataset, audio_glob=None, output_path=None):
 
 def opus_multiple(dataset, audio_glob=None, output_path=None):
     cbrs = [32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320]
-    comps = [10]
+    comps = [0]
     for cbr in cbrs:
         for comp in comps:
             opus(cbr, comp, dataset=dataset, audio_glob=audio_glob, output_path=output_path)

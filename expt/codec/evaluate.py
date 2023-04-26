@@ -14,9 +14,9 @@ from spauq.core.metrics import spauq_eval
 
 import soundfile as sf
 
-_EstimatePathFormat = "/home/kwatchar3/spauq-home/data/musdb-hq/{codec}/{setting}/wav"
+_EstimatePathFormat = "/home/kwatchar3/spauq-home/data/{dataset}/{codec}/{setting}/wav"
 MUSDB_FS = 44100
-
+STARSS_FS = 24000
 
 def evaluate_one(inputs):
     r, e = inputs
@@ -56,7 +56,7 @@ def evaluate_musdb(
 ):
 
     if estimate_path is None:
-        estimate_path = _EstimatePathFormat.format(codec=codec, setting=setting)
+        estimate_path = _EstimatePathFormat.format(dataset="musdb", codec=codec, setting=setting)
 
     data = defaultdict(dict)
 
@@ -82,64 +82,76 @@ def evaluate_musdb(
             print(filename)
             pprint(metrics)
 
-    os.makedirs(output_path, exist_ok=True)
+    os.makedirs(os.path.join(output_path, codec), exist_ok=True)
 
     df = pd.DataFrame.from_dict(data, orient="index").sort_index()
     df["shift"] = df["shift"].apply(lambda x: x.tolist())
     df["scale"] = df["scale"].apply(lambda x: x.tolist())
-    df.to_csv(os.path.join(output_path, f"{codec}-{setting}.csv"))
+    df.to_csv(os.path.join(output_path, codec, f"{codec}-{setting}.csv"))
     print(df[["SSR", "SRR"]].describe())
 
+def evaluate_starss(
+    codec, setting,
+    estimate_path=None,
+    reference_path="/home/kwatchar3/data/starss/mic_eval",
+    output_path="/home/kwatchar3/spauq-home/spauq/expt/codec/starss/results-2s",
+    sources=["mix*"],
+    fs=STARSS_FS,
+):
+    if estimate_path is None:
+        estimate_path = _EstimatePathFormat.format(dataset="starss", codec=codec, setting=setting)
 
-def evaluate_all_mp3():
-    codec = "mp3"
-    settings = sorted(glob.glob("/home/kwatchar3/spauq-home/data/musdb-hq/mp3/*", recursive=False))
+    data = defaultdict(dict)
+
+    for s in sources:
+        print("Evaluating", s)
+        ref = sorted(glob.glob(os.path.join(reference_path, "**", f"{s}.wav"), recursive=True))
+        est = [r.replace(reference_path, estimate_path) for r in ref]
+
+        fnmetrics = process_map(
+            evaluate_one,
+            zip(ref, est),
+            max_workers=4,
+            total=len(ref),
+        )
+        # fnmetrics = [evaluate_one(x) for x in zip(ref, est)]
+
+        filenames = [fn for fn, _ in fnmetrics]
+        metrics = [m for _, m in fnmetrics]
+
+        for filename, metric in zip(filenames, metrics):
+            data[(filename, s)] = metric
+
+            print(filename)
+            pprint(metrics)
+
+    os.makedirs(os.path.join(output_path, codec), exist_ok=True)
+
+    df = pd.DataFrame.from_dict(data, orient="index").sort_index()
+    df["shift"] = df["shift"].apply(lambda x: x.tolist())
+    df["scale"] = df["scale"].apply(lambda x: x.tolist())
+    df.to_csv(os.path.join(output_path, codec, f"{codec}-{setting}.csv"))
+    print(df[["SSR", "SRR"]].describe())
+
+def evaluate_all(dataset, codec):
+    settings = sorted(glob.glob(f"/home/kwatchar3/spauq-home/data/{dataset}/{codec}/*", recursive=False))
 
     for setting in tqdm(settings): 
         setting = setting.split("/")[-1]
         print(setting)
-        csv = f"/home/kwatchar3/spauq-home/spauq/expt/codec/musdb/results-2s/{codec}-{setting}.csv"
+        csv = f"/home/kwatchar3/spauq-home/spauq/expt/codec/{dataset}/results-2s/{codec}/{codec}-{setting}.csv"
         print(csv)
         if os.path.exists(csv):
             print("Skipping", setting)
             continue
         try:
-            evaluate_musdb(codec, setting)
+            if dataset == "musdb":
+                evaluate_musdb(codec, setting)
+            elif dataset == "starss":
+                evaluate_starss(codec, setting)
         except Exception as e:
             print(e)
 
-
-def evaluate_all_aac():
-    codec = "aac"
-    settings = sorted(glob.glob("/home/kwatchar3/spauq-home/data/musdb-hq/aac/*", recursive=False))
-
-    for setting in tqdm(settings): 
-        setting = setting.split("/")[-1]
-        print(setting)
-        csv = f"/home/kwatchar3/spauq-home/spauq/expt/codec/musdb/results-2s/{codec}-{setting}.csv"
-        print(csv)
-        if os.path.exists(csv):
-            print("Skipping", setting)
-            continue
-        try:
-            evaluate_musdb(codec, setting)
-        except Exception as e:
-            print(e)
-
-def evaluate_all_opus():
-    codec = "opus"
-    settings = sorted(glob.glob("/home/kwatchar3/spauq-home/data/musdb-hq/opus/*", recursive=False))
-
-    for setting in tqdm(settings):
-        setting = setting.split("/")[-1]
-
-        if os.path.exists("/home/kwatchar3/spauq-home/spauq/expt/codec/musdb/results-2s/{codec}-{setting}.csv"):
-            continue
-
-        try:
-            evaluate_musdb(codec, setting)
-        except Exception as e:
-            print(e)
 
 if __name__ == "__main__":
     import fire
