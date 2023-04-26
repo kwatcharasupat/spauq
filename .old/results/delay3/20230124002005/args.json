@@ -1,0 +1,35 @@
+{
+    "dataset": "TIMIT",
+    "room_dim": [
+        3,
+        3
+    ],
+    "snr": null,
+    "rt60": 0.15,
+    "src_dist": 1.0,
+    "mic_spacing": 0.6,
+    "directivity": "CARDIOID",
+    "min_pan": 0,
+    "max_pan": 0,
+    "pan_step": 45,
+    "min_error": -45,
+    "max_error": 45,
+    "error_step": 15,
+    "signal_filter_kwargs": [],
+    "estim_filter_kwargs": [
+        {
+            "backend": "custom",
+            "name": "delay",
+            "kwargs": {
+                "positions": [
+                    0.016,
+                    0.008
+                ]
+            }
+        }
+    ],
+    "use_phase": true,
+    "use_exact_grad": false,
+    "subfolder": "delay3",
+    "multiprocessing": true
+}

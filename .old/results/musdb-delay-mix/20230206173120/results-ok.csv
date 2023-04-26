@@ -1,0 +1,701 @@
+,spr/num,sfr/num,cost,true_pan,est_pan,est_deviation,file
+0,-286.92943515644134,-2.0250876797619075e-14,4.2383620105574105e+26,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/A Classic Education - NightOwl/mixture.wav
+1,-288.45267717588246,-2.1697367997449015e-14,6.0189709913313075e+26,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/A Classic Education - NightOwl/mixture.wav
+2,-289.60346435035115,-1.7357894397959203e-14,7.845144868415717e+26,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/A Classic Education - NightOwl/mixture.wav
+3,-290.4917472247935,-1.5911403198129265e-14,9.6256320240756e+26,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/A Classic Education - NightOwl/mixture.wav
+4,-290.38697803698597,-2.1697367997449015e-14,9.39620181937089e+26,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/A Classic Education - NightOwl/mixture.wav
+5,-290.03072956710395,-1.7357894397959203e-14,8.656204129346673e+26,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/A Classic Education - NightOwl/mixture.wav
+6,-289.54714082757494,-1.3982748265022685e-14,7.744058327907756e+26,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/A Classic Education - NightOwl/mixture.wav
+7,3.418577532926321,-1.395436768191006,0.002244176304220177,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/ANiMAL - Clinic A/mixture.wav
+8,3.5800987388796717,-1.6891686823816632,0.002406485090471902,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/ANiMAL - Clinic A/mixture.wav
+9,3.6136914635000386,-2.0515347626140357,0.0025915746283851817,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/ANiMAL - Clinic A/mixture.wav
+10,3.707861565747051,-2.138423682908128,0.0026511040457579188,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/ANiMAL - Clinic A/mixture.wav
+11,3.7225549599721686,-2.116342794892597,0.0026167415920322896,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/ANiMAL - Clinic A/mixture.wav
+12,3.6744936727888273,-2.370600820314685,0.002682727394497564,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/ANiMAL - Clinic A/mixture.wav
+13,3.191492912358178,-3.1879119586711764,0.002654390477419208,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/ANiMAL - Clinic A/mixture.wav
+14,4.31088470229561,-0.15485520480256004,0.0010540984081867464,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/ANiMAL - Easy Tiger/mixture.wav
+15,4.707566056445102,-0.2584726816061261,0.0010869355127247021,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/ANiMAL - Easy Tiger/mixture.wav
+16,4.936233085247928,-0.41531897512847404,0.001130309194841163,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/ANiMAL - Easy Tiger/mixture.wav
+17,5.044459925870234,-0.4629609903123033,0.0011480343064917103,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/ANiMAL - Easy Tiger/mixture.wav
+18,5.019549711465775,-0.605444890018169,0.001172763118239945,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/ANiMAL - Easy Tiger/mixture.wav
+19,4.890057757249046,-1.17205620229696,0.0012784539688833892,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/ANiMAL - Easy Tiger/mixture.wav
+20,4.6593121827454365,-2.0818912922349764,0.001457903857313967,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/ANiMAL - Easy Tiger/mixture.wav
+21,4.649854651116445,0.02161823181563174,0.0014353000122745198,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/ANiMAL - Rockshow/mixture.wav
+22,5.163596418685433,-0.06123843466010675,0.0014617407359069738,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/ANiMAL - Rockshow/mixture.wav
+23,5.486821462675959,-0.15507502758647657,0.0014925402068785773,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/ANiMAL - Rockshow/mixture.wav
+24,5.589821915599721,-0.20280315095023443,0.001516990301109714,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/ANiMAL - Rockshow/mixture.wav
+25,5.559698788610148,-0.24295751891723427,0.0015179061873932555,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/ANiMAL - Rockshow/mixture.wav
+26,5.409570123559564,-0.7619341363059567,0.0016435242769920215,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/ANiMAL - Rockshow/mixture.wav
+27,5.136997337119945,-1.6888337251374694,0.0018897359528385305,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/ANiMAL - Rockshow/mixture.wav
+28,4.061380731864056,-0.7479012573701407,0.0020110766662187886,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Actions - Devil's Words/mixture.wav
+29,4.424429198100411,-0.8733343828829271,0.002073248430144913,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Actions - Devil's Words/mixture.wav
+30,4.6300246489794645,-1.031927127087275,0.00215036381415293,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Actions - Devil's Words/mixture.wav
+31,4.669507391551818,-1.1571942007640859,0.0022121799364309604,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Actions - Devil's Words/mixture.wav
+32,4.6334822996794065,-1.3174472555316366,0.002262320934580216,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Actions - Devil's Words/mixture.wav
+33,4.373721862552704,-1.8939856973105773,0.002355106628177295,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Actions - Devil's Words/mixture.wav
+34,4.177537412101189,-2.6201731842675273,0.002576158629282834,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Actions - Devil's Words/mixture.wav
+35,3.16268409086986,-1.7654068489481345,0.0023827437442350487,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Actions - One Minute Smile/mixture.wav
+36,3.3030299166766612,-1.9376165113198045,0.0024856114704503605,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Actions - One Minute Smile/mixture.wav
+37,3.3429049576416903,-2.2077469212987078,0.0026266114657758012,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Actions - One Minute Smile/mixture.wav
+38,3.4359780271473306,-1.9829262609620408,0.002561662521241898,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Actions - One Minute Smile/mixture.wav
+39,3.4235719609393134,-2.039813263471835,0.0025702978570347817,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Actions - One Minute Smile/mixture.wav
+40,3.363748742603919,-2.440340546513615,0.002696810238811482,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Actions - One Minute Smile/mixture.wav
+41,3.254051649961295,-3.152474191161657,0.002932578056201696,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Actions - One Minute Smile/mixture.wav
+42,2.741205897579237,-2.4347769198056386,0.0024000463825853105,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Actions - South Of The Water/mixture.wav
+43,2.829174306993804,-2.7363483030144815,0.0025396693336777456,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Actions - South Of The Water/mixture.wav
+44,2.8389724701490957,-3.1492898114169323,0.002724390636197691,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Actions - South Of The Water/mixture.wav
+45,2.90818663413301,-3.104340135217421,0.0027386831088926735,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Actions - South Of The Water/mixture.wav
+46,2.896516851143058,-3.2006284210799256,0.0027660470256472775,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Actions - South Of The Water/mixture.wav
+47,2.555045872994903,-3.8215659177104397,0.0026985015942269357,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Actions - South Of The Water/mixture.wav
+48,2.523537347415772,-3.9524959624797953,0.0026938381862817145,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Actions - South Of The Water/mixture.wav
+49,4.83429651888769,-0.03198715830512161,0.0018912422222888638,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Aimee Norwich - Child/mixture.wav
+50,5.358975973037353,-0.022053107012998285,0.0018991335760657967,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Aimee Norwich - Child/mixture.wav
+51,5.69301422930284,-0.04272469118888868,0.001915257874820392,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Aimee Norwich - Child/mixture.wav
+52,5.790038467696359,-0.08187655620824802,0.0019333011687935524,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Aimee Norwich - Child/mixture.wav
+53,5.690110546671213,-0.4047536999165887,0.002039386674242463,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Aimee Norwich - Child/mixture.wav
+54,5.439991846446136,-1.0855115991766053,0.002274251774557231,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Aimee Norwich - Child/mixture.wav
+55,5.052908882675519,-2.036867290673881,0.0026257372031426585,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Aimee Norwich - Child/mixture.wav
+56,4.6696191638771385,0.6360398884910532,0.0010243959053954266,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Alexander Ross - Goodbye Bolero/mixture.wav
+57,5.068669920376841,0.566490570243396,0.001062773552843145,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Alexander Ross - Goodbye Bolero/mixture.wav
+58,5.644069351203975,0.7138598872552624,0.001057790244215642,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Alexander Ross - Goodbye Bolero/mixture.wav
+59,5.660784483788278,0.7719964715308679,0.0010498475179914776,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Alexander Ross - Goodbye Bolero/mixture.wav
+60,5.570024682800002,0.455523768569462,0.0011046622560332972,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Alexander Ross - Goodbye Bolero/mixture.wav
+61,5.414248036320432,-0.2536499299779134,0.001233839593444981,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Alexander Ross - Goodbye Bolero/mixture.wav
+62,5.038328512136433,-1.2916285636480596,0.0014324340076051038,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Alexander Ross - Goodbye Bolero/mixture.wav
+63,-286.2099708660223,1.0607602132086145e-14,1.579389010527816e+26,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Alexander Ross - Velvet Curtain/mixture.wav
+64,-287.3335267284897,3.857309866213147e-15,2.045712967419373e+26,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Alexander Ross - Velvet Curtain/mixture.wav
+65,-288.3714612405065,3.857309866213147e-15,2.5979940331752083e+26,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Alexander Ross - Velvet Curtain/mixture.wav
+66,-289.09558050571576,2.89298239965986e-15,3.0693758787534794e+26,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Alexander Ross - Velvet Curtain/mixture.wav
+67,-289.63348250935405,9.64327466553287e-16,3.4740836889611824e+26,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Alexander Ross - Velvet Curtain/mixture.wav
+68,-290.0006863796847,0.0,3.780599418592248e+26,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Alexander Ross - Velvet Curtain/mixture.wav
+69,-290.1857001520908,2.89298239965986e-15,3.9451365567355983e+26,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Alexander Ross - Velvet Curtain/mixture.wav
+70,3.8110808336253053,-1.0194109439571073,0.0009123147995868141,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Angela Thomas Wade - Milk Cow Blues/mixture.wav
+71,4.029968514571784,-1.1729451981246721,0.0009465443160375876,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Angela Thomas Wade - Milk Cow Blues/mixture.wav
+72,4.103793128939527,-1.3814775031773394,0.0009908382045487655,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Angela Thomas Wade - Milk Cow Blues/mixture.wav
+73,4.145538770592131,-1.4216305433237468,0.0010055581820878068,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Angela Thomas Wade - Milk Cow Blues/mixture.wav
+74,4.114605482406564,-1.5103184316607823,0.0010167717333983918,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Angela Thomas Wade - Milk Cow Blues/mixture.wav
+75,3.98751609688094,-1.8921278082657376,0.001066593989137773,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Angela Thomas Wade - Milk Cow Blues/mixture.wav
+76,3.660374988769224,-2.48109685396877,0.0010630767379492274,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Angela Thomas Wade - Milk Cow Blues/mixture.wav
+77,-292.01371425850897,5.785964799319719e-15,4.569870943195934e+26,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Atlantis Bound - It Was My Fault For Waiting/mixture.wav
+78,-294.01032701101786,4.821637332766433e-15,7.237110615954033e+26,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Atlantis Bound - It Was My Fault For Waiting/mixture.wav
+79,-295.590675834854,6.750292265873005e-15,1.0413580846562287e+27,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Atlantis Bound - It Was My Fault For Waiting/mixture.wav
+80,-295.30243078515804,8.678947198979575e-15,9.744859638722768e+26,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Atlantis Bound - It Was My Fault For Waiting/mixture.wav
+81,-295.25021802824,8.678947198979575e-15,9.628404172145356e+26,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Atlantis Bound - It Was My Fault For Waiting/mixture.wav
+82,-295.04971162180584,4.821637332766433e-15,9.193982478386444e+26,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Atlantis Bound - It Was My Fault For Waiting/mixture.wav
+83,-294.6131405011453,5.785964799319719e-15,8.31469953063749e+26,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Atlantis Bound - It Was My Fault For Waiting/mixture.wav
+84,4.883798023332091,0.2992749708025449,0.0011506270861136045,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Auctioneer - Our Future Faces/mixture.wav
+85,5.471696987879464,0.28339761293647187,0.0011570190754221325,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Auctioneer - Our Future Faces/mixture.wav
+86,5.863042490405048,0.2575641763990859,0.0011651761717951254,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Auctioneer - Our Future Faces/mixture.wav
+87,5.998178354216308,0.23627157950252356,0.0011721101155284758,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Auctioneer - Our Future Faces/mixture.wav
+88,5.9364738873993526,0.06243659522937896,0.0012070747134198152,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Auctioneer - Our Future Faces/mixture.wav
+89,5.734755442138274,-0.576702592727872,0.0013426868199671882,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Auctioneer - Our Future Faces/mixture.wav
+90,5.370725293023437,-1.578882014873155,0.0015733498033297392,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Auctioneer - Our Future Faces/mixture.wav
+91,4.730688351227165,0.12732596223786563,0.001331422978808116,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/AvaLuna - Waterduct/mixture.wav
+92,5.21824844125803,0.1162064981201636,0.0013466726983186413,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/AvaLuna - Waterduct/mixture.wav
+93,5.555127021217534,0.1009137948210246,0.001362546521984318,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/AvaLuna - Waterduct/mixture.wav
+94,5.6294736468175754,0.05117672708145153,0.0013788368169774022,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/AvaLuna - Waterduct/mixture.wav
+95,5.554743949588028,-0.17353674197362837,0.0014290093285346506,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/AvaLuna - Waterduct/mixture.wav
+96,5.352481590139707,-0.7872748247874874,0.0015749436664276918,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/AvaLuna - Waterduct/mixture.wav
+97,5.022396483506647,-1.7234190298598167,0.001814032032333194,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/AvaLuna - Waterduct/mixture.wav
+98,4.319345779402869,-0.31535107787118655,0.002522630575669429,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/BigTroubles - Phantom/mixture.wav
+99,4.807997017934454,-0.41847468363693097,0.002580116173151081,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/BigTroubles - Phantom/mixture.wav
+100,5.128291018238994,-0.5349770674700317,0.002647088110068996,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/BigTroubles - Phantom/mixture.wav
+101,5.25185814932305,-0.612415451291231,0.0027063090288231206,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/BigTroubles - Phantom/mixture.wav
+102,5.203463485081859,-0.6124983431403515,0.0026828471723160593,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/BigTroubles - Phantom/mixture.wav
+103,5.034561698345897,-1.0024315360122187,0.0028291129691729875,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/BigTroubles - Phantom/mixture.wav
+104,4.748337424228032,-1.7549457399364266,0.0031494370128832567,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/BigTroubles - Phantom/mixture.wav
+105,-280.7215151972462,5.785964799319684e-14,6.1394154876886926e+25,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Bill Chudziak - Children Of No-one/mixture.wav
+106,-284.8492480216117,1.7357894397959133e-14,1.588182140210509e+26,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Bill Chudziak - Children Of No-one/mixture.wav
+107,-285.8308435321502,4.821637332766433e-15,1.9909477329993468e+26,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Bill Chudziak - Children Of No-one/mixture.wav
+108,-286.44080569397386,9.64327466553286e-15,2.2911634635128076e+26,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Bill Chudziak - Children Of No-one/mixture.wav
+109,-286.8998883735044,3.857309866213147e-15,2.5466211584937363e+26,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Bill Chudziak - Children Of No-one/mixture.wav
+110,-287.21785691345923,6.750292265873005e-15,2.7400670931830384e+26,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Bill Chudziak - Children Of No-one/mixture.wav
+111,-287.4155342899263,6.750292265873005e-15,2.8676684266109323e+26,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Bill Chudziak - Children Of No-one/mixture.wav
+112,5.08940689660572,1.3599573863286518,0.0007330342010368767,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Black Bloc - If You Want Success/mixture.wav
+113,5.644730502911461,1.359179850761869,0.000746663257920787,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Black Bloc - If You Want Success/mixture.wav
+114,5.972489771250324,1.2844835554355647,0.0007667453742435306,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Black Bloc - If You Want Success/mixture.wav
+115,6.376841246313063,1.6214231922126352,0.0007274909497474014,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Black Bloc - If You Want Success/mixture.wav
+116,6.3594638336709854,1.4866237140480256,0.0007455874183901624,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Black Bloc - If You Want Success/mixture.wav
+117,6.193044717888352,0.8265255559727562,0.0008364218769429704,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Black Bloc - If You Want Success/mixture.wav
+118,5.905726057895225,-0.2505901831086569,0.0009995048449073912,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Black Bloc - If You Want Success/mixture.wav
+119,3.2234571562320777,-1.8836654426547876,0.0018744444589244293,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Celestial Shore - Die For Us/mixture.wav
+120,3.389920648034429,-2.1212841378668243,0.001971804160223968,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Celestial Shore - Die For Us/mixture.wav
+121,3.446001534958048,-2.4257881835797264,0.002093849466047953,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Celestial Shore - Die For Us/mixture.wav
+122,3.4864405626643844,-2.5697012592850648,0.0021572709125857767,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Celestial Shore - Die For Us/mixture.wav
+123,3.4683804113422023,-2.710555828989122,0.0021916136082778892,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Celestial Shore - Die For Us/mixture.wav
+124,3.184434463878947,-3.270468587698744,0.0021701368997369855,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Celestial Shore - Die For Us/mixture.wav
+125,3.073018472975799,-3.6181963263259926,0.0022158901553736353,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Celestial Shore - Die For Us/mixture.wav
+126,4.280937115813533,-0.33616971079515306,0.001513712009473882,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Chris Durban - Celebrate/mixture.wav
+127,4.556260342922048,-0.48937073215293564,0.0015828140215961304,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Chris Durban - Celebrate/mixture.wav
+128,4.679820575001953,-0.7126137495946641,0.0016723758527978228,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Chris Durban - Celebrate/mixture.wav
+129,4.783286142375051,-0.7649286547552094,0.0016982594317202701,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Chris Durban - Celebrate/mixture.wav
+130,4.746528713558888,-1.0264228367466923,0.001766588153755034,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Chris Durban - Celebrate/mixture.wav
+131,4.588813158321222,-1.5800810157333787,0.0018896644032985526,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Chris Durban - Celebrate/mixture.wav
+132,4.358975686446564,-2.3964593700069523,0.0021030966196250085,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Chris Durban - Celebrate/mixture.wav
+133,4.2439513933572695,-0.5149219656501058,0.0012661337935887646,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Clara Berry And Wooldog - Air Traffic/mixture.wav
+134,4.601914754132171,-0.6554391412369052,0.0013083004956852625,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Clara Berry And Wooldog - Air Traffic/mixture.wav
+135,4.7853051982665225,-0.8254732511263362,0.0013589879096195686,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Clara Berry And Wooldog - Air Traffic/mixture.wav
+136,4.801682006858773,-0.9652034138120681,0.0014027582522865086,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Clara Berry And Wooldog - Air Traffic/mixture.wav
+137,4.780473492859773,-1.0766719595596272,0.001425591461967625,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Clara Berry And Wooldog - Air Traffic/mixture.wav
+138,4.591268785023661,-1.4667215567973748,0.0014598244551471773,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Clara Berry And Wooldog - Air Traffic/mixture.wav
+139,4.409490052252587,-2.212154422417366,0.0016088495118434189,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Clara Berry And Wooldog - Air Traffic/mixture.wav
+140,4.563102002884528,-0.28822697517980345,0.0011872549427196916,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Clara Berry And Wooldog - Stella/mixture.wav
+141,4.998385763267011,-0.3616163201329595,0.0012100263585880444,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Clara Berry And Wooldog - Stella/mixture.wav
+142,5.245951407794951,-0.45675387426286085,0.001238204112661635,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Clara Berry And Wooldog - Stella/mixture.wav
+143,5.286906767549311,-0.5378129751750863,0.0012623583688875456,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Clara Berry And Wooldog - Stella/mixture.wav
+144,5.246176865402368,-0.6890086718597416,0.0012911345365014559,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Clara Berry And Wooldog - Stella/mixture.wav
+145,5.096623871287439,-1.2259512428501225,0.001401309911033405,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Clara Berry And Wooldog - Stella/mixture.wav
+146,4.725887725167174,-2.0604060416322065,0.001535604905085194,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Clara Berry And Wooldog - Stella/mixture.wav
+147,4.286413633613199,0.32392529159502026,0.0009664325898978923,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Clara Berry And Wooldog - Waltz For My Victims/mixture.wav
+148,4.609565636940999,0.09345342872314706,0.0010254465102578223,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Clara Berry And Wooldog - Waltz For My Victims/mixture.wav
+149,4.976601194377125,-0.1342360541863766,0.0011011749156498891,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Clara Berry And Wooldog - Waltz For My Victims/mixture.wav
+150,4.984565070347896,-0.10811842447872728,0.0011039431827811154,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Clara Berry And Wooldog - Waltz For My Victims/mixture.wav
+151,4.953557073636018,-0.34022127453289197,0.0011477935090465122,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Clara Berry And Wooldog - Waltz For My Victims/mixture.wav
+152,4.844265996333317,-0.8312924562127022,0.0012344828139075582,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Clara Berry And Wooldog - Waltz For My Victims/mixture.wav
+153,4.679046218603463,-1.5900367554329344,0.0013749046642847365,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Clara Berry And Wooldog - Waltz For My Victims/mixture.wav
+154,4.1382412094197205,-0.2949268074884035,0.0020741745423377153,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Cnoc An Tursa - Bannockburn/mixture.wav
+155,4.472751977621032,-0.43373571706939223,0.002154481917014961,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Cnoc An Tursa - Bannockburn/mixture.wav
+156,4.637972221150464,-0.5781547333202604,0.0022384750542970167,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Cnoc An Tursa - Bannockburn/mixture.wav
+157,4.666024286302094,-0.5603202375240092,0.002246109791722407,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Cnoc An Tursa - Bannockburn/mixture.wav
+158,4.5830733460913216,-0.5921962224011458,0.0022516956286172383,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Cnoc An Tursa - Bannockburn/mixture.wav
+159,4.463343420051755,-0.8388219480370857,0.0023178921929258457,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Cnoc An Tursa - Bannockburn/mixture.wav
+160,4.175782372562779,-1.4497726796643473,0.002398964148566734,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Cnoc An Tursa - Bannockburn/mixture.wav
+161,-283.39717397575214,-3.230497012953524e-14,1.2468700246162148e+26,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Creepoid - OldTree/mixture.wav
+162,-285.3703994361073,-3.0376315196428643e-14,1.9640101615386406e+26,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Creepoid - OldTree/mixture.wav
+163,-287.0813631669652,-1.6875730664682557e-14,2.9123267785615575e+26,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Creepoid - OldTree/mixture.wav
+164,-287.99397724328634,-1.3500584531746041e-14,3.5933664709104315e+26,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Creepoid - OldTree/mixture.wav
+165,-288.2318362707371,-1.639356693140591e-14,3.795660968063182e+26,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Creepoid - OldTree/mixture.wav
+166,-288.23590185989366,-1.5911403198129265e-14,3.799215888517542e+26,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Creepoid - OldTree/mixture.wav
+167,-288.03227622588463,-1.880438559778914e-14,3.6251953096204046e+26,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Creepoid - OldTree/mixture.wav
+168,4.197201304092077,-0.2603514370888506,0.0025936822642087564,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Dark Ride - Burning Bridges/mixture.wav
+169,4.588324248779838,-0.41765995203020245,0.002697290897219599,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Dark Ride - Burning Bridges/mixture.wav
+170,4.816272136338414,-0.6171837275507431,0.0028262248919564614,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Dark Ride - Burning Bridges/mixture.wav
+171,4.8905719422486875,-0.7576068024476261,0.0029222309418973315,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Dark Ride - Burning Bridges/mixture.wav
+172,4.858353794489447,-0.9655225403266543,0.003023696593923075,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Dark Ride - Burning Bridges/mixture.wav
+173,4.694761607837041,-1.548982231654604,0.003301317836918555,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Dark Ride - Burning Bridges/mixture.wav
+174,4.277003864879129,-2.358070913016145,0.003464979655907819,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Dark Ride - Burning Bridges/mixture.wav
+175,-287.9071666325499,-1.976871306434243e-14,1.220399603371803e+26,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Dreamers Of The Ghetto - Heavy Love/mixture.wav
+176,-287.9071666582172,-2.2661695464002304e-14,1.2203996105844994e+26,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Dreamers Of The Ghetto - Heavy Love/mixture.wav
+177,-287.9071666663914,-2.314385919727895e-14,1.2203996128815171e+26,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Dreamers Of The Ghetto - Heavy Love/mixture.wav
+178,-287.9071666565155,-1.7357894397959203e-14,1.2203996101063185e+26,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Dreamers Of The Ghetto - Heavy Love/mixture.wav
+179,-288.2590839811985,-1.5429239464852623e-14,1.3234081129464786e+26,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Dreamers Of The Ghetto - Heavy Love/mixture.wav
+180,-287.2868629872721,-2.700116906349212e-14,1.057965957018312e+26,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Dreamers Of The Ghetto - Heavy Love/mixture.wav
+181,-286.79988845157726,-2.8447660263322066e-14,9.457454046121831e+25,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Dreamers Of The Ghetto - Heavy Love/mixture.wav
+182,4.193931331574005,-0.41001584661034396,0.0007707483826034391,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Drumtracks - Ghost Bitch/mixture.wav
+183,4.597691317482493,-0.5684601290258664,0.0007993727363679215,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Drumtracks - Ghost Bitch/mixture.wav
+184,4.835315224176076,-0.7564376966651845,0.0008337896695503563,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Drumtracks - Ghost Bitch/mixture.wav
+185,4.892633312291566,-0.9315543246923629,0.0008669524634768696,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Drumtracks - Ghost Bitch/mixture.wav
+186,4.777232449658124,-1.046359105205267,0.0008611250546397429,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Drumtracks - Ghost Bitch/mixture.wav
+187,4.659660201902668,-1.2883255434649499,0.0008815716439822814,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Drumtracks - Ghost Bitch/mixture.wav
+188,4.431999181061965,-1.8804791225438549,0.000951516599141064,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Drumtracks - Ghost Bitch/mixture.wav
+189,4.022564581104879,-1.058916230554491,0.0013115555471208237,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Faces On Film - Waiting For Ga/mixture.wav
+190,4.246242948698407,-1.2118557855663323,0.0013691004855889276,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Faces On Film - Waiting For Ga/mixture.wav
+191,4.344891945215008,-1.4273883701020595,0.0014479428372976724,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Faces On Film - Waiting For Ga/mixture.wav
+192,4.3719855736038475,-1.527413827623699,0.0014743232233101222,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Faces On Film - Waiting For Ga/mixture.wav
+193,4.3003915142356135,-1.9248327454164895,0.0015588450909835858,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Faces On Film - Waiting For Ga/mixture.wav
+194,4.1603285596500665,-2.65286331787167,0.0017181893650049908,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Faces On Film - Waiting For Ga/mixture.wav
+195,3.9293332266375085,-3.654442808659997,0.0019440447202064262,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Faces On Film - Waiting For Ga/mixture.wav
+196,-284.86313927088077,-1.9286549331065783e-14,1.341805718708431e+26,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Fergessen - Back From The Start/mixture.wav
+197,-286.0847337945667,-1.9286549331065783e-14,1.7776615988080488e+26,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Fergessen - Back From The Start/mixture.wav
+198,-287.02915088880394,-2.507251413038554e-14,2.209483691265458e+26,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Fergessen - Back From The Start/mixture.wav
+199,-287.4795415680436,-2.0250876797619075e-14,2.450924133488e+26,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Fergessen - Back From The Start/mixture.wav
+200,-286.8629733647821,-1.7357894397959203e-14,2.1265375111564597e+26,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Fergessen - Back From The Start/mixture.wav
+201,-285.8922012199545,-2.121520426417237e-14,1.700575168881086e+26,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Fergessen - Back From The Start/mixture.wav
+202,-284.4445350191408,-1.7840058131235845e-14,1.2185103244310784e+26,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Fergessen - Back From The Start/mixture.wav
+203,3.5010472382441598,-1.5564412111311383,0.0015235243616664848,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Fergessen - Nos Palpitants/mixture.wav
+204,3.685784389068142,-1.9112921579251083,0.0016742558609694294,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Fergessen - Nos Palpitants/mixture.wav
+205,3.7027806032382564,-2.23493100508226,0.0017968947385781507,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Fergessen - Nos Palpitants/mixture.wav
+206,3.6873348331125477,-2.434127604411935,0.0018709505520672653,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Fergessen - Nos Palpitants/mixture.wav
+207,3.6810079685680117,-2.5918533031716287,0.0019054971718354859,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Fergessen - Nos Palpitants/mixture.wav
+208,3.4178519794333537,-3.0919445091979094,0.001883923179205014,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Fergessen - Nos Palpitants/mixture.wav
+209,3.3196319527175273,-3.5129605891268403,0.0019452201557359624,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Fergessen - Nos Palpitants/mixture.wav
+210,-275.7193342675607,0.0,1.8665966776253524e+25,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Fergessen - The Wind/mixture.wav
+211,-279.8398716622811,1.3500584531745998e-14,4.820634759632354e+25,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Fergessen - The Wind/mixture.wav
+212,-282.532868502035,1.4464911998299284e-14,8.961978793847945e+25,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Fergessen - The Wind/mixture.wav
+213,-282.46656382472685,1.0607602132086145e-14,8.826193495643161e+25,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Fergessen - The Wind/mixture.wav
+214,-283.26185928695327,1.2536257065192713e-14,1.0599929832912637e+26,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Fergessen - The Wind/mixture.wav
+215,-283.41687121063563,9.64327466553286e-15,1.0985104250272722e+26,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Fergessen - The Wind/mixture.wav
+216,-283.34323619597996,5.785964799319719e-15,1.0800420918689582e+26,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Fergessen - The Wind/mixture.wav
+217,5.235515726767002,2.3351865903683464,0.00039358854797622353,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Flags - 54/mixture.wav
+218,6.106949392910885,2.4062493655097725,0.00038760327058174785,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Flags - 54/mixture.wav
+219,6.953200246709854,2.8158612382438863,0.00036036025266088733,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Flags - 54/mixture.wav
+220,7.088175358875245,2.876993574851379,0.0003549320185044179,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Flags - 54/mixture.wav
+221,6.960363591749909,2.4693133477992784,0.0003808283665479962,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Flags - 54/mixture.wav
+222,6.599262870613831,1.6812901962124789,0.0004362075737024132,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Flags - 54/mixture.wav
+223,6.034303335453378,0.6476079702045141,0.0005171474199176102,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Flags - 54/mixture.wav
+224,2.3977882669068107,-2.7690523191696004,0.0010476316905411432,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Giselle - Moss/mixture.wav
+225,2.3485552468816016,-3.3816263527311126,0.0011491696506380888,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Giselle - Moss/mixture.wav
+226,2.685935941393258,-3.469924605347803,0.0012190483084944528,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Giselle - Moss/mixture.wav
+227,2.720637944545978,-3.478339119203203,0.0012230389828166604,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Giselle - Moss/mixture.wav
+228,2.753973318522976,-3.413843775900414,0.0011939306067552718,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Giselle - Moss/mixture.wav
+229,2.745496563538815,-3.3576157719686894,0.0011748156002162273,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Giselle - Moss/mixture.wav
+230,2.7150899418956307,-3.571078674958051,0.001197783475641491,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Giselle - Moss/mixture.wav
+231,5.03987336758359,0.5656426842636085,0.0009241734306599328,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Grants - PunchDrunk/mixture.wav
+232,5.663405746320266,0.5642028967883715,0.0009246160397072454,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Grants - PunchDrunk/mixture.wav
+233,6.090039103169195,0.5699624405330906,0.0009227029928149723,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Grants - PunchDrunk/mixture.wav
+234,6.240159075533967,0.5975240487922633,0.0009196185623200458,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Grants - PunchDrunk/mixture.wav
+235,6.13229735086879,0.3468929303829011,0.0009600383041790022,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Grants - PunchDrunk/mixture.wav
+236,5.852253189620801,-0.3046942454828571,0.0010720527160374086,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Grants - PunchDrunk/mixture.wav
+237,5.422817382604997,-1.2582214633492093,0.0012487116860413463,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Grants - PunchDrunk/mixture.wav
+238,-279.5361166330264,-3.326929759608853e-14,3.488615072433631e+25,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Helado Negro - Mitad Del Mundo/mixture.wav
+239,-279.5503409534421,-4.0983917328514896e-14,3.500059963892509e+25,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Helado Negro - Mitad Del Mundo/mixture.wav
+240,-279.56222141044566,-3.2787133862811885e-14,3.509647753131839e+25,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Helado Negro - Mitad Del Mundo/mixture.wav
+241,-279.5653705271839,-4.00195898619616e-14,3.5121935599478115e+25,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Helado Negro - Mitad Del Mundo/mixture.wav
+242,-278.9507113188745,-4.580555466128138e-14,3.0486847713319128e+25,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Helado Negro - Mitad Del Mundo/mixture.wav
+243,-277.8463466460817,-7.811052479081695e-14,2.364155585344818e+25,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Helado Negro - Mitad Del Mundo/mixture.wav
+244,-278.18208068945916,-8.100350719047687e-14,2.5541679937526725e+25,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Helado Negro - Mitad Del Mundo/mixture.wav
+245,4.799600722695682,0.13200154225671404,0.0012245995203319698,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Hezekiah Jones - Borrowed Heart/mixture.wav
+246,5.3572325678263475,0.12281723592667161,0.0012283456189020427,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Hezekiah Jones - Borrowed Heart/mixture.wav
+247,5.712801075394321,0.11272920537218142,0.0012318588210570316,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Hezekiah Jones - Borrowed Heart/mixture.wav
+248,5.812283552958338,0.1089866689867562,0.0012334614626060049,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Hezekiah Jones - Borrowed Heart/mixture.wav
+249,5.7654910106924815,0.027769860948601063,0.00124642046640843,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Hezekiah Jones - Borrowed Heart/mixture.wav
+250,5.603240014174257,-0.54786247480696,0.0013662021425513001,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Hezekiah Jones - Borrowed Heart/mixture.wav
+251,5.32482818052106,-1.542667575981911,0.0015925044195374183,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Hezekiah Jones - Borrowed Heart/mixture.wav
+252,-287.08443385554267,-9.161110932256236e-15,2.8890677356400623e+26,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Hollow Ground - Left Blind/mixture.wav
+253,-287.86768721779526,-7.714619732426303e-15,3.460055463504788e+26,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Hollow Ground - Left Blind/mixture.wav
+254,-288.3302644172362,-1.0125438398809526e-14,3.848936803531462e+26,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Hollow Ground - Left Blind/mixture.wav
+255,-288.59902141329025,-1.2536257065192749e-14,4.094647121230319e+26,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Hollow Ground - Left Blind/mixture.wav
+256,-287.7946817809582,-1.1571929598639459e-14,3.402377649169173e+26,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Hollow Ground - Left Blind/mixture.wav
+257,-286.1432773907865,-3.3751461329365063e-15,2.3261733599164067e+26,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Hollow Ground - Left Blind/mixture.wav
+258,-284.02617913197025,2.89298239965986e-15,1.4286710743514142e+26,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Hollow Ground - Left Blind/mixture.wav
+259,3.1630198750437497,-1.6635772665032158,0.0029324607177398723,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Hop Along - Sister Cities/mixture.wav
+260,3.3254095912644637,-2.1424949827255055,0.0031970318003821667,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Hop Along - Sister Cities/mixture.wav
+261,3.3732146787942687,-2.6623193624472288,0.0035081671094221,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Hop Along - Sister Cities/mixture.wav
+262,3.423478975692725,-2.7942626994502993,0.0037275023144304484,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Hop Along - Sister Cities/mixture.wav
+263,3.438662107285256,-2.480013253953144,0.0034988139113213902,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Hop Along - Sister Cities/mixture.wav
+264,3.426911494525428,-2.3996416066100226,0.00337971520639475,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Hop Along - Sister Cities/mixture.wav
+265,3.3615211848003264,-2.6632652956266116,0.003426539736400016,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Hop Along - Sister Cities/mixture.wav
+266,4.871696629236501,0.1298070894647983,0.00109632683247557,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Invisible Familiars - Disturbing Wildlife/mixture.wav
+267,5.485027429280738,0.13047033395499186,0.0010953573309438452,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Invisible Familiars - Disturbing Wildlife/mixture.wav
+268,5.90072016733512,0.1335331220611093,0.0010945031267369516,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Invisible Familiars - Disturbing Wildlife/mixture.wav
+269,6.028111401479649,0.12308539581213744,0.0010975827309272887,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Invisible Familiars - Disturbing Wildlife/mixture.wav
+270,5.926326456626146,-0.20667745245212027,0.001160843574489727,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Invisible Familiars - Disturbing Wildlife/mixture.wav
+271,5.665594561619352,-0.9653054269956911,0.0013152053519255669,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Invisible Familiars - Disturbing Wildlife/mixture.wav
+272,5.2670451917391805,-2.029501141054604,0.0015501768517572978,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Invisible Familiars - Disturbing Wildlife/mixture.wav
+273,4.130321108591551,-0.8844971600376239,0.0012532383774349226,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/James May - All Souls Moon/mixture.wav
+274,4.375410376346432,-0.9870699276214266,0.0012933470312826562,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/James May - All Souls Moon/mixture.wav
+275,4.4615872262243155,-1.1484398233617912,0.001345374958459742,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/James May - All Souls Moon/mixture.wav
+276,4.516660586223241,-1.1529426277216395,0.0013539742699835813,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/James May - All Souls Moon/mixture.wav
+277,4.475520473456068,-1.3383281202593573,0.001385681227001568,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/James May - All Souls Moon/mixture.wav
+278,4.3671177931217855,-1.8829393352387613,0.0014911726383419362,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/James May - All Souls Moon/mixture.wav
+279,4.176695332089953,-2.746372179271596,0.001667693633760561,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/James May - All Souls Moon/mixture.wav
+280,5.235242411693127,2.1509359272098334,0.000745518133102621,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/James May - Dont Let Go/mixture.wav
+281,6.336577182868681,2.246966614278349,0.0007196361727445501,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/James May - Dont Let Go/mixture.wav
+282,7.225294022292147,2.5712458920114525,0.0006876282786846121,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/James May - Dont Let Go/mixture.wav
+283,7.360867265357001,2.957561521326941,0.0006396314068067688,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/James May - Dont Let Go/mixture.wav
+284,7.267722186883595,2.6666415800840633,0.0006753751882832218,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/James May - Dont Let Go/mixture.wav
+285,6.956301490279033,1.7919228430668632,0.0007921238662064133,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/James May - Dont Let Go/mixture.wav
+286,6.459199070110156,0.5480381181252733,0.000981592839110898,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/James May - Dont Let Go/mixture.wav
+287,-276.8006484069481,6.268128532596321e-14,1.7045038667236432e+25,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/James May - If You Say/mixture.wav
+288,-279.1498177883069,4.243040852834443e-14,2.9276215069024506e+25,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/James May - If You Say/mixture.wav
+289,-280.87629274160986,2.6036841596938673e-14,4.356747836903786e+25,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/James May - If You Say/mixture.wav
+290,-281.21033932817534,2.025087679761898e-14,4.7050807671334275e+25,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/James May - If You Say/mixture.wav
+291,-281.0192308692513,3.0858478929705075e-14,4.502526079411915e+25,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/James May - If You Say/mixture.wav
+292,-280.65580147481757,3.375146132936492e-14,4.141076920190437e+25,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/James May - If You Say/mixture.wav
+293,-280.1370096885268,3.47157887959182e-14,3.6748034796588184e+25,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/James May - If You Say/mixture.wav
+294,4.925824525713304,0.686269546707466,0.0011784675400632633,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/James May - On The Line/mixture.wav
+295,5.455427199158235,0.6080849995073369,0.0012035358956639871,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/James May - On The Line/mixture.wav
+296,5.772559154541472,0.50384137580991,0.001234998523553592,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/James May - On The Line/mixture.wav
+297,5.865717461542484,0.43992629854452714,0.0012572056489347997,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/James May - On The Line/mixture.wav
+298,5.87481086231115,0.4318990881594182,0.0012592615865884035,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/James May - On The Line/mixture.wav
+299,5.74938453255749,-0.1097626264798377,0.0013800719168906741,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/James May - On The Line/mixture.wav
+300,5.353137376144838,-1.0795806653114712,0.0015612932056810083,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/James May - On The Line/mixture.wav
+301,5.0071400826674655,1.2472807850047472,0.0008862150321937454,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Jay Menon - Through My Eyes/mixture.wav
+302,5.390178929159243,1.2696008542155324,0.0009019555684974299,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Jay Menon - Through My Eyes/mixture.wav
+303,6.0014717565365405,1.8184426923553514,0.0008368951289302916,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Jay Menon - Through My Eyes/mixture.wav
+304,6.035135382895426,1.9840439226247506,0.0008124023203042242,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Jay Menon - Through My Eyes/mixture.wav
+305,5.950827028394513,1.5244231914972626,0.0008802139325901615,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Jay Menon - Through My Eyes/mixture.wav
+306,5.748876450323658,0.5546188982936675,0.0010357087168642754,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Jay Menon - Through My Eyes/mixture.wav
+307,5.4318480269767395,-0.7497469805706483,0.0012682899609253067,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Jay Menon - Through My Eyes/mixture.wav
+308,3.9359752488084476,-0.6822408752583359,0.0018318775052644412,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Johnny Lokke - Promises & Lies/mixture.wav
+309,4.269451515894349,-0.7753496425257553,0.0018907454458348015,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Johnny Lokke - Promises & Lies/mixture.wav
+310,4.46285511216428,-0.9424376599488716,0.0019717855829791448,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Johnny Lokke - Promises & Lies/mixture.wav
+311,4.568541564222446,-0.9310955591361294,0.0019749735665030286,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Johnny Lokke - Promises & Lies/mixture.wav
+312,4.500874932088993,-1.1919402671373442,0.002047249267364253,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Johnny Lokke - Promises & Lies/mixture.wav
+313,4.362125929052782,-1.7132364185305262,0.002195751533693103,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Johnny Lokke - Promises & Lies/mixture.wav
+314,4.132613850011278,-2.5256322476151762,0.002441081931525287,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Johnny Lokke - Promises & Lies/mixture.wav
+315,-296.9283774158312,4.821637332766433e-15,4.1744003803796924e+27,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Johnny Lokke - Whisper To A Scream/mixture.wav
+316,-298.86586570166725,1.928654933106574e-15,6.521431395327204e+27,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Johnny Lokke - Whisper To A Scream/mixture.wav
+317,-299.50748582425337,6.750292265873005e-15,7.559706630636795e+27,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Johnny Lokke - Whisper To A Scream/mixture.wav
+318,-299.7921845870142,4.821637332766433e-15,8.071882259668382e+27,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Johnny Lokke - Whisper To A Scream/mixture.wav
+319,-299.90312176121694,4.821637332766433e-15,8.280728313012892e+27,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Johnny Lokke - Whisper To A Scream/mixture.wav
+320,-299.76067325681646,2.89298239965986e-15,8.013526647423926e+27,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Johnny Lokke - Whisper To A Scream/mixture.wav
+321,-299.46804313824765,5.785964799319719e-15,7.491360100417958e+27,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Johnny Lokke - Whisper To A Scream/mixture.wav
+322,4.802910496686844,0.32154200688400997,0.0012535801332727808,0.0,-45.0,-45.0,"/home/kwatchar3/data/musdb18hq/train/Jokers, Jacks & Kings - Sea Of Leaves/mixture.wav"
+323,5.262070824083813,0.31273131727494957,0.0012705837716203996,0.0,-30.0,-30.0,"/home/kwatchar3/data/musdb18hq/train/Jokers, Jacks & Kings - Sea Of Leaves/mixture.wav"
+324,5.528682491051674,0.24302657087861695,0.0012994699726626318,0.0,-15.0,-15.0,"/home/kwatchar3/data/musdb18hq/train/Jokers, Jacks & Kings - Sea Of Leaves/mixture.wav"
+325,5.673454800451012,0.29851658741706033,0.0012925379709578227,0.0,0.0,0.0,"/home/kwatchar3/data/musdb18hq/train/Jokers, Jacks & Kings - Sea Of Leaves/mixture.wav"
+326,5.611112713278345,0.00933583398192809,0.0013557441436011467,0.0,15.0,15.0,"/home/kwatchar3/data/musdb18hq/train/Jokers, Jacks & Kings - Sea Of Leaves/mixture.wav"
+327,5.42582223476984,-0.7572746873979479,0.0015331988692482898,0.0,30.0,30.0,"/home/kwatchar3/data/musdb18hq/train/Jokers, Jacks & Kings - Sea Of Leaves/mixture.wav"
+328,5.1294105746620255,-1.8753218318593707,0.0018126750942780681,0.0,45.0,45.0,"/home/kwatchar3/data/musdb18hq/train/Jokers, Jacks & Kings - Sea Of Leaves/mixture.wav"
+329,-281.55828901021255,5.303801066043047e-14,1.046335707302861e+26,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Leaf - Come Around/mixture.wav
+330,-283.9492969297375,2.8929823996598517e-14,1.8145621107399874e+26,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Leaf - Come Around/mixture.wav
+331,-285.8312785205274,1.7357894397959133e-14,2.7987879625072644e+26,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Leaf - Come Around/mixture.wav
+332,-285.4728033577189,1.6393566931405848e-14,2.577047841555275e+26,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Leaf - Come Around/mixture.wav
+333,-285.676137809888,2.025087679761898e-14,2.7005730309283547e+26,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Leaf - Come Around/mixture.wav
+334,-285.4228646222249,1.7357894397959133e-14,2.547584556539365e+26,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Leaf - Come Around/mixture.wav
+335,-284.68677961625826,2.6036841596938673e-14,2.1504042362793653e+26,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Leaf - Come Around/mixture.wav
+336,4.972625539963095,0.911087276005062,0.0007071117222161542,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Leaf - Summerghost/mixture.wav
+337,5.47255165612561,0.88953182394479,0.0007198260351771949,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Leaf - Summerghost/mixture.wav
+338,5.76928470913776,0.7982023351449818,0.0007408253927493585,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Leaf - Summerghost/mixture.wav
+339,5.993630280144892,0.9459139838951035,0.0007267364126234834,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Leaf - Summerghost/mixture.wav
+340,5.974933049971653,0.8060331867252233,0.0007450993939588479,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Leaf - Summerghost/mixture.wav
+341,5.810378939233751,0.1414466499390305,0.0008342248191706746,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Leaf - Summerghost/mixture.wav
+342,5.527298144908564,-0.9128582522690858,0.0009876575280945452,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Leaf - Summerghost/mixture.wav
+343,-285.3466834776361,4.050175359523787e-14,1.0769243846115141e+26,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Leaf - Wicked/mixture.wav
+344,-286.32127780523797,3.278713386281163e-14,1.3478595605311076e+26,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Leaf - Wicked/mixture.wav
+345,-286.09727703059025,3.7608771195578034e-14,1.280101970265049e+26,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Leaf - Wicked/mixture.wav
+346,-286.17231600613104,3.7608771195578034e-14,1.3024122236144463e+26,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Leaf - Wicked/mixture.wav
+347,-286.13223158582576,3.0858478929705075e-14,1.2904465519951074e+26,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Leaf - Wicked/mixture.wav
+348,-285.96068492725817,3.6644443729024755e-14,1.240467401059699e+26,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Leaf - Wicked/mixture.wav
+349,-285.5403799991185,2.8929823996598517e-14,1.126042708875908e+26,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Leaf - Wicked/mixture.wav
+350,3.686055179944633,-1.339572227145751,0.0013247376871490975,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Lushlife - Toynbee Suite/mixture.wav
+351,3.901381735485895,-1.6251240965957792,0.0013956074392006694,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Lushlife - Toynbee Suite/mixture.wav
+352,3.9694018076047093,-1.9372352245715647,0.0014794900573611976,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Lushlife - Toynbee Suite/mixture.wav
+353,4.034193780167419,-1.8514046438898717,0.001518287187274068,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Lushlife - Toynbee Suite/mixture.wav
+354,4.035662980916742,-1.829456033015192,0.0015075770552596425,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Lushlife - Toynbee Suite/mixture.wav
+355,3.943905191606778,-1.6103219180623831,0.0014240541044233108,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Lushlife - Toynbee Suite/mixture.wav
+356,3.8521351161354644,-1.9432504821322585,0.0014622191546656423,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Lushlife - Toynbee Suite/mixture.wav
+357,3.110892750454429,-1.7472121635611617,0.0009002986985709477,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Matthew Entwistle - Dont You Ever/mixture.wav
+358,3.2368970937093122,-2.078085378189812,0.0009602229601332382,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Matthew Entwistle - Dont You Ever/mixture.wav
+359,3.2590451186817497,-2.4886479521904668,0.0010348623361135605,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Matthew Entwistle - Dont You Ever/mixture.wav
+360,3.2813977259284903,-2.675947511417762,0.0010750383910074475,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Matthew Entwistle - Dont You Ever/mixture.wav
+361,3.2541965297046205,-2.7476572594884354,0.0010784177814811746,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Matthew Entwistle - Dont You Ever/mixture.wav
+362,2.9463179576104044,-2.914749003334337,0.0010216769342406384,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Matthew Entwistle - Dont You Ever/mixture.wav
+363,2.9142368006928243,-2.841407227670971,0.000986190781347351,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Matthew Entwistle - Dont You Ever/mixture.wav
+364,3.864645832704661,-0.7607082300262575,0.001729269846726479,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Meaxic - Take A Step/mixture.wav
+365,4.194766181797211,-0.9552027760769405,0.001811520811964902,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Meaxic - Take A Step/mixture.wav
+366,4.379568431604112,-1.1980359518233499,0.001912706953041532,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Meaxic - Take A Step/mixture.wav
+367,4.420033969706037,-1.3755631181213135,0.001989274051151575,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Meaxic - Take A Step/mixture.wav
+368,4.375477274430873,-1.5421390051895292,0.002029692721293848,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Meaxic - Take A Step/mixture.wav
+369,4.259267765452415,-1.9600219210321967,0.0021430128347208442,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Meaxic - Take A Step/mixture.wav
+370,3.8647906187120853,-2.654141180890526,0.002194086041817963,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Meaxic - Take A Step/mixture.wav
+371,2.494417156678974,-2.6321420215784475,0.0020887958208050815,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Meaxic - You Listen/mixture.wav
+372,2.4270461298680432,-3.4686415075275576,0.0023620654645283025,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Meaxic - You Listen/mixture.wav
+373,2.6800324036184837,-3.9846425455570196,0.0026089625136260586,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Meaxic - You Listen/mixture.wav
+374,2.709351788859382,-4.209382317956495,0.002693837647530734,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Meaxic - You Listen/mixture.wav
+375,2.6367265680606824,-4.345586229158325,0.002668291121654184,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Meaxic - You Listen/mixture.wav
+376,2.5798092740433347,-4.32544455885279,0.002623773675029008,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Meaxic - You Listen/mixture.wav
+377,2.2855975680320713,-4.3601704573464755,0.002429957545076352,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Meaxic - You Listen/mixture.wav
+378,-275.8658827453707,-1.4464911998299544e-13,2.62938950428215e+25,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - 80s Rock/mixture.wav
+379,-276.23664996252916,-1.2488040691865246e-13,2.8637272147466386e+25,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - 80s Rock/mixture.wav
+380,-276.50662352015223,-1.0607602132086289e-13,3.047396767289114e+25,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - 80s Rock/mixture.wav
+381,-276.5174154718506,-9.836140158843641e-14,3.0549787779968278e+25,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - 80s Rock/mixture.wav
+382,-276.051676792452,-9.498625545549983e-14,2.7443173401296613e+25,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - 80s Rock/mixture.wav
+383,-275.1671710386889,-1.1475496851984268e-13,2.2386373963735624e+25,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - 80s Rock/mixture.wav
+384,-274.01833041969695,-1.234339157188225e-13,1.7183027789429487e+25,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - 80s Rock/mixture.wav
+385,4.8599515192594165,0.07506765186207029,0.0019530969005332219,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Beatles/mixture.wav
+386,5.456173401733009,0.07846640641399157,0.001954203310354135,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Beatles/mixture.wav
+387,5.86253960647711,0.07607689860640184,0.0019569330076785055,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Beatles/mixture.wav
+388,6.009319095806193,0.07069231591966046,0.0019601587774860725,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Beatles/mixture.wav
+389,5.9316255198996135,-0.19178923851515745,0.0020496918006288633,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Beatles/mixture.wav
+390,5.705271629035749,-0.9380277635970523,0.0023192763589303753,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Beatles/mixture.wav
+391,5.345727015976614,-2.036671896544599,0.0027511647857560387,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Beatles/mixture.wav
+392,4.473250377667387,-0.23925020357284782,0.0022685822261611474,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Britpop/mixture.wav
+393,4.964659753735138,-0.3022389372776995,0.002307520189206444,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Britpop/mixture.wav
+394,5.279787584351422,-0.38479709773742626,0.0023548935022019812,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Britpop/mixture.wav
+395,5.379320274371828,-0.4593121143343154,0.002396987951711578,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Britpop/mixture.wav
+396,5.319331349903727,-0.6791976225850471,0.0024823591838445064,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Britpop/mixture.wav
+397,5.148620276076898,-1.3260843005301093,0.0027417049365948457,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Britpop/mixture.wav
+398,4.775692729812472,-2.3390094078061505,0.00309555940897892,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Britpop/mixture.wav
+399,4.847827758838973,0.033384256127803685,0.0012650718671706259,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Country1/mixture.wav
+400,5.4330535919447565,0.032911798938253044,0.0012667776296507167,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Country1/mixture.wav
+401,5.827454166595358,0.026549384681619288,0.0012696166497418104,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Country1/mixture.wav
+402,5.9639062910403755,0.017049137584262693,0.001272818023999275,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Country1/mixture.wav
+403,5.8877715942665,-0.21313856513242407,0.0013231754493316973,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Country1/mixture.wav
+404,5.652913886973641,-0.8830307580330408,0.001478032939220745,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Country1/mixture.wav
+405,5.2777148553665505,-1.8785706861637952,0.0017268644123345136,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Country1/mixture.wav
+406,-277.86783527240425,-1.6875730664682557e-14,3.7689533798127073e+25,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Country2/mixture.wav
+407,-278.7074087582226,-2.36260229305556e-14,4.572756903248137e+25,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Country2/mixture.wav
+408,-278.99208967589584,-2.6036841596938828e-14,4.882544450885896e+25,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Country2/mixture.wav
+409,-278.99839200329177,-3.182280639625859e-14,4.88963496962813e+25,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Country2/mixture.wav
+410,-277.8684812358046,-1.6875730664682557e-14,3.7695140102401073e+25,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Country2/mixture.wav
+411,-275.9905925820258,1.928654933106574e-15,2.4462255415905213e+25,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Country2/mixture.wav
+412,-273.7363734975882,4.146608106179115e-14,1.455709070123724e+25,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Country2/mixture.wav
+413,-256.5519771818075,1.059795885741933e-12,1.7383011429402472e+23,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Disco/mixture.wav
+414,-262.56022023233817,1.3693450025056462e-13,6.933448926375365e+23,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Disco/mixture.wav
+415,-269.6372666938829,4.725204586111081e-14,3.5371539874748094e+24,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Disco/mixture.wav
+416,-272.882289782284,4.3394735994897696e-14,7.467174075579533e+24,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Disco/mixture.wav
+417,-274.478780815757,2.9894151463151796e-14,1.0784633209153266e+25,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Disco/mixture.wav
+418,-275.68581617061204,2.1215204264172265e-14,1.4239964761866558e+25,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Disco/mixture.wav
+419,-276.5908090263374,1.8322221864512416e-14,1.753913618214117e+25,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Disco/mixture.wav
+420,4.856959279900206,0.129754463774011,0.0020783726716698835,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Gospel/mixture.wav
+421,5.432993414138654,0.11931042406293994,0.002086034563100579,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Gospel/mixture.wav
+422,5.814480826545946,0.10114861466640826,0.0020964643019272425,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Gospel/mixture.wav
+423,5.9362795152901064,0.08366786520544656,0.0021061255458899655,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Gospel/mixture.wav
+424,5.874525464102893,-0.13611777499688946,0.002185455542031639,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Gospel/mixture.wav
+425,5.673771878415916,-0.8423005618573753,0.0024537244429171184,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Gospel/mixture.wav
+426,5.3438497699085445,-1.9282649034162171,0.0029035410583496575,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Gospel/mixture.wav
+427,4.7321772426297946,-0.017365255794641526,0.0015000602998340164,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Grunge/mixture.wav
+428,5.301435645294856,-0.04967694986711177,0.0015111065188721364,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Grunge/mixture.wav
+429,5.687347266170651,-0.08643597678938536,0.0015248690932179133,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Grunge/mixture.wav
+430,5.819154592304283,-0.12027755094731121,0.0015367032256360835,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Grunge/mixture.wav
+431,5.754899281334854,-0.27219724657286615,0.0015721991633961853,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Grunge/mixture.wav
+432,5.53542343305161,-0.8639180435460471,0.001729158202361649,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Grunge/mixture.wav
+433,5.182138170322422,-1.8003768531418447,0.001998180073504306,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Grunge/mixture.wav
+434,-260.53830986275705,-7.097450153832772e-13,9.195537745104612e+23,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Hendrix/mixture.wav
+435,-261.46324659007,-5.515953108685153e-13,1.1378127711756395e+24,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Hendrix/mixture.wav
+436,-262.1983638687029,-4.1610730181776336e-13,1.3476668074520148e+24,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Hendrix/mixture.wav
+437,-262.7088740519734,-3.047274794308494e-13,1.515770848176337e+24,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Hendrix/mixture.wav
+438,-261.97502927475887,-3.5680116262473087e-13,1.280115253634515e+24,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Hendrix/mixture.wav
+439,-260.9512823385691,-4.3587601488210763e-13,1.0112868940688381e+24,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Hendrix/mixture.wav
+440,-259.76345552442075,-5.332730890040005e-13,7.692928527274347e+23,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Hendrix/mixture.wav
+441,-271.06673867483755,-1.7502543517942512e-13,1.1819798529586594e+25,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Punk/mixture.wav
+442,-271.51974061464364,-1.3886315518367557e-13,1.3119288060050296e+25,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Punk/mixture.wav
+443,-271.8129860045465,-1.2632689811848246e-13,1.403572359100051e+25,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Punk/mixture.wav
+444,-271.86092075550755,-1.1234414985345941e-13,1.4191499363303288e+25,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Punk/mixture.wav
+445,-271.3174447071319,-1.383809914503989e-13,1.2522201191385659e+25,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Punk/mixture.wav
+446,-270.2326522158429,-1.779184175790851e-13,9.754419479747416e+24,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Punk/mixture.wav
+447,-269.10218807841994,-2.3626022930556175e-13,7.518912214594812e+24,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Punk/mixture.wav
+448,-276.8489070818028,1.186122783860527e-13,4.012888158769388e+25,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Reggae/mixture.wav
+449,-276.87072387721565,1.137906410532864e-13,4.033097632302283e+25,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Reggae/mixture.wav
+450,-276.81431057873203,1.0993333118707333e-13,3.9810479232605455e+25,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Reggae/mixture.wav
+451,-276.65854868115423,1.0993333118707333e-13,3.840795780364363e+25,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Reggae/mixture.wav
+452,-276.247094151605,1.205409333191592e-13,3.4936207862541945e+25,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Reggae/mixture.wav
+453,-275.8450316415938,1.3307719038435157e-13,3.184707215632374e+25,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Reggae/mixture.wav
+454,-276.00789913701254,1.253625706519255e-13,3.306406617017816e+25,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Reggae/mixture.wav
+455,4.829826492373232,-0.038904781463409095,0.0022093526301832397,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Rock/mixture.wav
+456,5.384492904667521,-0.020565704109400573,0.002213776189890068,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Rock/mixture.wav
+457,5.736364938474732,-0.03391768222181861,0.002225438766755445,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Rock/mixture.wav
+458,5.840130176683815,-0.053512555684168656,0.0022371908275081558,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Rock/mixture.wav
+459,5.76244125557648,-0.3564563976530284,0.0023531617932557526,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Rock/mixture.wav
+460,5.544173824211006,-1.1308964261315693,0.0026676213209588682,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Rock/mixture.wav
+461,5.205100815766876,-2.250506896864069,0.00316047032164771,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Rock/mixture.wav
+462,5.0128092656759735,0.06644036685328038,0.0016793212653108197,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Rockabilly/mixture.wav
+463,5.500685085078995,0.09353420476927612,0.0016820674500446105,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Rockabilly/mixture.wav
+464,5.688587500607397,0.1116227190568651,0.001686783845158827,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Rockabilly/mixture.wav
+465,5.809185941643102,0.07041753510192929,0.0017008137599869879,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Rockabilly/mixture.wav
+466,5.719341700233728,-0.2789309738340837,0.0018021201121099458,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Rockabilly/mixture.wav
+467,5.484277934993132,-1.0719198448202836,0.0020469507837161337,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Rockabilly/mixture.wav
+468,5.127919160234926,-2.1942898512478877,0.0024225120173467086,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Music Delta - Rockabilly/mixture.wav
+469,-279.90301282056384,3.375146132936492e-14,4.802750983827275e+25,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Night Panther - Fire/mixture.wav
+470,-279.9648999154428,3.8573098662131313e-14,4.871680286353773e+25,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Night Panther - Fire/mixture.wav
+471,-280.00818888393906,3.5680116262471476e-14,4.920482323543433e+25,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Night Panther - Fire/mixture.wav
+472,-280.0154058340665,3.375146132936492e-14,4.928665802430165e+25,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Night Panther - Fire/mixture.wav
+473,-279.3920910000521,4.725204586111081e-14,4.26970517254137e+25,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Night Panther - Fire/mixture.wav
+474,-278.5006493413419,7.521754239115574e-14,3.477392568942958e+25,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Night Panther - Fire/mixture.wav
+475,-278.1380610128028,8.196783465702862e-14,3.1988574626624497e+25,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Night Panther - Fire/mixture.wav
+476,-293.422277082884,7.714619732426289e-15,4.730446916393975e+26,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/North To Alaska - All The Same/mixture.wav
+477,-295.10255815639374,6.750292265873005e-15,6.965146903808504e+26,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/North To Alaska - All The Same/mixture.wav
+478,-296.4433050016483,7.714619732426289e-15,9.484293064484029e+26,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/North To Alaska - All The Same/mixture.wav
+479,-296.46797674900415,5.785964799319719e-15,9.538325523706748e+26,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/North To Alaska - All The Same/mixture.wav
+480,-296.4357330335504,9.64327466553286e-15,9.46777151079402e+26,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/North To Alaska - All The Same/mixture.wav
+481,-296.2530029664361,4.821637332766433e-15,9.077677752003325e+26,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/North To Alaska - All The Same/mixture.wav
+482,-296.0620895619186,6.750292265873005e-15,8.687272033412944e+26,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/North To Alaska - All The Same/mixture.wav
+483,5.0458310227271665,1.0213163189918273,0.0005188386420688349,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Patrick Talbot - A Reason To Leave/mixture.wav
+484,5.555823276344506,1.0054054885113763,0.0005271384972990448,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Patrick Talbot - A Reason To Leave/mixture.wav
+485,5.858714321335992,0.9245867815493657,0.0005412184003227828,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Patrick Talbot - A Reason To Leave/mixture.wav
+486,6.134060019360899,1.104262070281537,0.0005279948802718696,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Patrick Talbot - A Reason To Leave/mixture.wav
+487,6.09750430377683,0.9030105999282063,0.0005474214852019143,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Patrick Talbot - A Reason To Leave/mixture.wav
+488,5.928036840330353,0.16660822747212978,0.0006203160491117378,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Patrick Talbot - A Reason To Leave/mixture.wav
+489,5.618391560693363,-0.9491156503931528,0.0007405073758668746,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Patrick Talbot - A Reason To Leave/mixture.wav
+490,4.88030518308742,1.1289956634461455,0.0011829763727654442,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Patrick Talbot - Set Me Free/mixture.wav
+491,5.792482853726088,1.2317651444668791,0.00114198187251344,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Patrick Talbot - Set Me Free/mixture.wav
+492,6.345668626470156,1.2338167051568676,0.0011571225900378615,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Patrick Talbot - Set Me Free/mixture.wav
+493,6.431331164414632,1.468181184486723,0.0011093722741723866,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Patrick Talbot - Set Me Free/mixture.wav
+494,6.351369160322201,1.1054821754719752,0.0011818287957131115,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Patrick Talbot - Set Me Free/mixture.wav
+495,6.115715196283986,0.23420521241896308,0.0013698777699980731,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Patrick Talbot - Set Me Free/mixture.wav
+496,5.7387074032284655,-0.9797271878138375,0.001660383355750024,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Patrick Talbot - Set Me Free/mixture.wav
+497,-279.9460323255359,-4.6287718394558025e-14,4.520434435362505e+25,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Phre The Eon - Everybody's Falling Apart/mixture.wav
+498,-282.26041361681587,-2.36260229305556e-14,7.70226228784696e+25,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Phre The Eon - Everybody's Falling Apart/mixture.wav
+499,-284.1420992903038,-2.121520426417237e-14,1.1879191160357418e+26,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Phre The Eon - Everybody's Falling Apart/mixture.wav
+500,-284.8321246226938,-1.5911403198129265e-14,1.3924814047812096e+26,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Phre The Eon - Everybody's Falling Apart/mixture.wav
+501,-284.87390531467764,-2.0250876797619075e-14,1.405942222120263e+26,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Phre The Eon - Everybody's Falling Apart/mixture.wav
+502,-284.739773199295,-2.314385919727895e-14,1.3631833155103938e+26,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Phre The Eon - Everybody's Falling Apart/mixture.wav
+503,-284.45444104773924,-1.0125438398809526e-14,1.2765006691890595e+26,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Phre The Eon - Everybody's Falling Apart/mixture.wav
+504,3.818843827874833,-1.0259214793701616,0.0009607931120568369,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Port St Willow - Stay Even/mixture.wav
+505,4.015619072120587,-1.2024173233313602,0.0010175729501813906,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Port St Willow - Stay Even/mixture.wav
+506,4.196554417531587,-1.3425640073117093,0.0010591845883121305,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Port St Willow - Stay Even/mixture.wav
+507,4.180431280852044,-1.4698760095785912,0.001082719145405686,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Port St Willow - Stay Even/mixture.wav
+508,4.143910600038207,-1.7859214005050608,0.0011287218131605914,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Port St Willow - Stay Even/mixture.wav
+509,3.8733299642671284,-2.47510839788963,0.0011936819027473981,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Port St Willow - Stay Even/mixture.wav
+510,3.6749034107789234,-3.2494502465674686,0.001295142114663075,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Port St Willow - Stay Even/mixture.wav
+511,4.26738036163111,-0.4940844146224913,0.0019189424068423667,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Remember December - C U Next Time/mixture.wav
+512,4.663320409003603,-0.5781645548326275,0.001969999906371559,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Remember December - C U Next Time/mixture.wav
+513,4.896673429220922,-0.7113231372867104,0.0020374964622499638,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Remember December - C U Next Time/mixture.wav
+514,4.973021329253276,-0.7991776326578695,0.002079985312836159,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Remember December - C U Next Time/mixture.wav
+515,4.901602953795255,-1.0955949588983078,0.0021766989218998775,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Remember December - C U Next Time/mixture.wav
+516,4.743518224049955,-1.7487828161284,0.0023962774391531006,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Remember December - C U Next Time/mixture.wav
+517,4.469328270636554,-2.70825028134872,0.002724478142585885,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Remember December - C U Next Time/mixture.wav
+518,3.286141164506236,-1.4971880430845521,0.0018751411879200605,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Secret Mountains - High Horse/mixture.wav
+519,3.4499087903569796,-1.92693574369825,0.002026897928560093,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Secret Mountains - High Horse/mixture.wav
+520,3.5273883262643646,-2.3913762100228944,0.0022239186290013303,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Secret Mountains - High Horse/mixture.wav
+521,3.507025716334551,-2.576043108766754,0.002342479546179595,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Secret Mountains - High Horse/mixture.wav
+522,3.493930577317643,-2.2329264985659893,0.002196043721940533,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Secret Mountains - High Horse/mixture.wav
+523,3.4876617016253326,-2.0527498376182045,0.002091114222086418,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Secret Mountains - High Horse/mixture.wav
+524,3.4355841010150785,-2.1862598591351268,0.0020806636990627677,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Secret Mountains - High Horse/mixture.wav
+525,-279.6626486625169,-8.437865332341344e-14,9.907122787677258e+25,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Skelpolu - Human Mistakes/mixture.wav
+526,-281.5449377670288,-6.027046665958085e-14,1.5281868422490723e+26,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Skelpolu - Human Mistakes/mixture.wav
+527,-282.95819403914487,-4.0983917328514896e-14,2.1159338352107325e+26,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Skelpolu - Human Mistakes/mixture.wav
+528,-283.3292910211847,-3.90552623954083e-14,2.3046860945396724e+26,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Skelpolu - Human Mistakes/mixture.wav
+529,-283.70843220126255,-3.6644443729025065e-14,2.5149299883547008e+26,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Skelpolu - Human Mistakes/mixture.wav
+530,-283.7391241182458,-3.712660746230171e-14,2.5327661378032706e+26,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Skelpolu - Human Mistakes/mixture.wav
+531,-283.2929692880423,-3.90552623954083e-14,2.285491488070975e+26,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Skelpolu - Human Mistakes/mixture.wav
+532,4.694805937878498,0.2877154029705652,0.0012479279995062501,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Skelpolu - Together Alone/mixture.wav
+533,5.112726598649292,0.20563212955393662,0.0012812556707192538,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Skelpolu - Together Alone/mixture.wav
+534,5.335261889719217,0.07162307870547611,0.0013266753755350102,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Skelpolu - Together Alone/mixture.wav
+535,5.451082276796612,0.06553691027719429,0.0013383139250567624,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Skelpolu - Together Alone/mixture.wav
+536,5.406552402340941,-0.14631131643576392,0.0013874020484804875,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Skelpolu - Together Alone/mixture.wav
+537,5.214560851608581,-0.7255730342913287,0.0015190502181126524,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Skelpolu - Together Alone/mixture.wav
+538,4.968954353738142,-1.5904703449030253,0.0017267595340870988,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Skelpolu - Together Alone/mixture.wav
+539,4.469940824796687,-0.45666823019792574,0.0020282368476160864,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Snowmine - Curfews/mixture.wav
+540,4.871874267726046,-0.4954813676482716,0.0020637246732274485,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Snowmine - Curfews/mixture.wav
+541,5.129144915232048,-0.5489746750398741,0.002115027420102553,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Snowmine - Curfews/mixture.wav
+542,5.195639965088075,-0.5781576035175094,0.002129757763897121,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Snowmine - Curfews/mixture.wav
+543,5.121643643155828,-0.8877919144332914,0.002229576083318053,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Snowmine - Curfews/mixture.wav
+544,4.931828169862672,-1.5977061518722149,0.002476172434941667,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Snowmine - Curfews/mixture.wav
+545,4.6421441397513235,-2.6183796324703366,0.0028535771678797257,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Snowmine - Curfews/mixture.wav
+546,4.894343263549124,0.18059754022894378,0.0013076307257099708,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Spike Mullings - Mike's Sulking/mixture.wav
+547,5.469482829328407,0.17855716653032788,0.001311439807858509,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Spike Mullings - Mike's Sulking/mixture.wav
+548,5.8482833017199525,0.16455197305849215,0.0013176852044899374,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Spike Mullings - Mike's Sulking/mixture.wav
+549,5.972900240022505,0.15343699829224225,0.0013224872328900061,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Spike Mullings - Mike's Sulking/mixture.wav
+550,5.896056201152216,-0.08313168941996571,0.0013764307899450906,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Spike Mullings - Mike's Sulking/mixture.wav
+551,5.676827884106713,-0.7762340313015726,0.0015430360631582731,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Spike Mullings - Mike's Sulking/mixture.wav
+552,5.323240468822678,-1.8197509728381664,0.001815149601658419,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Spike Mullings - Mike's Sulking/mixture.wav
+553,4.6808781935739505,0.44423798782373963,0.0007226919348208635,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/St Vitus - Word Gets Around/mixture.wav
+554,5.084984390345552,0.40184021216802324,0.0007393274827773176,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/St Vitus - Word Gets Around/mixture.wav
+555,5.301053713868158,0.28339123649108783,0.0007651650674093522,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/St Vitus - Word Gets Around/mixture.wav
+556,5.478708243631656,0.4553816994597156,0.000747318492905195,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/St Vitus - Word Gets Around/mixture.wav
+557,5.430425709844469,0.1707530226616276,0.000783756839241591,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/St Vitus - Word Gets Around/mixture.wav
+558,5.26451784825825,-0.5809208566065425,0.0008840305320044141,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/St Vitus - Word Gets Around/mixture.wav
+559,4.90255658223048,-1.6000681800082583,0.0010254788162742604,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/St Vitus - Word Gets Around/mixture.wav
+560,4.320343856895502,-0.3305134120987902,0.001349350922341679,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Steven Clark - Bounty/mixture.wav
+561,4.674650335951814,-0.4850169306564934,0.0014023352592173715,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Steven Clark - Bounty/mixture.wav
+562,4.85571214711638,-0.681386038366031,0.001468399363032249,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Steven Clark - Bounty/mixture.wav
+563,4.886039501988039,-0.8220439086732306,0.0015179179815983435,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Steven Clark - Bounty/mixture.wav
+564,4.82762687538966,-1.04398125691718,0.0015731794487335677,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Steven Clark - Bounty/mixture.wav
+565,4.606566401287302,-1.6205691113514975,0.0016663256819411047,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Steven Clark - Bounty/mixture.wav
+566,4.2989013104482545,-2.4222039275955094,0.0017982706063243094,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Steven Clark - Bounty/mixture.wav
+567,2.9915754317020293,-2.2289903348360744,0.0014755411880146396,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Strand Of Oaks - Spacestation/mixture.wav
+568,2.984504026384288,-2.702607476322434,0.0016168445706813872,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Strand Of Oaks - Spacestation/mixture.wav
+569,3.0750924606151497,-3.068579618697829,0.0017300717418586996,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Strand Of Oaks - Spacestation/mixture.wav
+570,3.0734661193743706,-3.3809839859331596,0.0018173198434191567,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Strand Of Oaks - Spacestation/mixture.wav
+571,3.0566733698353827,-3.6749132532755806,0.0018474858178011944,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Strand Of Oaks - Spacestation/mixture.wav
+572,2.9932157286374297,-4.096180680493381,0.0019126169527704914,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Strand Of Oaks - Spacestation/mixture.wav
+573,2.7563805414675198,-4.771029466809178,0.001975524896253269,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Strand Of Oaks - Spacestation/mixture.wav
+574,3.4358238958655307,-1.5362153405265289,0.002138863327483069,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Sweet Lights - You Let Me Down/mixture.wav
+575,3.618564618603682,-1.8030039031048564,0.0022623550595759607,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Sweet Lights - You Let Me Down/mixture.wav
+576,3.678653863512916,-2.1256292918302107,0.0024139450269744576,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Sweet Lights - You Let Me Down/mixture.wav
+577,3.6833133079966767,-2.3445660344535324,0.0025225823222573395,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Sweet Lights - You Let Me Down/mixture.wav
+578,3.66861385479949,-2.5044430758158476,0.002576117376189442,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Sweet Lights - You Let Me Down/mixture.wav
+579,3.4318628807344584,-2.8542837715294898,0.002519577596543667,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Sweet Lights - You Let Me Down/mixture.wav
+580,3.341877668775916,-3.285253182397025,0.002608846909087629,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Sweet Lights - You Let Me Down/mixture.wav
+581,-279.9652442736814,-2.2661695464002304e-14,5.275838695579623e+25,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Swinging Steaks - Lost My Way/mixture.wav
+582,-282.35122235599476,-1.3982748265022685e-14,9.138803032097865e+25,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Swinging Steaks - Lost My Way/mixture.wav
+583,-284.0522316533069,-4.3394735994897936e-15,1.3520421994039258e+26,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Swinging Steaks - Lost My Way/mixture.wav
+584,-284.23728416240056,9.64327466553287e-16,1.4108976098803872e+26,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Swinging Steaks - Lost My Way/mixture.wav
+585,-284.0978931464551,-1.4464911998299308e-15,1.36633249194707e+26,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Swinging Steaks - Lost My Way/mixture.wav
+586,-284.08337250271114,-7.232455999149659e-15,1.361771785438542e+26,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Swinging Steaks - Lost My Way/mixture.wav
+587,-283.1405785527857,-8.196783465702948e-15,1.0960362971185716e+26,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Swinging Steaks - Lost My Way/mixture.wav
+588,-288.443493407671,-2.459035039710889e-14,4.4734748511982094e+26,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/The Districts - Vermont/mixture.wav
+589,-291.1270666134577,-1.3018420798469397e-14,8.29855202049692e+26,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/The Districts - Vermont/mixture.wav
+590,-292.3384877535842,-1.2054093331916106e-14,1.0968429162336025e+27,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/The Districts - Vermont/mixture.wav
+591,-293.2468187376777,-7.714619732426303e-15,1.3520026199270066e+27,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/The Districts - Vermont/mixture.wav
+592,-293.91039274535626,-8.196783465702948e-15,1.575197210181264e+27,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/The Districts - Vermont/mixture.wav
+593,-294.3777196363131,-8.196783465702948e-15,1.7541536160300528e+27,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/The Districts - Vermont/mixture.wav
+594,-294.70138252049804,-5.785964799319726e-15,1.889878618036122e+27,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/The Districts - Vermont/mixture.wav
+595,-275.3526152198118,9.64327466553286e-15,1.7516862882013887e+25,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/The Long Wait - Back Home To Blue/mixture.wav
+596,-277.16917503750614,-5.785964799319726e-15,2.661413234598609e+25,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/The Long Wait - Back Home To Blue/mixture.wav
+597,-278.565763813778,-6.268128532596371e-15,3.6708884698305254e+25,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/The Long Wait - Back Home To Blue/mixture.wav
+598,-279.2512642984243,-1.639356693140591e-14,4.298542631555965e+25,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/The Long Wait - Back Home To Blue/mixture.wav
+599,-278.79847553196515,-8.678947198979593e-15,3.872954203723558e+25,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/The Long Wait - Back Home To Blue/mixture.wav
+600,-277.8994341742505,-6.750292265873015e-15,3.1487503289034334e+25,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/The Long Wait - Back Home To Blue/mixture.wav
+601,-276.5925425313542,-9.643274665532882e-15,2.3304997548316614e+25,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/The Long Wait - Back Home To Blue/mixture.wav
+602,4.130005669439519,-0.3913058062261262,0.0009246333449452099,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/The Scarlet Brand - Les Fleurs Du Mal/mixture.wav
+603,4.574979888193514,-0.46137610981196703,0.0009383128984304689,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/The Scarlet Brand - Les Fleurs Du Mal/mixture.wav
+604,4.8697195952138586,-0.5274623870181909,0.0009548857523772278,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/The Scarlet Brand - Les Fleurs Du Mal/mixture.wav
+605,4.947006147284488,-0.5753760442420185,0.0009665302041567973,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/The Scarlet Brand - Les Fleurs Du Mal/mixture.wav
+606,4.909539826288471,-0.49931597577810083,0.0009462629086997264,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/The Scarlet Brand - Les Fleurs Du Mal/mixture.wav
+607,4.8293028853240845,-0.7379791951332187,0.0009701199808494629,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/The Scarlet Brand - Les Fleurs Du Mal/mixture.wav
+608,4.652191575847576,-1.4136313987118436,0.001063173894579095,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/The Scarlet Brand - Les Fleurs Du Mal/mixture.wav
+609,4.0790260739899225,-0.7470504661361883,0.0015294641630623335,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/The So So Glos - Emergency/mixture.wav
+610,4.4324337482611496,-0.8765669817539691,0.001578972714610726,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/The So So Glos - Emergency/mixture.wav
+611,4.626114045213383,-1.0420574485093228,0.0016400228077871884,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/The So So Glos - Emergency/mixture.wav
+612,4.667682873420011,-1.1712841823083089,0.0016887363965941995,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/The So So Glos - Emergency/mixture.wav
+613,4.626989581850935,-1.3373047326876981,0.0017284803989010842,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/The So So Glos - Emergency/mixture.wav
+614,4.354070196499633,-1.9295717597725026,0.0017978397293033428,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/The So So Glos - Emergency/mixture.wav
+615,4.169391774027227,-2.6419061886240174,0.001962805339246803,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/The So So Glos - Emergency/mixture.wav
+616,-286.4236514320903,2.2179531730725548e-14,1.86477428452653e+26,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/The Wrong'Uns - Rothko/mixture.wav
+617,-288.6259046702584,9.64327466553286e-15,3.096361047780234e+26,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/The Wrong'Uns - Rothko/mixture.wav
+618,-290.2761295983149,9.64327466553287e-16,4.527662936771974e+26,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/The Wrong'Uns - Rothko/mixture.wav
+619,-289.86458659924745,0.0,4.118317148813155e+26,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/The Wrong'Uns - Rothko/mixture.wav
+620,-289.6359275712965,0.0,3.907094229797483e+26,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/The Wrong'Uns - Rothko/mixture.wav
+621,-289.2569356995385,9.64327466553287e-16,3.580590856652117e+26,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/The Wrong'Uns - Rothko/mixture.wav
+622,-288.71571298708096,-3.85730986621315e-15,3.161057727812437e+26,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/The Wrong'Uns - Rothko/mixture.wav
+623,4.713762810290081,0.11101485987267594,0.0009036565820317443,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Tim Taler - Stalker/mixture.wav
+624,5.239768288937113,0.07587986871777148,0.0009201279948247979,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Tim Taler - Stalker/mixture.wav
+625,5.551545757990129,0.022478001917997353,0.0009340896329138019,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Tim Taler - Stalker/mixture.wav
+626,5.655204561779824,-0.000869400423475206,0.0009416484503392001,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Tim Taler - Stalker/mixture.wav
+627,5.60056191074057,-0.19715790467310315,0.0009720533196327329,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Tim Taler - Stalker/mixture.wav
+628,5.392865314187256,-0.8272213685980155,0.0010742173576438058,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Tim Taler - Stalker/mixture.wav
+629,5.089584156707606,-1.76807509313475,0.001237629439396128,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Tim Taler - Stalker/mixture.wav
+630,-281.528468390626,2.6036841596938673e-14,6.507532005638588e+25,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Titanium - Haunted Age/mixture.wav
+631,-282.92772870741464,1.8322221864512416e-14,8.981364960415329e+25,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Titanium - Haunted Age/mixture.wav
+632,-284.0281235909422,2.2179531730725548e-14,1.1571291459075987e+26,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Titanium - Haunted Age/mixture.wav
+633,-284.66290047405056,2.507251413038539e-14,1.339243419478097e+26,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Titanium - Haunted Age/mixture.wav
+634,-284.4616845275768,2.7001169063491955e-14,1.2786094986864941e+26,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Titanium - Haunted Age/mixture.wav
+635,-283.7610021339702,1.7357894397959133e-14,1.0881021967435179e+26,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Titanium - Haunted Age/mixture.wav
+636,-282.17557588120565,1.92865493310657e-14,7.553131777962916e+25,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Titanium - Haunted Age/mixture.wav
+637,4.923921192877993,0.670381117814099,0.0012841562973421531,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Traffic Experiment - Once More (With Feeling)/mixture.wav
+638,5.365643247397502,0.643152289055541,0.0013091993591281311,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Traffic Experiment - Once More (With Feeling)/mixture.wav
+639,5.602366146832429,0.5468240105361221,0.001348474594997599,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Traffic Experiment - Once More (With Feeling)/mixture.wav
+640,5.81465139232848,0.7012786903423752,0.001320612063917692,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Traffic Experiment - Once More (With Feeling)/mixture.wav
+641,5.761233781862214,0.44024974806572525,0.0013811099796761349,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Traffic Experiment - Once More (With Feeling)/mixture.wav
+642,5.485406683583304,-0.25768638581768677,0.0015452125977106657,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Traffic Experiment - Once More (With Feeling)/mixture.wav
+643,5.214941978982374,-1.1860271459585467,0.0017792269524821763,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Traffic Experiment - Once More (With Feeling)/mixture.wav
+644,3.6902597432827906,-0.7284518519572567,0.0013496497150405412,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Traffic Experiment - Sirens/mixture.wav
+645,4.005677718313795,-0.9109784349646101,0.0014227855219586126,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Traffic Experiment - Sirens/mixture.wav
+646,4.154057271525277,-1.141627955559309,0.001498149886844199,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Traffic Experiment - Sirens/mixture.wav
+647,4.256341442990714,-1.180326338670762,0.0015217547250914545,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Traffic Experiment - Sirens/mixture.wav
+648,4.232105818383514,-1.3038478120770771,0.0015486385746461943,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Traffic Experiment - Sirens/mixture.wav
+649,4.103212610438827,-1.7636931648641327,0.0016468040746747538,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Traffic Experiment - Sirens/mixture.wav
+650,3.694870468062633,-2.5015003336421704,0.0016758309899322914,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Traffic Experiment - Sirens/mixture.wav
+651,4.59220926716077,-0.14264082965711428,0.0011376789710041155,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Triviul - Angelsaint/mixture.wav
+652,5.069786350397054,-0.21568246796155033,0.0011579274922494634,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Triviul - Angelsaint/mixture.wav
+653,5.359227575295592,-0.3057334492027964,0.0011824699580056707,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Triviul - Angelsaint/mixture.wav
+654,5.430389168248287,-0.381126409016032,0.001203833372907517,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Triviul - Angelsaint/mixture.wav
+655,5.378475989648952,-0.5587890099251313,0.0012387812316885247,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Triviul - Angelsaint/mixture.wav
+656,5.218743030841271,-1.133428418216738,0.0013549449247367597,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Triviul - Angelsaint/mixture.wav
+657,4.885772480795902,-1.9471949698343516,0.0014949163651036203,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Triviul - Angelsaint/mixture.wav
+658,4.808972074727977,0.056231035047568996,0.0005597831849725261,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Triviul - Dorothy/mixture.wav
+659,5.390117788237957,0.048885647921926,0.0005615971336277658,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Triviul - Dorothy/mixture.wav
+660,5.782828346255516,0.03301745800282822,0.0005641917666993242,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Triviul - Dorothy/mixture.wav
+661,5.921795635729986,0.015684460876613442,0.0005667381269652184,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Triviul - Dorothy/mixture.wav
+662,5.851340241953969,-0.24429129193735574,0.0005922168433066954,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Triviul - Dorothy/mixture.wav
+663,5.640687896106806,-0.9877708085265434,0.0006691468402676036,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Triviul - Dorothy/mixture.wav
+664,5.30101994631908,-2.09013708505649,0.0007930177469592189,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Triviul - Dorothy/mixture.wav
+665,4.417141878958299,-0.2917937826027984,0.001323927745785588,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Voelund - Comfort Lives In Belief/mixture.wav
+666,4.8385121660350645,-0.3718902875822628,0.0013552725162122381,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Voelund - Comfort Lives In Belief/mixture.wav
+667,5.084579982790112,-0.48984255843497215,0.0013959492115267682,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Voelund - Comfort Lives In Belief/mixture.wav
+668,5.158406099270847,-0.5637626874069384,0.0014225668093687074,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Voelund - Comfort Lives In Belief/mixture.wav
+669,5.095670987714854,-0.8209515075432632,0.001482405324092759,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Voelund - Comfort Lives In Belief/mixture.wav
+670,4.939752178033425,-1.4668056800777824,0.0016351842319592895,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Voelund - Comfort Lives In Belief/mixture.wav
+671,4.687567020565549,-2.4250934044759753,0.0018740682026223278,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Voelund - Comfort Lives In Belief/mixture.wav
+672,4.134844763332493,-0.6333789146198852,0.002268014451160516,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Wall Of Death - Femme/mixture.wav
+673,4.445899966828517,-0.796702289381632,0.002362885104958837,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Wall Of Death - Femme/mixture.wav
+674,4.5945918217388115,-1.0088157342442836,0.0024812097959532355,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Wall Of Death - Femme/mixture.wav
+675,4.623752428040163,-1.1514942287049044,0.002563817493223794,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Wall Of Death - Femme/mixture.wav
+676,4.592096630831236,-1.37960776882895,0.002654715925810017,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Wall Of Death - Femme/mixture.wav
+677,4.473310962837751,-1.9942516331516176,0.002903388941557765,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Wall Of Death - Femme/mixture.wav
+678,4.03468103353845,-2.9646858446997655,0.0030719123615245213,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Wall Of Death - Femme/mixture.wav
+679,4.945395559785896,0.35943429762662793,0.0010787790964963918,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Young Griffo - Blood To Bone/mixture.wav
+680,5.503594963306501,0.3823279655858284,0.0010814669825218186,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Young Griffo - Blood To Bone/mixture.wav
+681,5.866269417495418,0.37095791612513945,0.0010894128711243902,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Young Griffo - Blood To Bone/mixture.wav
+682,6.010918622431626,0.38364438649640886,0.0010899561886266755,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Young Griffo - Blood To Bone/mixture.wav
+683,5.9246095434094,0.09478271357855735,0.0011446044532226712,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Young Griffo - Blood To Bone/mixture.wav
+684,5.713237760321154,-0.6364526318600705,0.0012908517214491688,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Young Griffo - Blood To Bone/mixture.wav
+685,5.352648060644894,-1.700547043314131,0.0015216073020130239,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Young Griffo - Blood To Bone/mixture.wav
+686,4.85400571927908,0.9261090323472829,0.0008926372524740846,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Young Griffo - Facade/mixture.wav
+687,5.672845580322799,0.9962456093038708,0.0008705642918157696,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Young Griffo - Facade/mixture.wav
+688,6.059505226995001,1.0083283906443774,0.0008749125050307804,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Young Griffo - Facade/mixture.wav
+689,6.315735468839706,1.1555706950528966,0.000855096158826849,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Young Griffo - Facade/mixture.wav
+690,6.256156970336876,0.8593270419250315,0.0009002334990336969,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Young Griffo - Facade/mixture.wav
+691,6.051216627358875,0.055802598192462506,0.0010314709409220552,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Young Griffo - Facade/mixture.wav
+692,5.668234633641048,-1.1118485562618403,0.0012406900978549327,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Young Griffo - Facade/mixture.wav
+693,4.742144766527585,0.24017947825284458,0.0012421033750973337,0.0,-45.0,-45.0,/home/kwatchar3/data/musdb18hq/train/Young Griffo - Pennies/mixture.wav
+694,5.276637967650116,0.21031817244757461,0.0012556170004755023,0.0,-30.0,-30.0,/home/kwatchar3/data/musdb18hq/train/Young Griffo - Pennies/mixture.wav
+695,5.620547858125199,0.15622655471933564,0.0012744071396762022,0.0,-15.0,-15.0,/home/kwatchar3/data/musdb18hq/train/Young Griffo - Pennies/mixture.wav
+696,5.749545748978907,0.13562957783987725,0.0012842005552766995,0.0,0.0,0.0,/home/kwatchar3/data/musdb18hq/train/Young Griffo - Pennies/mixture.wav
+697,5.708372342091927,-0.009833030379173676,0.001314822041579901,0.0,15.0,15.0,/home/kwatchar3/data/musdb18hq/train/Young Griffo - Pennies/mixture.wav
+698,5.542891670772429,-0.6338512371073901,0.0014553141193290617,0.0,30.0,30.0,/home/kwatchar3/data/musdb18hq/train/Young Griffo - Pennies/mixture.wav
+699,5.254491921566002,-1.6395960242245569,0.0016998765896686545,0.0,45.0,45.0,/home/kwatchar3/data/musdb18hq/train/Young Griffo - Pennies/mixture.wav

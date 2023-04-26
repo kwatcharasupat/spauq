@@ -1,0 +1,86 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+
+orbs:
+  codecov: codecov/codecov@3.2.4
+
+jobs:
+  build-test:
+    parameters:
+      python-ver: 
+        type: string
+      extras:
+        type: string
+    docker:
+      - image: cimg/python:<< parameters.python-ver >>
+    steps:
+      - checkout
+      - restore_cache:
+          key: deps<< parameters.python-ver >>-{{ .Branch }}-{{ checksum "setup.cfg" }}
+      - run:
+          name: Install dependencies
+          command: |
+            python -m venv venv<< parameters.python-ver >>
+            . venv<< parameters.python-ver >>/bin/activate
+            pip install --upgrade pip
+            pip install .[<< parameters.extras >>]
+      - run:
+          name: Run tests
+          command: |
+            . venv<< parameters.python-ver >>/bin/activate
+            pytest -n 2 tests/ --cov=spauq --cov-report=xml
+      - save_cache:
+          key: deps<< parameters.python-ver >>-{{ .Branch }}-{{ checksum "setup.cfg" }}
+          paths:
+            - "venv<< parameters.python-ver >>"
+      - codecov/upload:
+          file: coverage.xml
+
+  publish_testpypi:
+    docker:
+      - image: cimg/python:3.8
+    steps:
+      - checkout
+      - run:
+          name: init .pypirc
+          command: |
+            echo -e "[testpypi]" >> ~/.pypirc
+            echo -e "username = __token__" >> ~/.pypirc
+            echo -e "password = $TESTPYPI_API" >> ~/.pypirc
+      - run:
+          name: Publish to TestPyPI
+          command: |
+            pip install --upgrade pip
+            pip install twine build
+            python -m build --sdist --wheel
+            twine check dist/*
+            twine upload --skip-existing --repository testpypi dist/*
+  publish_pypi:
+    docker:
+      - image: cimg/python:3.8
+    steps:
+      - checkout
+      - run:
+          name: init .pypirc
+          command: |
+            echo -e "[pypi]" >> ~/.pypirc
+            echo -e "username = __token__" >> ~/.pypirc
+            echo -e "password = $PYPI_API" >> ~/.pypirc
+      - run:
+          name: Publish to TestPyPI
+          command: |
+            pip install --upgrade pip
+            pip install twine build
+            python -m build --sdist --wheel
+            twine check dist/*
+            twine upload --repository pypi dist/*
+            
+workflows:
+  build-test:
+    jobs:
+      - build-test:
+          matrix:
+            parameters:
+              python-ver: ["3.7", "3.8", "3.9", "3.10"]
+              extras: ["tests"]

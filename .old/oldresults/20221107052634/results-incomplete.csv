@@ -1,0 +1,11 @@
+,spr/num,sfr/num,true_angle,est_angle,est_deviation,file
+0,2.323,143.503,-45.0,-90.0,-45.0,/home/kwatchar3/data/timit/timit/train/dr1/fcjf0/sa1.wav
+1,5.719,164.438,-45.0,-75.0,-30.0,/home/kwatchar3/data/timit/timit/train/dr1/fcjf0/sa1.wav
+2,11.665,162.46,-45.0,-60.0,-15.0,/home/kwatchar3/data/timit/timit/train/dr1/fcjf0/sa1.wav
+3,309.101,309.101,-45.0,-45.0,0.0,/home/kwatchar3/data/timit/timit/train/dr1/fcjf0/sa1.wav
+4,11.665,162.71,-45.0,-30.0,15.0,/home/kwatchar3/data/timit/timit/train/dr1/fcjf0/sa1.wav
+5,5.719,170.965,-45.0,-15.0,30.0,/home/kwatchar3/data/timit/timit/train/dr1/fcjf0/sa1.wav
+6,2.323,140.443,-45.0,0.0,45.0,/home/kwatchar3/data/timit/timit/train/dr1/fcjf0/sa1.wav
+7,2.323,145.668,-30.0,-75.0,-45.0,/home/kwatchar3/data/timit/timit/train/dr1/fcjf0/sa1.wav
+8,5.719,166.895,-30.0,-60.0,-30.0,/home/kwatchar3/data/timit/timit/train/dr1/fcjf0/sa1.wav
+9,11.665,161.537,-30.0,-45.0,-15.0,/home/kwatchar3/data/timit/timit/train/dr1/fcjf0/sa1.wav
