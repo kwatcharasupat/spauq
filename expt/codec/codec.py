@@ -50,26 +50,29 @@ def mp3(cbr, mode, *, dataset, audio_glob=None, output_path=None, q=3):
             audio_glob = os.path.join(_StarssInputBase, _StarssInputGlob)
         else:
             raise ValueError(f"Unknown dataset: {dataset}")
-        
+
     if dataset == "musdb":
         input_base = _MusdbInputBase
     elif dataset == "starss":
         input_base = _StarssInputBase
     else:
         raise ValueError(f"Unknown dataset: {dataset}")
-        
+
     audio_files = sorted(glob.glob(audio_glob, recursive=False))
     print(f"Found {len(audio_files)} audio files")
     print(audio_files)
-    mp3_files = [f.replace(input_base, mp3_output_path).replace(".wav", ".mp3") for f in audio_files]
+    mp3_files = [
+        f.replace(input_base, mp3_output_path).replace(".wav", ".mp3")
+        for f in audio_files
+    ]
     wav_files = [f.replace(input_base, wav_output_path) for f in audio_files]
 
     for a, m, w in tqdm(zip(audio_files, mp3_files, wav_files), total=len(audio_files)):
         os.makedirs(os.path.dirname(m), exist_ok=True)
         os.makedirs(os.path.dirname(w), exist_ok=True)
-        ecmd = " ".join(encode_command + [f"\"{a}\"", f"\"{m}\""])
+        ecmd = " ".join(encode_command + [f'"{a}"', f'"{m}"'])
         print(ecmd)
-        dcmd = " ".join(decode_command + [f"\"{m}\"", f"\"{w}\""])
+        dcmd = " ".join(decode_command + [f'"{m}"', f'"{w}"'])
         print(dcmd)
         out = subprocess.run(ecmd, capture_output=True, shell=True)
         if out.returncode != 0:
@@ -85,7 +88,8 @@ def mp3(cbr, mode, *, dataset, audio_glob=None, output_path=None, q=3):
             print(out.stderr)
             print(out.stdout)
             raise RuntimeError("Decoding failed")
-        
+
+
 def opus(cbr, comp, *, dataset, audio_glob=None, output_path=None):
     encode_command = [
         "opusenc",
@@ -124,19 +128,24 @@ def opus(cbr, comp, *, dataset, audio_glob=None, output_path=None):
         input_base = _StarssInputBase
     else:
         raise ValueError(f"Unknown dataset: {dataset}")
-        
+
     audio_files = sorted(glob.glob(audio_glob, recursive=False))
     print(f"Found {len(audio_files)} audio files")
     print(audio_files)
-    opus_files = [f.replace(input_base, opus_output_path).replace(".wav", ".opus") for f in audio_files]
+    opus_files = [
+        f.replace(input_base, opus_output_path).replace(".wav", ".opus")
+        for f in audio_files
+    ]
     wav_files = [f.replace(input_base, wav_output_path) for f in audio_files]
 
-    for a, m, w in tqdm(zip(audio_files, opus_files, wav_files), total=len(audio_files)):
+    for a, m, w in tqdm(
+        zip(audio_files, opus_files, wav_files), total=len(audio_files)
+    ):
         os.makedirs(os.path.dirname(m), exist_ok=True)
         os.makedirs(os.path.dirname(w), exist_ok=True)
-        ecmd = " ".join(encode_command + [f"\"{a}\"", f"\"{m}\""])
+        ecmd = " ".join(encode_command + [f'"{a}"', f'"{m}"'])
         print(ecmd)
-        dcmd = " ".join(decode_command + [f"\"{m}\"", f"\"{w}\""])
+        dcmd = " ".join(decode_command + [f'"{m}"', f'"{w}"'])
         print(dcmd)
         out = subprocess.run(ecmd, capture_output=True, shell=True)
         if out.returncode != 0:
@@ -152,6 +161,7 @@ def opus(cbr, comp, *, dataset, audio_glob=None, output_path=None):
             print(out.stderr)
             print(out.stdout)
             raise RuntimeError("Decoding failed")
+
 
 def aac(abr, mode, *, dataset, audio_glob=None, output_path=None, q=100):
     assert mode in [0, 1, 2]
@@ -189,26 +199,29 @@ def aac(abr, mode, *, dataset, audio_glob=None, output_path=None, q=100):
             audio_glob = os.path.join(_StarssInputBase, _StarssInputGlob)
         else:
             raise ValueError(f"Unknown dataset: {dataset}")
-        
+
     if dataset == "musdb":
         input_base = _MusdbInputBase
     elif dataset == "starss":
         input_base = _StarssInputBase
     else:
         raise ValueError(f"Unknown dataset: {dataset}")
-        
+
     audio_files = sorted(glob.glob(audio_glob, recursive=False))
     print(f"Found {len(audio_files)} audio files")
     print(audio_files)
-    aac_files = [f.replace(input_base, aac_output_path).replace(".wav", ".aac") for f in audio_files]
+    aac_files = [
+        f.replace(input_base, aac_output_path).replace(".wav", ".aac")
+        for f in audio_files
+    ]
     wav_files = [f.replace(input_base, wav_output_path) for f in audio_files]
 
     for a, m, w in tqdm(zip(audio_files, aac_files, wav_files), total=len(audio_files)):
         os.makedirs(os.path.dirname(m), exist_ok=True)
         os.makedirs(os.path.dirname(w), exist_ok=True)
-        ecmd = " ".join(encode_command + [f"-o \"{m}\"", f"\"{a}\""])
+        ecmd = " ".join(encode_command + [f'-o "{m}"', f'"{a}"'])
         print(ecmd)
-        dcmd = " ".join(decode_command + [f"-o \"{w}\"", f"\"{m}\""])
+        dcmd = " ".join(decode_command + [f'-o "{w}"', f'"{m}"'])
         print(dcmd)
         out = subprocess.run(ecmd, capture_output=True, shell=True)
         if out.returncode != 0:
@@ -224,14 +237,20 @@ def aac(abr, mode, *, dataset, audio_glob=None, output_path=None, q=100):
             print(out.stderr)
             print(out.stdout)
             raise RuntimeError("Decoding failed")
-        
-    
+
+
 def mp3_multiple(dataset, audio_glob=None, output_path=None):
     modes = ["j", "s", "f"]
-    cbrs = [160, 192, 224] #[32, 40, 48, 56, 64, 80, 96, 112, 128, 256, 320]
+    cbrs = [160, 192, 224]  # [32, 40, 48, 56, 64, 80, 96, 112, 128, 256, 320]
     for cbr in cbrs:
         for mode in modes:
-            mp3(cbr, mode, dataset=dataset, audio_glob=audio_glob, output_path=output_path)
+            mp3(
+                cbr,
+                mode,
+                dataset=dataset,
+                audio_glob=audio_glob,
+                output_path=output_path,
+            )
 
 
 def aac_multiple(dataset, audio_glob=None, output_path=None):
@@ -239,15 +258,30 @@ def aac_multiple(dataset, audio_glob=None, output_path=None):
     cbrs = [32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320]
     for cbr in cbrs:
         for mode in modes:
-            aac(cbr, mode, dataset=dataset, audio_glob=audio_glob, output_path=output_path)
+            aac(
+                cbr,
+                mode,
+                dataset=dataset,
+                audio_glob=audio_glob,
+                output_path=output_path,
+            )
+
 
 def opus_multiple(dataset, audio_glob=None, output_path=None):
     cbrs = [32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320]
     comps = [0]
     for cbr in cbrs:
         for comp in comps:
-            opus(cbr, comp, dataset=dataset, audio_glob=audio_glob, output_path=output_path)
+            opus(
+                cbr,
+                comp,
+                dataset=dataset,
+                audio_glob=audio_glob,
+                output_path=output_path,
+            )
+
 
 if __name__ == "__main__":
     import fire
+
     fire.Fire()

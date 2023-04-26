@@ -204,7 +204,6 @@ def _compute_framewise_projection(
     max_shift_samples: Optional[int] = None,
 ):
 
-
     ref_shifted, ref_proj, est_proj, shift = _project_shift(
         reference, estimate, max_shift_samples=max_shift_samples
     )
@@ -239,7 +238,6 @@ def compute_projection(
         reference, estimate, forgive_mode=forgive_mode
     )
 
-
     if max_segment_shift_seconds is None:
         max_segment_shift_seconds = _DefaultMaximumSegmentShiftSeconds
 
@@ -256,7 +254,6 @@ def compute_projection(
         scale_mode=scale_mode,
         verbose=verbose,
     )
-
 
     n_chan = reference.shape[-2]
 

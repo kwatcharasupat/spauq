@@ -18,6 +18,7 @@ _EstimatePathFormat = "/home/kwatchar3/spauq-home/data/{dataset}/{codec}/{settin
 MUSDB_FS = 44100
 STARSS_FS = 24000
 
+
 def evaluate_one(inputs):
     r, e = inputs
     filename = r.split("/")[-2]
@@ -46,8 +47,10 @@ def evaluate_one(inputs):
         raise ValueError("Bad!")
         return None
 
+
 def evaluate_musdb(
-    codec, setting,
+    codec,
+    setting,
     estimate_path=None,
     reference_path="/home/kwatchar3/spauq-home/data/musdb-hq/raw/musdb18hq/test",
     output_path="/home/kwatchar3/spauq-home/spauq/expt/codec/musdb/results-2s",
@@ -56,13 +59,17 @@ def evaluate_musdb(
 ):
 
     if estimate_path is None:
-        estimate_path = _EstimatePathFormat.format(dataset="musdb", codec=codec, setting=setting)
+        estimate_path = _EstimatePathFormat.format(
+            dataset="musdb", codec=codec, setting=setting
+        )
 
     data = defaultdict(dict)
 
     for s in sources:
         print("Evaluating", s)
-        ref = sorted(glob.glob(os.path.join(reference_path, "**", f"{s}.wav"), recursive=True))
+        ref = sorted(
+            glob.glob(os.path.join(reference_path, "**", f"{s}.wav"), recursive=True)
+        )
         est = [r.replace(reference_path, estimate_path) for r in ref]
 
         fnmetrics = process_map(
@@ -90,8 +97,10 @@ def evaluate_musdb(
     df.to_csv(os.path.join(output_path, codec, f"{codec}-{setting}.csv"))
     print(df[["SSR", "SRR"]].describe())
 
+
 def evaluate_starss(
-    codec, setting,
+    codec,
+    setting,
     estimate_path=None,
     reference_path="/home/kwatchar3/data/starss/mic_eval",
     output_path="/home/kwatchar3/spauq-home/spauq/expt/codec/starss/results-2s",
@@ -99,13 +108,17 @@ def evaluate_starss(
     fs=STARSS_FS,
 ):
     if estimate_path is None:
-        estimate_path = _EstimatePathFormat.format(dataset="starss", codec=codec, setting=setting)
+        estimate_path = _EstimatePathFormat.format(
+            dataset="starss", codec=codec, setting=setting
+        )
 
     data = defaultdict(dict)
 
     for s in sources:
         print("Evaluating", s)
-        ref = sorted(glob.glob(os.path.join(reference_path, "**", f"{s}.wav"), recursive=True))
+        ref = sorted(
+            glob.glob(os.path.join(reference_path, "**", f"{s}.wav"), recursive=True)
+        )
         est = [r.replace(reference_path, estimate_path) for r in ref]
 
         fnmetrics = process_map(
@@ -133,10 +146,15 @@ def evaluate_starss(
     df.to_csv(os.path.join(output_path, codec, f"{codec}-{setting}.csv"))
     print(df[["SSR", "SRR"]].describe())
 
-def evaluate_all(dataset, codec):
-    settings = sorted(glob.glob(f"/home/kwatchar3/spauq-home/data/{dataset}/{codec}/*", recursive=False))
 
-    for setting in tqdm(settings): 
+def evaluate_all(dataset, codec):
+    settings = sorted(
+        glob.glob(
+            f"/home/kwatchar3/spauq-home/data/{dataset}/{codec}/*", recursive=False
+        )
+    )
+
+    for setting in tqdm(settings):
         setting = setting.split("/")[-1]
         print(setting)
         csv = f"/home/kwatchar3/spauq-home/spauq/expt/codec/{dataset}/results-2s/{codec}/{codec}-{setting}.csv"

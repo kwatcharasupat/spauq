@@ -1,8 +1,16 @@
 import typing
 import warnings
+import math
 import numpy as np
 import numpy.typing as npt
-from typing import Literal, Optional, Tuple
+from typing import Optional, Tuple, Union
+
+# for python 3.7 compatibility
+try:
+    from typing import Literal
+except ImportError:  # pragma: no cover
+    from typing_extensions import Literal
+
 from scipy import signal as sps
 
 from .utils import root_mean_square
@@ -19,6 +27,17 @@ _ScaleDefault = "equal_rms"
 
 
 def _validate_input(signal: np.ndarray) -> None:
+    """
+    Validate that a signal has at least 2 dimensions and that there are at least 2 channels.
+
+    Parameters
+    ----------
+    signal : np.ndarray, (*, n_chan, n_sampl)
+
+    Raises
+    ------
+    AssertionError
+    """
     assert signal.ndim >= 2, "Signal must be at least 2-dimensional"
 
     n_chan, _ = signal.shape[-2:]
@@ -32,12 +51,24 @@ def _validate_inputs(
     *,
     forgive_mode: Optional[_ForgiveType] = None,
 ) -> Tuple[np.ndarray, np.ndarray]:
-    """Validate input signal.
+    """Validate that a reference and an estimate have the same batch shape and the same number of channels.
+    Convert the inputs to numpy arrays if necessary. For now, also validate that the number of samples is equal.
 
-    Checks that
-        - the input signal is at least 2-dimensional
-        - the last axis is the time axis
-        - the second last axis is the channel axis
+    Parameters
+    ----------
+    reference : np.typing.ArrayLike, (*, n_chan, n_sampl)
+    estimate : np.typing.ArrayLike, (*, n_chan, n_sampl)
+
+    Raises
+    ------
+    AssertionError
+    NotImplementedError
+
+    Returns
+    -------
+    reference : np.ndarray, (*, n_chan, n_sampl)
+    estimate : np.ndarray, (*, n_chan, n_sampl)
+
     """
     reference = np.asarray(reference)
     estimate = np.asarray(estimate)
@@ -47,8 +78,6 @@ def _validate_inputs(
 
     shape_r = reference.shape
     shape_e = estimate.shape
-
-    # print(shape_r, shape_e)
 
     n_chan_r, n_sampl_r = shape_r[-2:]
     n_chan_e, n_sampl_e = shape_e[-2:]
@@ -65,18 +94,18 @@ def _validate_inputs(
             "Shifting for unequal sample lengths is not implemented yet."
         )
 
-        if forgive_mode is None:
-            forgive_mode = _ForgiveDefault
+        # if forgive_mode is None:
+        #     forgive_mode = _ForgiveDefault
 
-        if forgive_mode in ["shift", "both"]:
-            warnings.warn(
-                "Numbers of samples are not equal. Shifting estimate to match reference.",
-                UserWarning,
-            )
-        else:
-            raise ValueError(
-                "Number of samples is not equal. Set `forgive_mode` to `shift` or `both` to allow shifting."
-            )
+        # if forgive_mode in ["shift", "both"]:
+        #     warnings.warn(
+        #         "Numbers of samples are not equal. Shifting estimate to match reference.",
+        #         UserWarning,
+        #     )
+        # else:
+        #     raise ValueError(
+        #         "Number of samples is not equal. Set `forgive_mode` to `shift` or `both` to allow shifting."
+        #     )
 
     return reference, estimate
 
@@ -87,14 +116,37 @@ def _compute_optimal_shift(
     *,
     use_diag_only: bool = True,
     max_shift_samples: Optional[int] = None,
-) -> Tuple[np.ndarray, np.ndarray]:
+) -> Union[int, np.ndarray]:
+
+    """
+    Compute the optimal global shift between a reference and an estimate.
+    Currently only works for 2D arrays.
+
+    Parameters
+    ----------
+    reference : np.ndarray, (*, n_chan, n_sampl)
+    estimate : np.ndarray, (*, n_chan, n_sampl)
+    use_diag_only : bool, optional
+        Only use the diagonal of the cross-correlation matrix, by default True
+    max_shift_samples : int, optional
+        Maximum number of samples to shift, by default None
+
+    Returns
+    -------
+    Union[int, np.ndarray]
+        Optimal shift in samples. If `reference` and `estimate` are 2D arrays, the optimal shift is a scalar. If they are higher-dimensional, the optimal shift is an array of shape `reference.shape[:-1]`.
+    """
+
     n_chan, n_sampl_r = reference.shape[-2:]
     _, n_sampl_e = estimate.shape[-2:]
+
+    if max_shift_samples is None:
+        max_shift_samples = np.inf
 
     xclags = sps.correlation_lags(n_sampl_r, n_sampl_e, mode="full")
     n_lags = (
         int(max_shift_samples) * 2 + 1
-        if np.isfinite(max_shift_samples)
+        if math.isfinite(max_shift_samples)
         else len(xclags)
     )
 
@@ -108,7 +160,7 @@ def _compute_optimal_shift(
                     reference[i], estimate[j], mode="full", method="fft"
                 )
 
-                if np.isfinite(max_shift_samples):
+                if math.isfinite(max_shift_samples):
                     xcf = xcf[np.abs(xclags) <= max_shift_samples]
                 xcvals[i, j] = xcf
         xcvals = np.abs(
@@ -121,6 +173,7 @@ def _compute_optimal_shift(
             )
         )
         # use mean for stability
+
         xclags = xclags[np.abs(xclags) <= max_shift_samples]
         best_lag = xclags[np.argmax(xcvals, axis=-1)]
     else:
@@ -132,18 +185,23 @@ def _compute_optimal_shift(
 def _apply_shift(
     reference: np.ndarray,
     estimate: np.ndarray,
-    best_lag: np.ndarray,
+    best_lag: Union[int, np.ndarray],
     *,
-    align_mode: _AlignType,
+    align_mode: _AlignType = _AlignDefault,
 ) -> Tuple[np.ndarray, np.ndarray]:
 
     shape_r = reference.shape
-    shape_l = best_lag.shape
+    shape_l = np.array(best_lag).shape
 
     assert shape_r[:-2] == shape_l, "Shape of non-time axes must be equal"
 
     n_chan, n_sampl_r = shape_r[-2:]
     _, n_sampl_e = estimate.shape[-2:]
+
+    if n_sampl_r != n_sampl_e:
+        raise NotImplementedError(
+            "Shifting for unequal sample lengths is not implemented yet."
+        )
 
     if len(shape_l) > 0:
         raise NotImplementedError("Batched shifting is not implemented yet.")
@@ -151,26 +209,18 @@ def _apply_shift(
     if best_lag == 0:
         return reference, estimate
 
-    estimate_padded = np.concatenate(
-        [estimate, np.zeros((n_chan, abs(best_lag)))], axis=-1
-    )  # (n_chan, n_sampl_e + abs(best_lag
-    estimate_rolled = np.roll(
-        estimate_padded, best_lag, axis=-1
-    )  # (n_chan, n_sampl_e + abs(best_lag))
-
     if align_mode == "overlap":
+        shifted_ref = np.roll(
+            reference, -best_lag, axis=-1
+        ) # positive roll shift to the right
+        mask = np.ones((n_sampl_r,), dtype=bool)
         if best_lag < 0:
-            # if estimate is behind, lag is negative
-            n_overlap = n_sampl_e + best_lag
+            mask[:-best_lag] = False
+        else: #elif best_lag > 0:
+            mask[-best_lag:] = False
 
-            reference = reference[..., :n_overlap]
-            estimate = estimate_rolled[..., :n_overlap]
-        else:
-            # if estimate is ahead, lag is positive
-            n_overlap = n_sampl_r - best_lag
-
-            reference = reference[..., best_lag:]
-            estimate = estimate_rolled[..., best_lag:]
+        estimate = estimate[..., mask]
+        reference = shifted_ref[..., mask]
     else:
         raise NotImplementedError("Other alignment modes are not implemented yet.")
 
@@ -206,8 +256,6 @@ def _apply_global_shift_forgive(
     reference, estimate = _apply_shift(
         reference, estimate, best_lag, align_mode=align_mode
     )
-
-    print("best_lag", best_lag)
 
     return reference, estimate
 

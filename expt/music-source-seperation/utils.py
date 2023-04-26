@@ -6,8 +6,11 @@ from torch.utils.data import DataLoader
 import torch
 import numpy as np
 
+
 class LightningWrapper(pl.LightningModule):
-    def __init__(self, model, output_path, source_order, chunk_size=60, overlap=0.25) -> None:
+    def __init__(
+        self, model, output_path, source_order, chunk_size=60, overlap=0.25
+    ) -> None:
         super().__init__()
         self.model = model
         self.output_path = output_path

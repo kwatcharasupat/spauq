@@ -57,7 +57,9 @@ def evaluate(
 
     for s in sources:
         print("Evaluating", s)
-        ref = sorted(glob.glob(os.path.join(reference_path, "**", f"{s}.wav"), recursive=True))
+        ref = sorted(
+            glob.glob(os.path.join(reference_path, "**", f"{s}.wav"), recursive=True)
+        )
         est = [r.replace(reference_path, estimate_path) for r in ref]
 
         fnmetrics = process_map(

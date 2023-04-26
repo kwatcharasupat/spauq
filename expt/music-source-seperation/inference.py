@@ -7,6 +7,7 @@ _DefaultOutputPath = "/home/kwatchar3/spauq-home/data/musdb-hq/{model}-{variant}
 
 from demucs.pretrained import tasnet
 
+
 def inference_spleeter(variant, audio_path, output_path):
     assert variant in ["4stems"]
 
@@ -15,26 +16,28 @@ def inference_spleeter(variant, audio_path, output_path):
     from spleeter.audio.adapter import AudioAdapter
     from spleeter.separator import Separator
 
-    mixtures = glob.glob(os.path.join(audio_path, "musdb18hq/test", "**", "mixture.wav"), recursive=True)
+    mixtures = glob.glob(
+        os.path.join(audio_path, "musdb18hq/test", "**", "mixture.wav"), recursive=True
+    )
     os.makedirs(output_path, exist_ok=True)
 
-    files=mixtures
-    adapter="spleeter.audio.ffmpeg.FFMPEGProcessAudioAdapter"
-    bitrate="128k"
-    codec=Codec.WAV
-    duration=600.0
-    offset=0
-    output_path=output_path
-    stft_backend=STFTBackend.AUTO
-    filename_format="{foldername}/{instrument}.{codec}"
-    params_filename=f"spleeter:{variant}"
-    mwf=False
-    verbose=True
+    files = mixtures
+    adapter = "spleeter.audio.ffmpeg.FFMPEGProcessAudioAdapter"
+    bitrate = "128k"
+    codec = Codec.WAV
+    duration = 600.0
+    offset = 0
+    output_path = output_path
+    stft_backend = STFTBackend.AUTO
+    filename_format = "{foldername}/{instrument}.{codec}"
+    params_filename = f"spleeter:{variant}"
+    mwf = False
+    verbose = True
 
     audio_adapter = AudioAdapter.get(adapter)
-    
+
     for filename in tqdm(files):
-        #FIXME: this a workaround to avoid spleeter saving files to wrong path
+        # FIXME: this a workaround to avoid spleeter saving files to wrong path
         separator = Separator(
             params_filename, MWF=mwf, stft_backend=stft_backend, multiprocess=False
         )

@@ -1,7 +1,7 @@
-
 import numpy as np
 
 from spauq.core import utils as _utils
+
 
 class TestRootMeanSquare:
     def test_rms_zeros(self):
@@ -15,4 +15,6 @@ class TestRootMeanSquare:
     def test_rms_values(self):
         np.testing.assert_allclose(_utils.root_mean_square([1, 2, 3]), 2.16024689947)
         np.testing.assert_allclose(_utils.root_mean_square([-1, 1]), 1.0)
-        np.testing.assert_allclose(_utils.root_mean_square([1, 2, 3, 4, 5]), 3.31662479036)
+        np.testing.assert_allclose(
+            _utils.root_mean_square([1, 2, 3, 4, 5]), 3.31662479036
+        )

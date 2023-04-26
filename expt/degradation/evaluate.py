@@ -21,10 +21,11 @@ from spatial import MonoToStereoPanLaw
 
 from scipy.signal import remez, filtfilt, lfilter
 
+
 def degrade(x, mode, settings):
-    
+
     if mode == "pan":
-        pan, = settings
+        (pan,) = settings
         x = stereoify(x, pan=pan)
     elif mode == "panboth":
         _, pan = settings
@@ -34,7 +35,7 @@ def degrade(x, mode, settings):
     elif mode == "delaypan":
         delay, pan = settings
         xr = np.roll(x, delay, axis=-1)
-        
+
         if delay > 0:
             xr[:, :delay] = 0
         elif delay < 0:
@@ -42,13 +43,13 @@ def degrade(x, mode, settings):
 
         x = stereoify(np.concatenate([x, xr], axis=0), pan=pan)
     elif mode in ["lpfpan", "lpfpan2"]:
-        
+
         b, pan = settings
         if mode == "lpfpan2":
             x = lfilter(b, [1], x, axis=-1)
         else:
             x = filtfilt(b, [1], x, axis=-1)
-    
+
         x = stereoify(x, pan=pan)
     elif mode == "noisepan":
         snr, pan = settings
@@ -66,10 +67,12 @@ def degrade(x, mode, settings):
 
     return x
 
+
 def stereoify(x, pan=0):
     pl = MonoToStereoPanLaw()
     x = pl.generate_one(x, pan=pan)
     return x
+
 
 def evaluate_one(inputs):
     r, mode, setting = inputs
@@ -94,23 +97,27 @@ def evaluate_one(inputs):
     )
     return filename, metrics
 
+
 _DELAYS = [0, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512]
 
+
 def evaluate_timit(
-    mode, 
+    mode,
     reference_path="/home/kwatchar3/data/timit/timit/test",
     output_path="/home/kwatchar3/spauq-home/spauq/expt/degradation/timit/results-2s",
     sources="sa1.wav",
     max_workers=8,
 ):
-    
+
     if mode == "pan":
         settings = [(pan,) for pan in np.linspace(-1, 1, 11)]
     elif mode == "panboth":
         settings = []
 
         for pan in np.linspace(-1, 1, 5):
-            for err in np.concatenate([np.geomspace(-2, -1e-4, 10), np.geomspace(1e-4, 2, 10)]):
+            for err in np.concatenate(
+                [np.geomspace(-2, -1e-4, 10), np.geomspace(1e-4, 2, 10)]
+            ):
                 if -1 <= pan + err <= 1:
                     settings.append((pan, pan + err))
 
@@ -121,17 +128,26 @@ def evaluate_timit(
         settings = list(product(_DELAYS, np.concatenate([np.linspace(-1, 1, 11)])))
         settings_ = settings
     elif mode == "lpfpan":
-        settings_ = list(product(125 * np.power(2, np.linspace(0, 6, 13)), np.linspace(-1, 1, 11)))
+        settings_ = list(
+            product(125 * np.power(2, np.linspace(0, 6, 13)), np.linspace(-1, 1, 11))
+        )
         settings = []
         for cutoff, pan in settings_:
             if cutoff >= 8000:
                 cutoff = None
             if cutoff is not None:
-                b = remez(128, [0, cutoff, cutoff * np.power(2, 1/3), 8000], [1, 0], fs=16000)
+                b = remez(
+                    128,
+                    [0, cutoff, cutoff * np.power(2, 1 / 3), 8000],
+                    [1, 0],
+                    fs=16000,
+                )
 
             settings.append((b, pan))
     elif mode == "noisepan":
-        settings = list(product([-24, -12, -6, -3, 0, 3, 6, 12, 24], np.linspace(-1, 1, 11)))
+        settings = list(
+            product([-24, -12, -6, -3, 0, 3, 6, 12, 24], np.linspace(-1, 1, 11))
+        )
         settings_ = settings
     else:
         raise ValueError("Bad mode!")
@@ -139,7 +155,9 @@ def evaluate_timit(
     data = defaultdict(dict)
 
     for s, s_ in tqdm(list(zip(settings, settings_))):
-        ref = sorted(glob.glob(os.path.join(reference_path, "**", sources), recursive=True))
+        ref = sorted(
+            glob.glob(os.path.join(reference_path, "**", sources), recursive=True)
+        )
         assert len(ref) == 168, len(ref)
 
         fnmetrics = process_map(
@@ -165,6 +183,7 @@ def evaluate_timit(
     df["scale"] = df["scale"].apply(lambda x: x.tolist())
     df.to_csv(os.path.join(output_path, mode, f"{mode}.csv"))
     print(df[["SSR", "SRR"]].describe())
+
 
 if __name__ == "__main__":
     import fire

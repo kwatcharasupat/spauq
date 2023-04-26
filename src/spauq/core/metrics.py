@@ -17,7 +17,7 @@ def _snr(signal: np.ndarray, noise: np.ndarray, eps: float = 1e-8):
 
     signal_energy = np.mean(np.square(signal))
     noise_energy = np.mean(np.square(noise))
-    
+
     if noise_energy == 0 and signal_energy == 0:
         ratio = 1.0
     elif noise_energy == 0:
@@ -26,9 +26,9 @@ def _snr(signal: np.ndarray, noise: np.ndarray, eps: float = 1e-8):
         ratio = -np.inf
     else:
         ratio = signal_energy / noise_energy
-    
-    ratio = np.clip(ratio, a_min=eps, a_max=1.0/eps)
-    
+
+    ratio = np.clip(ratio, a_min=eps, a_max=1.0 / eps)
+
     snr = 10 * np.log10(ratio)
 
     return snr
@@ -168,7 +168,9 @@ def _spauq_eval(
 
     duplex_snr = [_snr(ref, err_spat) for ref, err_spat in zip(refs, errs_spat)]
 
-    resid_snr = [_snr(ref_proj, err_resid) for ref_proj, err_resid in zip(ref_projs, errs_resid)]
+    resid_snr = [
+        _snr(ref_proj, err_resid) for ref_proj, err_resid in zip(ref_projs, errs_resid)
+    ]
 
     duplex_snr = np.stack(duplex_snr, axis=-1)
     resid_snr = np.stack(resid_snr, axis=-1)
@@ -182,7 +184,7 @@ def _spauq_eval(
 
     if return_cost:
         out["cost"] = cost
-    
+
     if return_shift:
         out["shift"] = shift
 
@@ -193,6 +195,7 @@ def _spauq_eval(
         return out
     else:
         return {k: np.median(v, axis=-1) for k, v in out.items()}
+
 
 def spauq_eval(
     reference: np.ndarray,
@@ -216,6 +219,7 @@ def spauq_eval(
         verbose=verbose,
     )
 
+
 # TODO
 def _spauq_bss_eval(
     reference: np.ndarray,
@@ -232,7 +236,7 @@ def _spauq_bss_eval(
     tikhonov_lambda: float = 1e-6,
     backend: _BssEvalBackendType = _BssEvalBackendDefault,
 ):
-    
+
     raise NotImplementedError("spauq_bss_eval is not implemented yet")
 
     assert backend in typing.get_args(
