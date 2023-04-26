@@ -82,5 +82,5 @@ workflows:
       - build-test:
           matrix:
             parameters:
-              python-ver: ["3.7", "3.8", "3.9"]
+              python-ver: ["3.8", "3.9"]
               extras: ["tests"]
