@@ -50,6 +50,7 @@ def _validate_inputs(
     estimate: npt.ArrayLike,
     *,
     forgive_mode: Optional[_ForgiveType] = None,
+    verbose: bool = True,
 ) -> Tuple[np.ndarray, np.ndarray]:
     """Validate that a reference and an estimate have the same batch shape and the same number of channels.
     Convert the inputs to numpy arrays if necessary. For now, also validate that the number of samples is equal.
@@ -86,26 +87,29 @@ def _validate_inputs(
     ndim_e = estimate.ndim
 
     assert ndim_r == ndim_e, "Number of dimensions must be equal"
-    assert n_chan_r == n_chan_e, "Number of channels must be equal"
+    assert n_chan_r == n_chan_e, f"Number of channels must be equal. Got {n_chan_r} and {n_chan_e}."
     assert shape_r[:-2] == shape_e[:-2], "Shape of non-time axes must be equal"
 
     if n_sampl_r != n_sampl_e:
-        raise NotImplementedError(
-            "Shifting for unequal sample lengths is not implemented yet."
-        )
 
-        # if forgive_mode is None:
-        #     forgive_mode = _ForgiveDefault
+        if forgive_mode is None:
+            forgive_mode = _ForgiveDefault
 
-        # if forgive_mode in ["shift", "both"]:
-        #     warnings.warn(
-        #         "Numbers of samples are not equal. Shifting estimate to match reference.",
-        #         UserWarning,
-        #     )
-        # else:
-        #     raise ValueError(
-        #         "Number of samples is not equal. Set `forgive_mode` to `shift` or `both` to allow shifting."
-        #     )
+        if forgive_mode in ["shift", "both"]:
+            if verbose:
+                warnings.warn(
+                    "Numbers of samples are not equal. Shifting estimate to match reference.",
+                    UserWarning,
+                )
+        else:
+            if verbose:
+                warnings.warn(
+                    "Numbers of samples are not equal. Trimming samples.",
+                    UserWarning,
+                )
+            n_sampl_min = min(n_sampl_r, n_sampl_e)
+            reference = reference[..., :n_sampl_min]
+            estimate = estimate[..., :n_sampl_min]
 
     return reference, estimate
 
@@ -198,29 +202,35 @@ def _apply_shift(
     n_chan, n_sampl_r = shape_r[-2:]
     _, n_sampl_e = estimate.shape[-2:]
 
-    if n_sampl_r != n_sampl_e:
-        raise NotImplementedError(
-            "Shifting for unequal sample lengths is not implemented yet."
-        )
-
     if len(shape_l) > 0:
         raise NotImplementedError("Batched shifting is not implemented yet.")
 
     if best_lag == 0:
-        return reference, estimate
+        if n_sampl_r == n_sampl_e:
+            return reference, estimate
+        else:
+            n_sampl_min = min(n_sampl_r, n_sampl_e)
+            return reference[..., :n_sampl_min], estimate[..., :n_sampl_min]
 
     if align_mode == "overlap":
+    
         shifted_ref = np.roll(
             reference, -best_lag, axis=-1
         ) # positive roll shift to the right
-        mask = np.ones((n_sampl_r,), dtype=bool)
-        if best_lag < 0:
-            mask[:-best_lag] = False
-        else: #elif best_lag > 0:
-            mask[-best_lag:] = False
 
-        estimate = estimate[..., mask]
-        reference = shifted_ref[..., mask]
+        if best_lag > 0:
+            shifted_ref = shifted_ref[..., :-best_lag]
+            estimate = estimate[..., :n_sampl_r-best_lag]
+        else:  # elif best_lag > 0:
+            shifted_ref = shifted_ref[..., -best_lag:]
+            estimate = estimate[..., -best_lag:]
+
+        n_sampl_sr = shifted_ref.shape[-1]
+        n_sampl_se = n_sampl_e
+        n_sampl_min = min(n_sampl_sr, n_sampl_se)
+        estimate = estimate[..., :n_sampl_min]
+        reference = shifted_ref[..., :n_sampl_min]
+
     else:
         raise NotImplementedError("Other alignment modes are not implemented yet.")
 

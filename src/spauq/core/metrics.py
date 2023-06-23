@@ -7,7 +7,6 @@ from .preprocessing import (
     _AlignType,
     _ScaleType,
 )
-import fast_bss_eval as fbe
 
 _BssEvalBackendType = Literal["fast_bss_eval", "museval"]
 _BssEvalBackendDefault = "museval"
@@ -207,6 +206,7 @@ def spauq_eval(
     return_shift: bool = False,
     return_scale: bool = False,
     verbose: bool = True,
+    **kwargs,
 ):
     return _spauq_eval(
         reference,
@@ -217,6 +217,7 @@ def spauq_eval(
         return_shift=return_shift,
         return_scale=return_scale,
         verbose=verbose,
+        **kwargs,
     )
 
 

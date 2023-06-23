@@ -1,7 +1,9 @@
 import warnings
 import numpy as np
 import numpy.typing as npt
-from typing import Optional, Tuple
+from typing import Any, List, Optional, Tuple
+
+from numpy import ndarray
 from scipy import signal as sps
 
 # from numba import jit
@@ -17,7 +19,7 @@ from .preprocessing import (
 __all__ = ["compute_projection"]
 
 _DefaultWindowLengthSeconds = 2
-_DefaultHopLengthSeconds = 1.5
+_DefaultHopLengthSeconds = 0.5
 _DefaultMaximumGlobalShiftSeconds = np.inf
 _DefaultMaximumSegmentShiftSeconds = 1.0
 _DefaultSilenceThreshold = 1e-8
@@ -49,6 +51,7 @@ def _project_shift(
         max_shift_filter = np.abs(full_lags) <= max_shift_samples
         lags = full_lags[max_shift_filter]
     else:
+        max_shift_filter = None
         lags = full_lags
 
     optim_lags = np.zeros((n_chan, n_chan), dtype=int)
@@ -232,7 +235,7 @@ def compute_projection(
     hop_length: Optional[int] = None,
     tikhonov_lambda: float = 1e-6,
     verbose: bool = True,
-) -> Tuple[np.ndarray, np.ndarray]:
+) -> tuple[list[Any], list[ndarray], list[Any], ndarray, ndarray, ndarray]:
 
     reference, estimate = _validate_inputs(
         reference, estimate, forgive_mode=forgive_mode
@@ -298,7 +301,7 @@ def compute_projection(
             reference=reference[..., starts[i] : ends[i]],
             estimate=estimate[..., starts[i] : ends[i]],
             tikhonov_lambda=tikhonov_lambda,
-            max_shift_samples=max_segment_shift_seconds * fs,
+            max_shift_samples=int(np.round(max_segment_shift_seconds * fs)),
         )
 
         refs.append(ref)
