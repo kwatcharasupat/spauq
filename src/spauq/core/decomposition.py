@@ -170,7 +170,7 @@ def _project_scale(
     try:
         scaleT, _, _, _ = np.linalg.lstsq(acf.T, xcf.T, rcond=None)
         scale = scaleT.T
-    except np.linalg.LinAlgError:
+    except: # np.linalg.LinAlgError:
         warnings.warn(
             "Singular matrix in projection, using Tikhonov regularization",
             RuntimeWarning,
@@ -235,7 +235,7 @@ def compute_projection(
     hop_length: Optional[int] = None,
     tikhonov_lambda: float = 1e-6,
     verbose: bool = True,
-) -> tuple[list[Any], list[ndarray], list[Any], ndarray, ndarray, ndarray]:
+) -> Tuple[List[Any], List[ndarray], List[Any], ndarray, ndarray, ndarray]:
 
     reference, estimate = _validate_inputs(
         reference, estimate, forgive_mode=forgive_mode
@@ -275,6 +275,12 @@ def compute_projection(
     if np.isposinf(window_length):
         n_frames = 1
     else:
+
+        if n_sampl < window_length:
+            raise ValueError(
+                "The input signal is too short to be decomposed into frames."
+            )
+
         n_frames = int(np.ceil((n_sampl - window_length) / hop_length) + 1)
 
     refs = []
