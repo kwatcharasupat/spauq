@@ -111,47 +111,77 @@ def evaluate(
 
 
 def evaluate_full(
-        audio_dir="/home/kwatchar3/spauq-home/data/starss22/foa_dev_spat",
+        bed_dir="/home/kwatchar3/spauq-home/data/starss22/foa_dev_spat",
+        obj_dir="/home/kwatchar3/data/timit/timit/test_foa_48k_5ch",
         out_dir="/home/kwatchar3/spauq-home/data/starss22/foa_dev_spat_eval",
-        reference_tag = "5ch-30-n30-0-110-n110",
-        estimate_tag = "5ch-30-n30-0-110-n120",
+        bed_tag = "5ch-30-n30-0-110-n110",
     ):
 
-    reffiles = glob.glob(os.path.join(audio_dir, reference_tag, "**", "*.wav"), recursive=True)
+    bed_files = glob.glob(os.path.join(bed_dir, bed_tag, "**", "*.wav"), recursive=True)
     
-    refiles = [
-        (rf, rf.replace(reference_tag, estimate_tag) )
-            for rf in reffiles
-        
-    ]
+    # print(bed_files)
+    
+    # obj_files = glob.glob(os.path.join(obj_dir, "**", "*.flac"), recursive=True)
 
-    out_dir = os.path.join(out_dir, f"{estimate_tag}---{reference_tag}")
+    # print(obj_files)
+
+    accents = sorted(os.listdir(obj_dir))
+    speakers = {a: sorted(os.listdir(os.path.join(obj_dir, a)))[0] for a in accents}
+
+    out_dir = os.path.join(out_dir, f"timit+starss-new")
 
     os.makedirs(out_dir, exist_ok=True)
 
-    for reffile, estfile in tqdm(refiles):
+    for bedfile in tqdm(bed_files):
+
+        bed, fs = sf.read(bedfile)
+
+        bedname = os.path.basename(bedfile).split(".")[0]
+
+        for a in accents[:1]:
+            speaker = speakers[a]
+            objfile = os.path.join(obj_dir, a, speaker, "sa1_a0e30.flac")
+
+            obj, fso = sf.read(objfile)
+
+            n_samples = obj.shape[0]
+
+            obj = np.tile(obj, (int(np.ceil(bed.shape[0] / n_samples)), 1))[:bed.shape[0], :]
+
+            ref = bed + obj
+
+            for azi in tqdm([0, 60, 120, -180]):
+
+                objfile2 = objfile.replace("a0e30", f"a{azi}e30")
+
+                obj2, fso2 = sf.read(objfile2)
+
+                n_samples = obj2.shape[0]
+
+                obj2 = np.tile(obj2, (int(np.ceil(bed.shape[0] / n_samples)), 1))[:bed.shape[0], :]
+
+                # print(fso2)
+
+                est = bed + obj2
 
 
-        ref, fs = sf.read(reffile)
-        est, fs = sf.read(estfile)
+                try:
+                    out = spauq_eval(
+                        reference=ref.T, 
+                        estimate=est.T, 
+                        fs=fs, 
+                        return_framewise=True,
+                    )
 
-        try:
-            out = spauq_eval(
-                reference=ref.T, 
-                estimate=est.T, 
-                fs=fs, 
-                return_framewise=True,
-            )
+                    filename = f"{bedname}_{a}_{speaker}_a0e30--a{azi}e30.npz"
 
-            filename = os.sep.join(reffile.split(os.sep)[-2:]).replace(".wav", ".npz")
+                    outpath = os.path.join(out_dir, filename)
 
-            outpath = os.path.join(out_dir, filename)
+                    os.makedirs(os.path.dirname(outpath), exist_ok=True)
 
-            os.makedirs(os.path.dirname(outpath), exist_ok=True)
-
-            np.savez(outpath, **out)
-        except:
-            continue
+                    np.savez(outpath, **out)
+                except:
+                    continue
 
 if __name__ == "__main__":
     import fire
