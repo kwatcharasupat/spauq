@@ -174,8 +174,6 @@ def _spauq_eval(
     duplex_snr = np.stack(duplex_snr, axis=-1)
     resid_snr = np.stack(resid_snr, axis=-1)
 
-    # print(duplex_snr.shape, resid_snr.shape)
-
     out = {
         "SSR": duplex_snr,
         "SRR": resid_snr,

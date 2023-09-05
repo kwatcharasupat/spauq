@@ -18,10 +18,10 @@ from .preprocessing import (
 
 __all__ = ["compute_projection"]
 
-_DefaultWindowLengthSeconds = 2
+_DefaultWindowLengthSeconds = 1.0
 _DefaultHopLengthSeconds = 0.5
 _DefaultMaximumGlobalShiftSeconds = np.inf
-_DefaultMaximumSegmentShiftSeconds = 1.0
+_DefaultMaximumSegmentShiftSeconds = 0.1
 _DefaultSilenceThreshold = 1e-8
 
 
@@ -87,6 +87,8 @@ def _project_shift(
         for j in range(n_chan):
             shifted_ref[i, j] = np.roll(reference[i], -optim_lags[i, j])
 
+    # print(np.round(shifted_ref[0, :, :16], 3))
+
     # if min_lags < 0 and max_lags < 0: then abs(min_lags) > abs(max_lags), only deal with min_lags
     # if min_lags > 0 and max_lags > 0: then abs(max_lags) > abs(min_lags), only deal with max_lags
     # if min_lags < 0 and max_lags > 0: then max_lags > min_lags, deal with both
@@ -120,21 +122,15 @@ def _compute_corrs(
     shifted_estimate: np.ndarray,
 ):
     n_chan, _, _ = shifted_reference.shape
-    # chan of reference, chan of estimate, sample
+    # chan of estimate, chan of reference, sample
 
-    shifted_reference_t = np.ascontiguousarray(shifted_reference.transpose((1, 0, 2)))
-    xcf = np.sum(shifted_reference_t * shifted_estimate[:, None, :], axis=-1)
+    xcf = np.sum(shifted_reference * shifted_estimate[:, None, :], axis=-1)
+    # (chan of estimate, chan of reference)
 
-    # xcf = np.zeros((n_chan, n_chan), dtype=shifted_reference.dtype)
-    acf = np.zeros((n_chan, n_chan), dtype=shifted_reference.dtype)
-    for cest in range(n_chan):
-        acf[cest, :] = np.sum(
-            shifted_reference_t[cest, :, :] * shifted_reference[cest, cest, :],
+    acf = np.sum(
+            shifted_reference[:, :, None, :] * shifted_reference[:, None, :, :],
             axis=-1,
         )
-        # xcf[cest, :] = np.sum(
-        #     shifted_reference_t[cest, :, :] * shifted_estimate[cest, :], axis=-1
-        # )
 
     return acf, xcf
 
@@ -156,38 +152,66 @@ def _project_scale(
     shifted_reference: np.ndarray,
     shifted_estimate: np.ndarray,
     tikhonov_lambda: float = 1e-6,
+    silence_threshold: float = _DefaultSilenceThreshold,
 ):
     assert shifted_reference.ndim == 3
 
     n_chan, n_chan, _ = shifted_reference.shape
 
+    # print(shifted_reference.shape)
+    # print(np.round(shifted_reference[:, 0, :16], 3))
+    # chan of reference, chan of estimate, sample
+
     acf, xcf = _compute_corrs(shifted_reference, shifted_estimate)
 
-    # scale @ acf = xcf
-    # acf.T @ scale.T = xcf.T
+    shifted_reference_t = np.ascontiguousarray(shifted_reference.transpose((1, 0, 2)))
+    # (chan of estimate, chan of reference, sample)
 
-    # TODO: detect singular matrix
-    try:
-        scaleT, _, _, _ = np.linalg.lstsq(acf.T, xcf.T, rcond=None)
-        scale = scaleT.T
-    except np.linalg.LinAlgError:
-        warnings.warn(
-            "Singular matrix in projection, using Tikhonov regularization",
-            RuntimeWarning,
-        )
-        # scale @ acf = xcf
-        # acf.T @ scale.T = xcf.T
-        # acf @ acf.T @ scale.T = acf @ xcf.T
-        # (acf @ acf.T + lambd * I) @ scale.T = acf @ xcf.T
-        # scale.T = (acf @ acf.T + lambd * I)^-1 @ acf @ xcf.T
+    # acf.shape = (n_chan_e, n_chan_r, n_chan_r)
+    # xcf.shape = (n_chan_e, n_chan_r)
 
-        scaleT = np.linalg.pinv(acf @ acf.T + tikhonov_lambda * np.eye(n_chan)) @ (
-            acf @ xcf.T
-        )
-        scale = scaleT.T
+    estimate_std = np.std(shifted_estimate, axis=-1)
+    estimate_nonsilent = estimate_std > silence_threshold # (n_chan,)
+
+    reference_std = np.std(shifted_reference_t, axis=-1)
+    reference_nonsilent = reference_std > silence_threshold # (n_chan_e, n_chan_r)
+
+    scale = np.zeros((n_chan, n_chan), dtype=acf.dtype)
+
+    for cest in range(n_chan):
+        if not estimate_nonsilent[cest]:
+            continue
+
+        active_ref = reference_nonsilent[cest, :]
+        n_active_ref = int(np.sum(active_ref))
+
+        if n_active_ref == 0:
+            continue
+
+        acf_cest = acf[cest][active_ref, :][:, active_ref] # (n_chan_r, n_chan_r)
+        xcf_cest = xcf[cest][active_ref][None, :] # (1, n_chan_r)
+
+        # TODO: detect singular matrix
+        if np.linalg.matrix_rank(acf_cest) == n_active_ref:
+            # scale @ acf = xcf
+            # acf.T @ scale.T = xcf.T
+            scaleTcest, _, _, _ = np.linalg.lstsq(acf_cest.T, xcf_cest.T, rcond=None)
+        else:
+            # scale @ acf = xcf
+            # acf.T @ scale.T = xcf.T
+            # acf @ acf.T @ scale.T = acf @ xcf.T
+            # (acf @ acf.T + lambd * I) @ scale.T = acf @ xcf.T
+            # scale.T = (acf @ acf.T + lambd * I)^-1 @ acf @ xcf.T
+
+            acf2 = acf_cest @ acf_cest.T
+            axcf = acf_cest @ xcf_cest.T
+            reg = tikhonov_lambda * np.eye(n_active_ref)
+            scaleTcest, _, _, _ = np.linalg.lstsq(acf2 + reg, axcf, rcond=None)
+
+        scale[cest][active_ref] = scaleTcest[:, 0]
 
     ref_proj = _compute_projections(
-        np.ascontiguousarray(shifted_reference.transpose((1, 0, 2))),
+        shifted_reference_t,
         np.ascontiguousarray(scale[:, None, :]),
     )
 
@@ -212,9 +236,9 @@ def _compute_framewise_projection(
     )
 
     ref_proj, scale = _project_scale(
-        ref_proj, est_proj, tikhonov_lambda=tikhonov_lambda
+        ref_shifted, est_proj, tikhonov_lambda=tikhonov_lambda
     )
-    # print(ref_proj.shape, est_proj.shape)
+
     cost = _compute_cost(ref_proj, est_proj)
 
     return ref_shifted, ref_proj, est_proj, cost, shift, scale

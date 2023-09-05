@@ -77,10 +77,10 @@ def spauq_eval_dir(
     result_name_format: str = None,
     save_format: str = "npz",
     *,
-    return_framewise: bool = False,
-    return_cost: bool = False,
-    return_shift: bool = False,
-    return_scale: bool = False,
+    return_framewise: bool = True, #False,
+    return_cost: bool = True, #False,
+    return_shift: bool = True, #False,
+    return_scale: bool = True, #False,
     verbose: bool = True,
     **kwargs
 ):
