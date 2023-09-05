@@ -170,6 +170,22 @@ def _project_scale(
     # acf.shape = (n_chan_e, n_chan_r, n_chan_r)
     # xcf.shape = (n_chan_e, n_chan_r)
 
+    # TODO: detect singular matrix
+    try:
+        scaleT, _, _, _ = np.linalg.lstsq(acf.T, xcf.T, rcond=None)
+        scale = scaleT.T
+    except: # np.linalg.LinAlgError:
+        warnings.warn(
+            "Singular matrix in projection, using Tikhonov regularization",
+            RuntimeWarning,
+        )
+        # scale @ acf = xcf
+        # acf.T @ scale.T = xcf.T
+        # acf @ acf.T @ scale.T = acf @ xcf.T
+        # (acf @ acf.T + lambd * I) @ scale.T = acf @ xcf.T
+        # scale.T = (acf @ acf.T + lambd * I)^-1 @ acf @ xcf.T
+
+
     estimate_std = np.std(shifted_estimate, axis=-1)
     estimate_nonsilent = estimate_std > silence_threshold # (n_chan,)
 
@@ -259,7 +275,7 @@ def compute_projection(
     hop_length: Optional[int] = None,
     tikhonov_lambda: float = 1e-6,
     verbose: bool = True,
-) -> tuple[list[Any], list[ndarray], list[Any], ndarray, ndarray, ndarray]:
+) -> Tuple[List[Any], List[ndarray], List[Any], ndarray, ndarray, ndarray]:
 
     reference, estimate = _validate_inputs(
         reference, estimate, forgive_mode=forgive_mode
@@ -299,6 +315,12 @@ def compute_projection(
     if np.isposinf(window_length):
         n_frames = 1
     else:
+
+        if n_sampl < window_length:
+            raise ValueError(
+                "The input signal is too short to be decomposed into frames."
+            )
+
         n_frames = int(np.ceil((n_sampl - window_length) / hop_length) + 1)
 
     refs = []
