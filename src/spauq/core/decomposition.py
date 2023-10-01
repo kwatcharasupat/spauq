@@ -157,9 +157,6 @@ def _project_scale(
     assert shifted_reference.ndim == 3
 
     n_chan, n_chan, _ = shifted_reference.shape
-
-    # print(shifted_reference.shape)
-    # print(np.round(shifted_reference[:, 0, :16], 3))
     # chan of reference, chan of estimate, sample
 
     acf, xcf = _compute_corrs(shifted_reference, shifted_estimate)
@@ -169,22 +166,6 @@ def _project_scale(
 
     # acf.shape = (n_chan_e, n_chan_r, n_chan_r)
     # xcf.shape = (n_chan_e, n_chan_r)
-
-    # TODO: detect singular matrix
-    try:
-        scaleT, _, _, _ = np.linalg.lstsq(acf.T, xcf.T, rcond=None)
-        scale = scaleT.T
-    except: # np.linalg.LinAlgError:
-        warnings.warn(
-            "Singular matrix in projection, using Tikhonov regularization",
-            RuntimeWarning,
-        )
-        # scale @ acf = xcf
-        # acf.T @ scale.T = xcf.T
-        # acf @ acf.T @ scale.T = acf @ xcf.T
-        # (acf @ acf.T + lambd * I) @ scale.T = acf @ xcf.T
-        # scale.T = (acf @ acf.T + lambd * I)^-1 @ acf @ xcf.T
-
 
     estimate_std = np.std(shifted_estimate, axis=-1)
     estimate_nonsilent = estimate_std > silence_threshold # (n_chan,)
@@ -207,7 +188,6 @@ def _project_scale(
         acf_cest = acf[cest][active_ref, :][:, active_ref] # (n_chan_r, n_chan_r)
         xcf_cest = xcf[cest][active_ref][None, :] # (1, n_chan_r)
 
-        # TODO: detect singular matrix
         if np.linalg.matrix_rank(acf_cest) == n_active_ref:
             # scale @ acf = xcf
             # acf.T @ scale.T = xcf.T
