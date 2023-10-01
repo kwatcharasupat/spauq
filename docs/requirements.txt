@@ -2,3 +2,4 @@ sphinx-autoapi
 numpydoc
 mistune<2.0.0
 m2r2
+sphinx-rtd-theme
