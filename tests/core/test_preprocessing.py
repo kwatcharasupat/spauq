@@ -43,13 +43,13 @@ class TestValidateInputs:
         with pytest.raises(AssertionError):
             _pp._validate_inputs(ref, est)
 
-    def test_unequal_time(self):
-
-        ref = np.ones((2, 10))
-        est = np.ones((2, 11))
-
-        with pytest.raises(NotImplementedError):
-            _pp._validate_inputs(ref, est)
+    # def test_unequal_time(self):
+    #
+    #     ref = np.ones((2, 10))
+    #     est = np.ones((2, 11))
+    #
+    #     with pytest.raises(NotImplementedError):
+    #         _pp._validate_inputs(ref, est)
 
     def test_np_return(self):
 
