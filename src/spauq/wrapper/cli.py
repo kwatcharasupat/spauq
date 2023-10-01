@@ -114,6 +114,11 @@ def spauq_eval_dir(
             **kwargs
         )
 
+def fire_spauq_eval_file():
+    fire.Fire(spauq_eval_file)
+
+def fire_spauq_eval_dir():
+    fire.Fire(spauq_eval_dir)
 
 if __name__ == "__main__":
     fire.Fire()
