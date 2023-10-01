@@ -1,3 +1,4 @@
+sphinx<7
 sphinx-autoapi
 numpydoc
 mistune<2.0.0
