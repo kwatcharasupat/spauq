@@ -4,6 +4,7 @@
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/karnwatcharasupat/spauq/tree/main.svg?style=svg&circle-token=e9a1a1f3087725f6ab4726391e79a2fd213e5e71)](https://dl.circleci.com/status-badge/redirect/gh/karnwatcharasupat/spauq/tree/main)
 [![CodeFactor](https://www.codefactor.io/repository/github/karnwatcharasupat/spauq/badge)](https://www.codefactor.io/repository/github/karnwatcharasupat/spauq)
 [![arXiv](https://img.shields.io/badge/arXiv-2306.08053-b31b1b.svg)](https://arxiv.org/abs/2306.08053)
+[![Documentation Status](https://readthedocs.org/projects/spauq/badge/?version=latest)](https://spauq.readthedocs.io/en/latest/?badge=latest)
 
 Implementation of 
 > K. N. Watcharasupat and A. Lerch, ``Quantifying Spatial Audio Quality Impairment'', submitted to ICASSP 2024.

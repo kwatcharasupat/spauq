@@ -19,9 +19,9 @@ sys.path.insert(0, os.path.abspath("../src"))
 
 # -- Project information -----------------------------------------------------
 
-project = "Latte"
-copyright = "2021, Karn N. Watcharasupat, Junyoung Lee, and Alexander Lerch"
-author = "Karn N. Watcharasupat, Junyoung Lee, and Alexander Lerch"
+project = 'SPAUQ'
+copyright = '2023, Karn N. Watcharasupat and Alexander Lerch'
+author = 'Karn N. Watcharasupat and Alexander Lerch'
 
 
 # -- General configuration ---------------------------------------------------
@@ -48,10 +48,10 @@ add_module_names = False
 source_suffix = [".rst", ".md"]
 
 autoapi_type = "python"
-autoapi_dirs = ["../src/latte/"]
+autoapi_dirs = ["../src/spauq/"]
 autoapi_options = [
     "members",
-    # "undoc-members",
+    "undoc-members",
     # "inherited-members",
     "show-inheritance",
     "show-module-summary",

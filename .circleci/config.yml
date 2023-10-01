@@ -33,7 +33,7 @@ jobs:
       - save_cache:
           key: deps<< parameters.python-ver >>-{{ .Branch }}-{{ checksum "setup.cfg" }}
           paths:
-            - "venv<< parameters.python-ver >>"
+            - ".venv<< parameters.python-ver >>"
       - codecov/upload:
           file: coverage.xml
 
