@@ -70,7 +70,26 @@ def signal_to_spatial_distortion_ratio(
     *,
     return_framewise: bool = False,
 ):
+    """
 
+    Parameters
+    ----------
+    reference
+        reference signal, shape=(n_channels, n_samples)
+    estimate
+        reference signal, shape=(n_channels, n_samples)
+    fs
+        sampling rate in Hz
+    return_framewise
+        whether to return the framewise evaluation result
+
+    Returns
+    -------
+    `float` or `np.ndarray`
+        Median signal to spatial distortion ratio over frames in dB.
+        An array of shape (n_frames,) if `return_framewise` is true.
+
+    """
     return _signal_to_spatial_distortion_ratio(
         reference,
         estimate,
@@ -115,6 +134,26 @@ def signal_to_residual_distortion_ratio(
     *,
     return_framewise: bool = False,
 ):
+    """
+
+    Parameters
+    ----------
+    reference
+        reference signal, shape=(n_channels, n_samples)
+    estimate
+        reference signal, shape=(n_channels, n_samples)
+    fs
+        sampling rate in Hz
+    return_framewise
+        whether to return the framewise evaluation result
+
+    Returns
+    -------
+    `float` or `np.ndarray`
+        Median signal to residual distortion ratio over frames in dB.
+        An array of shape (n_frames,) if `return_framewise` is true.
+
+    """
     return _signal_to_residual_distortion_ratio(
         reference,
         estimate,
@@ -206,6 +245,57 @@ def spauq_eval(
     verbose: bool = True,
     **kwargs,
 ):
+    """
+
+    Parameters
+    ----------
+    reference
+        reference signal, shape=(n_channels, n_samples)
+    estimate
+        reference signal, shape=(n_channels, n_samples)
+    fs
+        sampling rate in Hz
+    return_framewise
+        whether to return the framewise evaluation result
+    return_cost
+        whether to return the estimation error (cost function)
+    return_shift
+        whether to return the estimated shift parameters
+    return_scale
+        whether to return the esitmated scale parameters
+    verbose
+        whether to use verbose mode
+    kwargs
+        additional keyword arguments to be passed to the internal
+        function.
+
+    Returns
+    -------
+    dict
+        A dictionary with the following keys:\n
+        - SSR (`float` or `np.ndarray`)
+            Median signal to spatial distortion ratio in dB.
+            An array of shape (n_frames,) if `return_framewise` is true.
+
+        - SRR (`float` or `np.ndarray`)
+            Median signal to residual distortion ratio in dB.
+            An array of shape (n_frames,) if `return_framewise` is true.
+
+        - cost (`float` or `np.ndarray`)
+            Median cost function of the estimates over frames.
+            An array of shape (n_frames,) if `return_framewise` is true.
+
+        - shift (`np.ndarray`)
+            An array of shape (n_channels, n_channels,) of the elementwise
+            median of the shift matrices over frames.
+            An array of shape (n_channels, n_channels, n_frames,) if `return_framewise` is true.
+
+        - scale (`np.ndarray`)
+            An array of shape (n_channels, n_channels,) of the elementwise
+            median of the scale matrices over frames.
+            An array of shape (n_channels, n_channels, n_frames,) if `return_framewise` is true.
+
+    """
     return _spauq_eval(
         reference,
         estimate,
@@ -219,7 +309,7 @@ def spauq_eval(
     )
 
 
-# TODO
+# TODO: Implement
 def _spauq_bss_eval(
     reference: np.ndarray,
     estimate: np.ndarray,
