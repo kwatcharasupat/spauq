@@ -9,6 +9,8 @@
 SPAUQ is an Implementation of 
 > K. N. Watcharasupat and A. Lerch, ``Quantifying Spatial Audio Quality Impairment'', submitted to ICASSP 2024.
 
+The supplementary derivation is available at [here](https://zenodo.org/records/10161156).
+
 # Installation
 
 ```shell
