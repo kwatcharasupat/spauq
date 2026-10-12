@@ -105,9 +105,7 @@ def _project_shift(
     mask = np.ones((n_sampl,), dtype=bool)
     if min_lags < 0:
         mask[:-min_lags] = False
-        if max_lags > 0:
-            mask[-max_lags:] = False
-    elif min_lags > 0 and max_lags > 0:
+    if max_lags > 0:
         mask[-max_lags:] = False
 
     shifted_ref = shifted_ref[:, :, mask]
@@ -159,10 +157,10 @@ def _project_scale(
     n_chan, n_chan, _ = shifted_reference.shape
     # chan of reference, chan of estimate, sample
 
-    acf, xcf = _compute_corrs(shifted_reference, shifted_estimate)
-
     shifted_reference_t = np.ascontiguousarray(shifted_reference.transpose((1, 0, 2)))
     # (chan of estimate, chan of reference, sample)
+
+    acf, xcf = _compute_corrs(shifted_reference_t, shifted_estimate)
 
     # acf.shape = (n_chan_e, n_chan_r, n_chan_r)
     # xcf.shape = (n_chan_e, n_chan_r)
@@ -227,7 +225,7 @@ def _compute_framewise_projection(
     max_shift_samples: Optional[int] = None,
 ):
 
-    ref_shifted, ref_proj, est_proj, shift = _project_shift(
+    ref_masked, ref_shifted, est_proj, shift = _project_shift(
         reference, estimate, max_shift_samples=max_shift_samples
     )
 
@@ -237,7 +235,7 @@ def _compute_framewise_projection(
 
     cost = _compute_cost(ref_proj, est_proj)
 
-    return ref_shifted, ref_proj, est_proj, cost, shift, scale
+    return ref_masked, ref_proj, est_proj, cost, shift, scale
 
 
 def compute_projection(
